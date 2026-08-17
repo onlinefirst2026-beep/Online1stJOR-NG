@@ -47,7 +47,7 @@ export const CapabilitiesSection: React.FC = () => {
       icon: Globe,
       title: 'Modern Academic Identity',
       tag: 'International Standards',
-      desc: 'COPE-aligned publication ethics, CC BY open-access licensing frameworks, verified ISSN displays, and responsive mobile-first typography paired for international prestige.',
+      desc: 'Transparent publication ethics frameworks, CC BY 4.0 open-access licensing, verified ISSN (2536-7412) displays, and responsive mobile-first typography designed to support indexing readiness.',
       accent: 'border-sky-500/30 text-sky-400',
       bgGlow: 'from-sky-500/10 to-cyan-500/5',
     },

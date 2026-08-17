@@ -34,6 +34,7 @@ import {
   ArrowLeft,
 } from 'lucide-react';
 import { VerifiedBadge } from '../../Common/VerifiedBadge';
+import { DemoBadge } from '../../Common/DemoBadge';
 import { PEER_REVIEW_STEPS } from '../../../data/journalData';
 
 interface Demo1PagesProps {
@@ -769,45 +770,111 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
   // INDEXING & METRICS PAGE
   // ----------------------------------------------------
   if (page === 'indexing') {
+    const verifiedServices = indexing.filter((i) => i.category === 'Verified JORMASS Discovery Channels');
+    const proposedServices = indexing.filter((i) => i.category !== 'Verified JORMASS Discovery Channels');
+
     return (
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8 space-y-8">
-        <div className="border-b-2 border-[#0d1b2a] pb-4">
-          <h1 className="font-serif text-3xl font-bold text-[#0d1b2a]">
-            Indexing & Abstracting Services
-          </h1>
-          <p className="text-xs sm:text-sm text-neutral-600 mt-1">
-            Verified academic discovery databases and ongoing indexing applications.
-          </p>
+        <div className="border-b-2 border-[#0d1b2a] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="font-serif text-3xl font-bold text-[#0d1b2a]">
+                Indexing & Discovery
+              </h1>
+              <DemoBadge type="indexing" size="sm" />
+            </div>
+            <p className="text-xs sm:text-sm text-neutral-600 mt-1">
+              Scholarly discovery channels and indexing roadmap presentation.
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {indexing.map((idxItem, idx) => (
-            <div
-              key={idx}
-              className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm space-y-3"
-            >
-              <div className="flex items-start justify-between gap-2">
-                <h3 className="font-serif text-lg font-bold text-[#0d1b2a]">
-                  {idxItem.name}
-                </h3>
-                <VerifiedBadge status={idxItem.status} />
+        {/* Informative Notice Banner */}
+        <div className="rounded-xl border border-amber-300 bg-amber-50/80 p-4 text-xs text-amber-950 flex items-start gap-3 shadow-xs">
+          <div className="mt-0.5 rounded-full bg-amber-200 p-1 text-amber-900 shrink-0">
+            <DemoBadge type="preview" size="xs" />
+          </div>
+          <div className="space-y-1">
+            <p className="font-semibold text-amber-900">Proposed Presentation Notice</p>
+            <p className="text-amber-800 leading-relaxed">
+              This section demonstrates how verified indexing and discovery services can be presented on the redesigned JORMASS website. Final services, verification links, and inclusion statuses will be confirmed by JORMASS before launch.
+            </p>
+          </div>
+        </div>
+
+        {/* Section 1: Verified Channels */}
+        <div className="space-y-4">
+          <h2 className="font-serif text-xl font-bold text-[#0d1b2a] border-b pb-2">
+            Verified Discovery Channels
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {verifiedServices.map((idxItem, idx) => (
+              <div
+                key={idx}
+                className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm space-y-3"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="font-serif text-lg font-bold text-[#0d1b2a]">
+                    {idxItem.name}
+                  </h3>
+                  <VerifiedBadge status={idxItem.status} />
+                </div>
+                <p className="text-xs text-neutral-600 leading-relaxed">
+                  {idxItem.description}
+                </p>
+                {idxItem.url && (
+                  <a
+                    href={idxItem.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-amber-800 hover:underline pt-2"
+                  >
+                    <span>Verification Portal</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
               </div>
-              <p className="text-xs text-neutral-600 leading-relaxed">
-                {idxItem.description}
-              </p>
-              {idxItem.url && (
-                <a
-                  href={idxItem.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-amber-800 hover:underline pt-2"
-                >
-                  <span>Verification Portal</span>
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Section 2: Proposed Indexing Targets */}
+        <div className="space-y-4 pt-4">
+          <div className="flex items-center gap-2 border-b pb-2">
+            <h2 className="font-serif text-xl font-bold text-[#0d1b2a]">
+              Proposed Indexing & Abstracting Targets
+            </h2>
+            <DemoBadge type="indexing" size="xs" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {proposedServices.map((idxItem, idx) => (
+              <div
+                key={idx}
+                className="rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 shadow-sm space-y-3"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="font-serif text-lg font-bold text-[#0d1b2a]">
+                    {idxItem.name}
+                  </h3>
+                  <VerifiedBadge status={idxItem.status} />
+                </div>
+                <p className="text-xs text-neutral-600 leading-relaxed">
+                  {idxItem.description}
+                </p>
+                {idxItem.url && (
+                  <a
+                    href={idxItem.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-amber-800 hover:underline pt-2"
+                  >
+                    <span>Directory Link</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -819,13 +886,31 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
   if (page === 'events') {
     return (
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8 space-y-8">
-        <div className="border-b-2 border-[#0d1b2a] pb-4">
-          <h1 className="font-serif text-3xl font-bold text-[#0d1b2a]">
-            Academic Events & Conferences
-          </h1>
-          <p className="text-xs sm:text-sm text-neutral-600 mt-1">
-            Annual conferences, research workshops, distinguished faculty lectures, and Special Issue symposiums.
-          </p>
+        <div className="border-b-2 border-[#0d1b2a] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="font-serif text-3xl font-bold text-[#0d1b2a]">
+                Academic Events & Conferences
+              </h1>
+              <DemoBadge type="event" size="sm" />
+            </div>
+            <p className="text-xs sm:text-sm text-neutral-600 mt-1">
+              Annual conferences, research workshops, distinguished faculty lectures, and Special Issue symposiums.
+            </p>
+          </div>
+        </div>
+
+        {/* Notice Banner */}
+        <div className="rounded-xl border border-cyan-300 bg-cyan-50/80 p-4 text-xs text-cyan-950 flex items-start gap-3 shadow-xs">
+          <div className="mt-0.5 rounded-full bg-cyan-200 p-1 text-cyan-900 shrink-0">
+            <DemoBadge type="event" size="xs" />
+          </div>
+          <div className="space-y-1">
+            <p className="font-semibold text-cyan-900">Event Capability Showcase</p>
+            <p className="text-cyan-800 leading-relaxed">
+              This section demonstrates how the redesigned platform can support academic conferences, workshops, and faculty lectures. Past events are documented from College archives; future event schedules and registration portals will be confirmed by JORMASS.
+            </p>
+          </div>
         </div>
 
         <div className="space-y-6">
@@ -835,9 +920,12 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
               className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm hover:shadow-md transition grid grid-cols-1 md:grid-cols-4 gap-6 items-center"
             >
               <div className="md:col-span-1 space-y-2">
-                <span className="rounded bg-amber-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-900">
-                  {evt.eventType}
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className="rounded bg-amber-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-900">
+                    {evt.eventType}
+                  </span>
+                  <DemoBadge type="event" size="xs" />
+                </div>
                 <div className="flex items-center gap-1.5 text-xs text-neutral-700 font-semibold">
                   <Calendar className="h-4 w-4 text-amber-800" />
                   <span>{evt.eventDate}</span>

@@ -103,6 +103,16 @@ export const DemoCards: React.FC<DemoCardsProps> = ({
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-2xl mx-auto">
             Each concept represents a complete, functional architectural prototype with working articles, archive browsing, editorial board listings, and events management.
           </p>
+
+          {/* Discreet About Demo Content Note */}
+          <div className="mt-4 inline-flex items-start gap-3 rounded-xl bg-slate-900/80 border border-slate-800 px-4 py-3 text-left max-w-2xl mx-auto text-xs text-slate-300">
+            <span className="rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider shrink-0 mt-0.5">
+              About Demo Content
+            </span>
+            <p className="leading-relaxed text-slate-300">
+              The design concepts combine verified information from the current JORMASS website with clearly identified illustrative content used to demonstrate proposed functionality such as events management, publication analytics, advanced metadata and future publishing workflows. All final journal data will be confirmed with JORMASS before production launch.
+            </p>
+          </div>
         </div>
 
         {/* 3 Interactive Cards Grid */}

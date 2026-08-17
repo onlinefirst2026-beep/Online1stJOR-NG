@@ -24,6 +24,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { VerifiedBadge } from '../../Common/VerifiedBadge';
+import { DemoBadge } from '../../Common/DemoBadge';
 
 interface Demo1HomeProps {
   settings: JournalSettings;
@@ -297,12 +298,15 @@ export const Demo1Home: React.FC<Demo1HomeProps> = ({
             </div>
           </div>
 
-          {/* C. Verified Indexing Box */}
+          {/* C. Indexing & Discovery Box */}
           <div className="rounded-xl border border-neutral-200 bg-white p-5 shadow-xs space-y-3">
             <div className="flex items-center justify-between border-b border-neutral-200 pb-2">
-              <h4 className="font-serif text-sm font-bold text-[#0d1b2a]">
-                Verified Indexing
-              </h4>
+              <div className="flex items-center gap-1.5">
+                <h4 className="font-serif text-sm font-bold text-[#0d1b2a]">
+                  Indexing & Discovery
+                </h4>
+                <DemoBadge type="indexing" size="xs" />
+              </div>
               <button
                 onClick={() => onNavigate('indexing')}
                 className="text-[11px] font-semibold text-amber-800 hover:underline"
@@ -310,22 +314,25 @@ export const Demo1Home: React.FC<Demo1HomeProps> = ({
                 View All
               </button>
             </div>
-            <div className="space-y-2">
+            <p className="text-[11px] text-neutral-500 leading-tight">
+              Proposed presentation — final links to be verified by JORMASS before launch.
+            </p>
+            <div className="space-y-2 pt-1">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-semibold text-neutral-800">Google Scholar</span>
-                <VerifiedBadge status="Verified" />
+                <VerifiedBadge status="Status to be confirmed" />
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="font-semibold text-neutral-800">CrossRef / DOI</span>
-                <VerifiedBadge status="Verified" />
+                <VerifiedBadge status="Status to be confirmed" />
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="font-semibold text-neutral-800">MOUAU Repository</span>
-                <VerifiedBadge status="Verified" />
+                <VerifiedBadge status="Status to be confirmed" />
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="font-semibold text-neutral-800">ResearchGate</span>
-                <VerifiedBadge status="Verified" />
+                <VerifiedBadge status="Status to be confirmed" />
               </div>
             </div>
           </div>
@@ -333,22 +340,28 @@ export const Demo1Home: React.FC<Demo1HomeProps> = ({
           {/* D. Latest Academic Events */}
           <div className="rounded-xl border border-neutral-200 bg-white p-5 shadow-xs space-y-3">
             <div className="flex items-center justify-between border-b border-neutral-200 pb-2">
-              <h4 className="font-serif text-sm font-bold text-[#0d1b2a]">
-                Latest Events
-              </h4>
+              <div className="flex items-center gap-1.5">
+                <h4 className="font-serif text-sm font-bold text-[#0d1b2a]">
+                  Academic Events
+                </h4>
+                <DemoBadge type="event" size="xs" />
+              </div>
               <button
                 onClick={() => onNavigate('events')}
                 className="text-[11px] font-semibold text-amber-800 hover:underline"
               >
-                View All Events
+                View All
               </button>
             </div>
             <div className="space-y-3">
               {upcomingEvents.map((evt) => (
                 <div key={evt.id} className="space-y-1 text-xs border-b border-neutral-100 pb-2 last:border-0 last:pb-0">
-                  <span className="inline-block rounded bg-neutral-100 px-1.5 py-0.5 text-[9px] font-bold text-neutral-700">
-                    {evt.eventType}
-                  </span>
+                  <div className="flex items-center justify-between">
+                    <span className="inline-block rounded bg-neutral-100 px-1.5 py-0.5 text-[9px] font-bold text-neutral-700">
+                      {evt.eventType}
+                    </span>
+                    {evt.status === 'Published' && <DemoBadge type="event" size="xs" />}
+                  </div>
                   <h5
                     onClick={() => onNavigate('events')}
                     className="cursor-pointer font-semibold text-neutral-900 hover:text-amber-800 leading-snug"

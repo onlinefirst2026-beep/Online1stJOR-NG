@@ -118,10 +118,10 @@ export interface Announcement {
 export interface EditorialBoardMember {
   id: string;
   name: string;
-  role: 'Editor-in-Chief' | 'Managing Editor' | 'Associate Editor' | 'Section Editor' | 'Editorial Advisory Board' | 'Desk Editor';
+  role: 'Editor-in-Chief' | 'Managing Editor' | 'Associate Editor' | 'Co-Editor' | 'Section Editor' | 'Editorial Advisory Board' | 'Desk Editor';
   section?: 'Management' | 'Economics & Finance' | 'Accounting & Auditing' | 'Social Sciences & Public Policy' | 'Agribusiness';
   institution: string;
-  department: string;
+  department?: string;
   country: string;
   orcid?: string;
   profileUrl?: string;
@@ -133,10 +133,10 @@ export interface EditorialBoardMember {
 
 export interface IndexingService {
   name: string;
-  status: 'Verified' | 'Under Editorial Verification' | 'Pending Application';
+  status: 'Verified' | 'Status to be confirmed' | 'Verification required' | 'Under Editorial Verification' | 'Pending Application';
   url?: string;
   description: string;
-  category: 'Major Academic Index' | 'Institutional Repository' | 'Open Access Directory' | 'Regional Index';
+  category: 'Major Academic Index' | 'Institutional Repository' | 'Open Access Directory' | 'Regional Index' | 'Research / Scholarly Network';
   badgeColor?: string;
 }
 

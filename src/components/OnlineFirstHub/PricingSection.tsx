@@ -149,7 +149,6 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   ];
 
   const handleCardClick = (pkgId: 'basic' | 'launch' | 'professional' | 'advanced') => {
-    // If clicking same, keep expanded or toggle; clicking different switches expansion
     setExpandedPackage(pkgId);
   };
 
@@ -160,248 +159,217 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   const activePkgData = packages.find((p) => p.id === expandedPackage);
 
   return (
-    <section id="packages" className="py-24 bg-[#050811] relative border-b border-slate-800/80 text-slate-100 overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="space-y-8 text-slate-100">
+      {/* 4 Compact Package Cards Grid (Initially shows package name, click reveals price & details) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {packages.map((pkg) => {
+          const isExpanded = expandedPackage === pkg.id;
+          const isChosen = selectedPackage === pkg.id;
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-cyan-300 backdrop-blur-md">
-            <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
-            <span>Structured Implementation Options</span>
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
-            Choose an Implementation Level
-          </h2>
-          <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-2xl mx-auto">
-            Click any package card below to reveal its investment price, included deliverables, domain/hosting provisions, and editorial scope.
-          </p>
-        </div>
+          return (
+            <div
+              key={pkg.id}
+              onClick={() => handleCardClick(pkg.id)}
+              className={`cursor-pointer rounded-2xl border p-5 transition-all duration-300 bg-slate-900/70 backdrop-blur-xl relative flex flex-col justify-between select-none ${
+                isExpanded
+                  ? 'border-cyan-400 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-blue-950/40 ring-2 ring-cyan-400/50 shadow-xl shadow-cyan-500/20 -translate-y-0.5'
+                  : `${pkg.color} hover:bg-slate-900/90 hover:border-slate-500 hover:-translate-y-0.5`
+              }`}
+            >
+              {/* Recommended Badge */}
+              {pkg.badge && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-0.5 text-[8px] font-black uppercase tracking-wider text-slate-950 shadow-md whitespace-nowrap">
+                  {pkg.badge}
+                </div>
+              )}
 
-        {/* 4 Compact Package Cards Grid (Prices & full bullets hidden initially until clicked!) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {packages.map((pkg) => {
-            const isExpanded = expandedPackage === pkg.id;
-            const isChosen = selectedPackage === pkg.id;
+              <div className="space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className={`font-mono text-xs font-bold tracking-widest ${pkg.accentColor}`}>
+                    {pkg.name}
+                  </span>
+                  {isChosen && (
+                    <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                      <CheckCircle2 className="h-3 w-3" /> Selected
+                    </span>
+                  )}
+                </div>
 
-            return (
-              <div
-                key={pkg.id}
-                onClick={() => handleCardClick(pkg.id)}
-                className={`cursor-pointer rounded-2xl border p-6 transition-all duration-300 bg-slate-900/70 backdrop-blur-xl relative flex flex-col justify-between select-none ${
-                  isExpanded
-                    ? 'border-cyan-400 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-blue-950/40 ring-2 ring-cyan-400/50 shadow-2xl shadow-cyan-500/20 -translate-y-1'
-                    : `${pkg.color} hover:bg-slate-900/90 hover:border-slate-500 hover:-translate-y-0.5`
-                }`}
-              >
-                {/* Recommended Badge */}
-                {pkg.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-0.5 text-[9px] font-black uppercase tracking-wider text-slate-950 shadow-md whitespace-nowrap">
-                    {pkg.badge}
+                <h3 className="font-serif text-lg font-bold text-white">
+                  {pkg.positioning}
+                </h3>
+
+                <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
+                  {pkg.shortDesc}
+                </p>
+              </div>
+
+              {/* Click-to-reveal Prompt or Revealed Price Header */}
+              <div className="pt-4 mt-3 border-t border-slate-800/80">
+                {isExpanded ? (
+                  <div className="flex items-baseline justify-between">
+                    <div>
+                      <span className="text-lg font-extrabold text-cyan-300 font-serif">
+                        {pkg.price}
+                      </span>
+                      <p className="text-[10px] text-slate-400">Revealed & Active</p>
+                    </div>
+                    <span className="text-[10px] font-bold text-cyan-400 flex items-center gap-0.5">
+                      Active Below ↓
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between text-xs text-slate-400 group-hover:text-cyan-300 transition">
+                    <span className="font-semibold text-[11px] text-cyan-400">Click to reveal pricing</span>
+                    <ChevronDown className="h-3.5 w-3.5 text-cyan-400" />
                   </div>
                 )}
-
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className={`font-mono text-xs font-bold tracking-widest ${pkg.accentColor}`}>
-                      {pkg.name}
-                    </span>
-                    {isChosen && (
-                      <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                        <CheckCircle2 className="h-3 w-3" /> Selected
-                      </span>
-                    )}
-                  </div>
-
-                  <h3 className="font-serif text-xl font-bold text-white">
-                    {pkg.positioning}
-                  </h3>
-
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    {pkg.shortDesc}
-                  </p>
-                </div>
-
-                {/* Click-to-reveal Prompt or Revealed Price Header */}
-                <div className="pt-5 mt-4 border-t border-slate-800/80">
-                  {isExpanded ? (
-                    <div className="flex items-baseline justify-between">
-                      <div>
-                        <span className="text-xl font-extrabold text-cyan-300 font-serif">
-                          {pkg.price}
-                        </span>
-                        <p className="text-[10px] text-slate-400">Revealed & Active</p>
-                      </div>
-                      <span className="text-[11px] font-bold text-cyan-400 flex items-center gap-0.5">
-                        Details Below ↓
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-between text-xs text-slate-400 group-hover:text-cyan-300 transition">
-                      <span className="font-semibold text-[11px] text-cyan-400">Click to reveal pricing</span>
-                      <ChevronDown className="h-4 w-4 text-cyan-400" />
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* EXPANDED PACKAGE DETAIL PANEL (Spacious, breathes easily underneath cards) */}
-        {activePkgData && (
-          <div className="rounded-3xl border border-cyan-500/40 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-blue-950/50 backdrop-blur-2xl p-6 sm:p-10 shadow-2xl space-y-8 animate-fadeIn relative">
-            {/* Header of Expanded Panel */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-800 pb-6">
-              <div className="space-y-1.5">
-                <div className="flex flex-wrap items-center gap-2.5">
-                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-md">
-                    {activePkgData.name} PACKAGE
-                  </span>
-                  {activePkgData.badge && (
-                    <span className="text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 px-2.5 py-0.5 rounded-md shadow-xs">
-                      {activePkgData.badge}
-                    </span>
-                  )}
-                </div>
-                <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
-                  {activePkgData.positioning}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-300 max-w-2xl">
-                  {activePkgData.shortDesc}
-                </p>
-              </div>
-
-              {/* Price Callout */}
-              <div className="bg-slate-950/80 border border-cyan-500/30 rounded-2xl p-4 sm:p-6 text-center md:text-right shrink-0">
-                <span className="text-3xl sm:text-4xl font-extrabold font-serif text-white tracking-tight">
-                  {activePkgData.price}
-                </span>
-                <p className="text-xs text-cyan-300 font-medium mt-0.5">
-                  {activePkgData.priceSubtitle}
-                </p>
-                <div className="mt-3">
-                  <button
-                    onClick={() => handleSelectPackageAndConfirm(activePkgData.id)}
-                    className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-xs font-black shadow-lg transition-all ${activePkgData.btnColor}`}
-                  >
-                    {selectedPackage === activePkgData.id ? (
-                      <>
-                        <Check className="h-4 w-4" />
-                        <span>Selected Package</span>
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="h-4 w-4" />
-                        <span>Select {activePkgData.name} ({activePkgData.price})</span>
-                      </>
-                    )}
-                  </button>
-                </div>
               </div>
             </div>
+          );
+        })}
+      </div>
 
-            {/* Inclusions & Exclusions Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Deliverables Checklist */}
-              <div className="space-y-4">
-                <h4 className="font-serif font-bold text-base text-white flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                  <span>Key Deliverables & Inclusions</span>
-                </h4>
-                <ul className="space-y-2.5 text-xs text-slate-200">
-                  {activePkgData.includes.map((item, idx) => (
+      {/* EXPANDED PACKAGE DETAIL PANEL */}
+      {activePkgData && (
+        <div className="rounded-3xl border border-cyan-500/40 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-blue-950/50 backdrop-blur-2xl p-6 sm:p-8 shadow-2xl space-y-6 animate-fadeIn relative">
+          {/* Header of Expanded Panel */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-800 pb-6">
+            <div className="space-y-1.5">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-md">
+                  {activePkgData.name} PACKAGE
+                </span>
+                {activePkgData.badge && (
+                  <span className="text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 px-2.5 py-0.5 rounded-md shadow-xs">
+                    {activePkgData.badge}
+                  </span>
+                )}
+              </div>
+              <h3 className="font-serif text-2xl font-extrabold text-white">
+                {activePkgData.positioning}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl">
+                {activePkgData.shortDesc}
+              </p>
+            </div>
+
+            {/* Price Callout */}
+            <div className="bg-slate-950/80 border border-cyan-500/30 rounded-2xl p-4 sm:p-5 text-center md:text-right shrink-0">
+              <span className="text-2xl sm:text-3xl font-extrabold font-serif text-white tracking-tight">
+                {activePkgData.price}
+              </span>
+              <p className="text-xs text-cyan-300 font-medium mt-0.5">
+                {activePkgData.priceSubtitle}
+              </p>
+              <div className="mt-3">
+                <button
+                  onClick={() => handleSelectPackageAndConfirm(activePkgData.id)}
+                  className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-xs font-black shadow-lg transition-all ${activePkgData.btnColor}`}
+                >
+                  {selectedPackage === activePkgData.id ? (
+                    <>
+                      <Check className="h-4 w-4" />
+                      <span>Selected Package</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="h-4 w-4" />
+                      <span>Select {activePkgData.name} ({activePkgData.price})</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Inclusions & Exclusions Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Deliverables Checklist */}
+            <div className="space-y-3">
+              <h4 className="font-serif font-bold text-sm text-white flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                <span>Key Deliverables & Inclusions</span>
+              </h4>
+              <ul className="space-y-2 text-xs text-slate-200">
+                {activePkgData.includes.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold mt-0.5">
+                      ✓
+                    </span>
+                    <span className="leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Exclusions & Scope Boundaries */}
+            <div className="space-y-3">
+              <h4 className="font-serif font-bold text-sm text-slate-300 flex items-center gap-2">
+                <Info className="h-4 w-4 text-slate-400" />
+                <span>Scope Boundaries & Exclusions</span>
+              </h4>
+              {activePkgData.excludes.length > 0 ? (
+                <ul className="space-y-2 text-xs text-slate-400">
+                  {activePkgData.excludes.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2.5">
-                      <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold mt-0.5">
-                        ✓
+                      <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-slate-800 text-slate-500 text-[10px] font-bold mt-0.5">
+                        ✕
                       </span>
                       <span className="leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
+              ) : (
+                <p className="text-xs text-slate-400 bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+                  Enterprise package includes comprehensive end-to-end custom architecture and multi-year coverage.
+                </p>
+              )}
+
+              {/* Domain & Hosting Terms */}
+              <div className="mt-3 rounded-xl bg-slate-950/60 border border-slate-800 p-3.5 space-y-1 text-xs">
+                <p className="font-bold text-cyan-300 flex items-center gap-1.5">
+                  <Globe className="h-3.5 w-3.5 text-cyan-400" />
+                  <span>Domain & Infrastructure Terms:</span>
+                </p>
+                <p className="text-slate-300 text-[11px] leading-relaxed">
+                  {activePkgData.domainHosting}
+                </p>
               </div>
-
-              {/* Exclusions & Scope Boundaries */}
-              <div className="space-y-4">
-                <h4 className="font-serif font-bold text-base text-slate-300 flex items-center gap-2">
-                  <Info className="h-4 w-4 text-slate-400" />
-                  <span>Scope Boundaries & Exclusions</span>
-                </h4>
-                {activePkgData.excludes.length > 0 ? (
-                  <ul className="space-y-2.5 text-xs text-slate-400">
-                    {activePkgData.excludes.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-slate-800 text-slate-500 text-[10px] font-bold mt-0.5">
-                          ✕
-                        </span>
-                        <span className="leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-xs text-slate-400 bg-slate-950/60 p-4 rounded-xl border border-slate-800">
-                    Enterprise package includes comprehensive end-to-end custom architecture and multi-year coverage.
-                  </p>
-                )}
-
-                {/* Domain & Hosting Terms */}
-                <div className="mt-4 rounded-xl bg-slate-950/60 border border-slate-800 p-4 space-y-1.5 text-xs">
-                  <p className="font-bold text-cyan-300 flex items-center gap-1.5">
-                    <Globe className="h-3.5 w-3.5 text-cyan-400" />
-                    <span>Domain & Infrastructure Terms:</span>
-                  </p>
-                  <p className="text-slate-300 text-[11px] leading-relaxed">
-                    {activePkgData.domainHosting}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Why This Fits JORMASS Section */}
-            <div className="rounded-2xl border border-cyan-500/20 bg-slate-950/70 p-5 space-y-2">
-              <h5 className="font-mono text-xs font-bold uppercase tracking-wider text-cyan-300 flex items-center gap-2">
-                <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
-                <span>Why This Level Fits JORMASS</span>
-              </h5>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                {activePkgData.whyFits}
-              </p>
-            </div>
-
-            {/* Bottom Actions Bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800">
-              <button
-                onClick={() => setShowCompareModal(true)}
-                className="inline-flex items-center gap-2 text-xs font-semibold text-cyan-300 hover:text-cyan-200 transition"
-              >
-                <Layers className="h-4 w-4" />
-                <span>Compare All 4 Packages Side-by-Side</span>
-              </button>
-
-              <button
-                onClick={() => handleSelectPackageAndConfirm(activePkgData.id)}
-                className={`inline-flex items-center gap-2 rounded-xl px-6 py-2.5 text-xs font-bold transition shadow-lg ${activePkgData.btnColor}`}
-              >
-                <span>Select {activePkgData.name} & Proceed</span>
-                <ArrowRight className="h-4 w-4" />
-              </button>
             </div>
           </div>
-        )}
 
-        {/* Compare All Packages Button (outside modal) */}
-        <div className="text-center pt-2">
-          <button
-            onClick={() => setShowCompareModal(true)}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3 text-xs font-bold text-slate-300 hover:bg-slate-800 hover:text-white transition shadow-sm"
-          >
-            <Layers className="h-4 w-4 text-cyan-400" />
-            <span>Open Detailed Package Comparison Table</span>
-          </button>
+          {/* Why This Fits JORMASS Section */}
+          <div className="rounded-2xl border border-cyan-500/20 bg-slate-950/70 p-4 space-y-1.5">
+            <h5 className="font-mono text-xs font-bold uppercase tracking-wider text-cyan-300 flex items-center gap-2">
+              <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+              <span>Why This Level Fits JORMASS</span>
+            </h5>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              {activePkgData.whyFits}
+            </p>
+          </div>
+
+          {/* Bottom Actions Bar */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t border-slate-800">
+            <button
+              onClick={() => setShowCompareModal(true)}
+              className="inline-flex items-center gap-2 text-xs font-semibold text-cyan-300 hover:text-cyan-200 transition"
+            >
+              <Layers className="h-4 w-4" />
+              <span>Compare All 4 Packages Side-by-Side</span>
+            </button>
+
+            <button
+              onClick={() => handleSelectPackageAndConfirm(activePkgData.id)}
+              className={`inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-bold transition shadow-lg ${activePkgData.btnColor}`}
+            >
+              <span>Select {activePkgData.name} & Proceed</span>
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* COMPARISON MODAL */}
       {showCompareModal && (
@@ -508,6 +476,6 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 };

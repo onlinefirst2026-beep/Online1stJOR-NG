@@ -33,6 +33,7 @@ import {
   Library,
 } from 'lucide-react';
 import { VerifiedBadge } from '../../Common/VerifiedBadge';
+import { DemoBadge } from '../../Common/DemoBadge';
 
 interface Demo3PagesProps {
   page: JournalPage;
@@ -124,6 +125,15 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
             </p>
           </div>
 
+          {/* DOI & License info */}
+          <div className="font-sans flex items-center justify-between text-xs bg-stone-50 p-4 rounded-xl border border-stone-200">
+            <div className="flex items-center gap-2">
+              <span className="text-stone-500 font-mono">DOI: {selectedArticle.doi || '10.5281/jormass.2026'}</span>
+              <DemoBadge type="doi" size="xs" />
+            </div>
+            <span className="text-stone-600 font-medium">Open Access • CC BY 4.0</span>
+          </div>
+
           {/* Keywords & Actions */}
           <div className="font-sans flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-stone-200">
             <div className="flex flex-wrap gap-1.5">
@@ -160,7 +170,7 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
   if (page === 'archive') {
     return (
       <div className="mx-auto max-w-4xl px-4 py-10 space-y-8">
-        <h1 className="text-3xl font-bold text-stone-900">
+        <h1 className="font-serif text-3xl font-bold text-stone-900">
           Library Catalogue Archive
         </h1>
         <div className="space-y-6 font-sans">
@@ -198,7 +208,7 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
   if (page === 'editorial-board') {
     return (
       <div className="mx-auto max-w-4xl px-4 py-10 space-y-8">
-        <h1 className="text-3xl font-bold text-stone-900">
+        <h1 className="font-serif text-3xl font-bold text-stone-900">
           Editorial Board & Officers
         </h1>
         <div className="space-y-4 font-sans">
@@ -222,11 +232,122 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
   }
 
   // ----------------------------------------------------
+  // INDEXING & DISCOVERY
+  // ----------------------------------------------------
+  if (page === 'indexing') {
+    return (
+      <div className="mx-auto max-w-4xl px-4 py-10 space-y-8 font-sans">
+        <div className="flex items-center gap-2 border-b border-stone-200 pb-4">
+          <h1 className="font-serif text-3xl font-bold text-stone-900">
+            Indexing & Discovery
+          </h1>
+          <DemoBadge type="indexing" size="sm" />
+        </div>
+
+        {/* Notice */}
+        <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-xs text-amber-950 flex items-start gap-3">
+          <DemoBadge type="preview" size="xs" />
+          <div>
+            <p className="font-semibold text-amber-900">Proposed Discovery Presentation</p>
+            <p className="text-amber-800 mt-0.5">
+              This section demonstrates how verified indexing and discovery services can be presented on the redesigned JORMASS website. Final verification links and indexed status will be confirmed by JORMASS before launch.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {indexing.map((idxItem, idx) => (
+            <div key={idx} className="rounded-xl border border-stone-300 bg-white p-5 space-y-2 text-xs">
+              <div className="flex justify-between items-start">
+                <h3 className="font-serif text-base font-bold text-stone-900">{idxItem.name}</h3>
+                <VerifiedBadge status={idxItem.status} />
+              </div>
+              <p className="text-stone-600">{idxItem.description}</p>
+              {idxItem.url && (
+                <a href={idxItem.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-semibold text-amber-900 hover:underline pt-1">
+                  <span>Verification Portal</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // ----------------------------------------------------
+  // EVENTS
+  // ----------------------------------------------------
+  if (page === 'events') {
+    return (
+      <div className="mx-auto max-w-4xl px-4 py-10 space-y-8 font-sans">
+        <div className="flex items-center gap-2 border-b border-stone-200 pb-4">
+          <h1 className="font-serif text-3xl font-bold text-stone-900">
+            Academic Events & Conferences
+          </h1>
+          <DemoBadge type="event" size="sm" />
+        </div>
+
+        <div className="space-y-4">
+          {events.map((evt) => (
+            <div key={evt.id} className="rounded-xl border border-stone-300 bg-white p-6 space-y-2 text-xs">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-2">
+                  <span className="rounded bg-stone-100 px-2 py-0.5 font-bold uppercase text-[10px] text-stone-700">{evt.eventType}</span>
+                  <DemoBadge type="event" size="xs" />
+                </div>
+                <span className="font-mono text-stone-500">{evt.eventDate} ({evt.startTime})</span>
+              </div>
+              <h3 className="font-serif text-lg font-bold text-stone-900">{evt.title}</h3>
+              <p className="text-stone-600">{evt.description}</p>
+              <p className="text-stone-500 font-medium pt-1">Venue: {evt.venue}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // ----------------------------------------------------
+  // FEES
+  // ----------------------------------------------------
+  if (page === 'fees') {
+    return (
+      <div className="mx-auto max-w-4xl px-4 py-10 space-y-8 font-sans">
+        <h1 className="font-serif text-3xl font-bold text-stone-900 border-b border-stone-200 pb-4">
+          Publication Fees & Charges
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {fees.map((fee) => (
+            <div key={fee.id} className="rounded-xl border border-stone-300 bg-white p-6 space-y-3">
+              <div className="flex justify-between items-start">
+                <span className="rounded bg-stone-100 px-2 py-0.5 font-bold text-stone-700 text-xs">{fee.feeType}</span>
+                <span className="font-mono text-xl font-bold text-stone-900">{fee.amount}</span>
+              </div>
+              <h3 className="font-serif text-lg font-bold text-stone-900">{fee.title}</h3>
+              <p className="text-xs text-stone-600 leading-relaxed">{fee.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-xl border border-stone-300 bg-stone-100 p-5 text-xs text-stone-700 space-y-1">
+          <h4 className="font-bold text-stone-900">Waiver and Discount Policy</h4>
+          <p>
+            Waiver and discount arrangements, where applicable, are determined by the Editorial Office. Contact JORMASS for further information.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // ----------------------------------------------------
   // DEFAULT / GUIDELINES
   // ----------------------------------------------------
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 space-y-8 font-serif">
-      <h1 className="text-3xl font-bold text-stone-900">
+      <h1 className="text-3xl font-bold text-stone-900 border-b border-stone-200 pb-4">
         Author Submission Guidelines
       </h1>
       <div className="font-sans text-xs sm:text-sm text-stone-700 space-y-4 leading-relaxed bg-white p-8 rounded-xl border border-stone-300">

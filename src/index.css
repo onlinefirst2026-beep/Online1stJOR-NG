@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-playfair {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+  .font-garamond {
+    font-family: 'EB Garamond', Georgia, serif;
+  }
+  .font-newsreader {
+    font-family: 'Newsreader', Georgia, serif;
+  }
+  .font-sans-academic {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+  .font-mono-meta {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom spine motif for Demo 1 Heritage Academic */
+.journal-spine-pattern {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(217, 119, 6, 0.15) 0px,
+    rgba(217, 119, 6, 0.15) 2px,
+    transparent 2px,
+    transparent 12px
+  );
+}
+
+/* Smooth academic reading experience */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Print styles for citation and paper summary */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+

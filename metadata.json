@@ -1,0 +1,6 @@
+{
+  "name": "JORMASS Academic Journal & OnlineFirst Proposal Hub",
+  "description": "Comprehensive academic journal publishing platform and proposal hub for JORMASS (Journal of Research in Management and Social Sciences, Michael Okpara University of Agriculture, Umudike) featuring 3 distinct demo designs, complete publication management, events system, and OnlineFirst proposal with transparent package tiers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

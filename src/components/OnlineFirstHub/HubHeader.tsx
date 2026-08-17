@@ -70,21 +70,21 @@ export const HubHeader: React.FC<HubHeaderProps> = ({
         >
           <div className="flex flex-col">
             <div className="flex items-center gap-2.5">
-              <span className="font-serif font-black text-xl tracking-tight text-[#F5FAFF]">
+              <span className="font-heading font-extrabold text-xl tracking-tight text-[#F5FAFF]">
                 OnlineFirst Studio
               </span>
-              <span className="rounded-full bg-[#35D6FF]/15 border border-[#35D6FF]/40 text-[#7BE7FF] font-mono text-[9px] font-bold px-2.5 py-0.5 uppercase tracking-wider shadow-[0_0_10px_rgba(53,214,255,0.15)]">
+              <span className="rounded-full bg-[#35D6FF]/15 border border-[#35D6FF]/40 text-[#7BE7FF] font-mono-clean text-[10px] font-bold px-2.5 py-0.5 uppercase tracking-wider shadow-[0_0_10px_rgba(53,214,255,0.15)]">
                 ONLINEFIRST HUB
               </span>
             </div>
-            <span className="text-[10px] text-[#B7C6D8] font-mono tracking-wide">
+            <span className="text-[11px] text-[#B7C6D8] font-mono-clean tracking-wide">
               ONLINEFIRST STUDIO | Academic Systems Engineering
             </span>
           </div>
         </div>
 
         {/* Simplified Center Nav: Proposal, From → To, Design Concepts, Capabilities, Implementation */}
-        <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-[#B7C6D8]">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-[#B7C6D8]">
           <button
             onClick={() => handleNavClick('why-redesign')}
             className="hover:text-[#35D6FF] transition cursor-pointer"
@@ -129,9 +129,9 @@ export const HubHeader: React.FC<HubHeaderProps> = ({
             onClick={() => {
               handleNavClick('decision-next-step');
             }}
-            className="hidden sm:inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#35D6FF] via-[#56E0FF] to-[#3182CE] px-4 py-2 text-xs font-black text-[#0A121E] hover:shadow-[0_0_20px_rgba(53,214,255,0.4)] transition-all transform hover:-translate-y-0.5 cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#35D6FF] via-[#56E0FF] to-[#3182CE] px-4 py-2.5 text-xs font-black text-[#0A121E] hover:shadow-[0_0_20px_rgba(53,214,255,0.4)] transition-all transform hover:-translate-y-0.5 cursor-pointer"
           >
-            <Sparkles className="h-3.5 w-3.5" />
+            <Sparkles className="h-4 w-4" />
             <span>Confirm Direction</span>
           </button>
 

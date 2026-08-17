@@ -132,28 +132,28 @@ export const DemoCards: React.FC<DemoCardsProps> = ({
               <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
                 <div className="space-y-2.5">
                   <div className="flex items-center justify-between gap-2">
-                    <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${c.badgeStyle}`}>
+                    <span className={`rounded-full border px-2.5 py-0.5 text-xs font-mono-clean font-bold uppercase tracking-wider ${c.badgeStyle}`}>
                       {c.badge}
                     </span>
-                    <span className="text-xs font-mono text-[#B7C6D8]">
+                    <span className="text-xs font-mono-clean text-[#B7C6D8]">
                       Concept {c.id.toUpperCase().replace('DEMO', '0')}
                     </span>
                   </div>
 
-                  <h3 className="font-serif text-2xl font-bold text-[#F5FAFF] group-hover:text-[#35D6FF] transition">
+                  <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#F5FAFF] group-hover:text-[#35D6FF] transition">
                     {c.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-[#B7C6D8] leading-relaxed">
+                  <p className="text-sm text-[#B7C6D8] leading-relaxed">
                     {c.tagline}
                   </p>
 
                   {/* Feature Bullets */}
                   <div className="pt-2 space-y-2 border-t border-[#223753]">
-                    <p className="text-[11px] font-mono font-bold uppercase text-[#7BE7FF]">
+                    <p className="text-xs font-mono-clean font-bold uppercase text-[#7BE7FF]">
                       Design Characteristics:
                     </p>
-                    <ul className="space-y-1.5 text-xs text-[#B7C6D8]">
+                    <ul className="space-y-1.5 text-xs sm:text-sm text-[#B7C6D8]">
                       {c.features.map((feat, fIdx) => (
                         <li key={fIdx} className="flex items-start gap-2">
                           <span className="text-[#35D6FF] text-xs mt-0.5">•</span>
@@ -168,17 +168,17 @@ export const DemoCards: React.FC<DemoCardsProps> = ({
                 <div className="pt-4 border-t border-[#223753] space-y-2.5">
                   <button
                     onClick={() => onSelectDemo(c.id)}
-                    className={`w-full inline-flex items-center justify-center gap-2 rounded-xl py-2.5 px-4 text-xs font-bold transition-all shadow-md cursor-pointer ${c.primaryBtnColor}`}
+                    className={`w-full inline-flex items-center justify-center gap-2 rounded-xl py-3 px-4 text-xs sm:text-sm font-bold transition-all shadow-md cursor-pointer min-h-[44px] ${c.primaryBtnColor}`}
                   >
                     <BookOpen className="h-4 w-4" />
                     <span>{c.btnLabel}</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
+                    <ArrowRight className="h-4 w-4" />
                   </button>
 
                   {onChooseDesign && (
                     <button
                       onClick={() => onChooseDesign(c.id)}
-                      className={`w-full inline-flex items-center justify-center gap-2 rounded-xl py-2 px-4 text-xs font-bold transition-all border cursor-pointer ${
+                      className={`w-full inline-flex items-center justify-center gap-2 rounded-xl py-2.5 px-4 text-xs sm:text-sm font-bold transition-all border cursor-pointer min-h-[44px] ${
                         isSelected
                           ? 'bg-[#14263D] border-[#35D6FF] text-[#7BE7FF]'
                           : 'bg-[#0E1A2B]/60 border-[#314A68] hover:bg-[#223753] hover:border-[#35D6FF]/50 text-[#D8F3FF]'
@@ -186,12 +186,12 @@ export const DemoCards: React.FC<DemoCardsProps> = ({
                     >
                       {isSelected ? (
                         <>
-                          <Check className="h-3.5 w-3.5 text-[#35D6FF]" />
+                          <Check className="h-4 w-4 text-[#35D6FF]" />
                           <span>Design Concept Selected</span>
                         </>
                       ) : (
                         <>
-                          <Sparkles className="h-3.5 w-3.5 text-[#7BE7FF]" />
+                          <Sparkles className="h-4 w-4 text-[#7BE7FF]" />
                           <span>Select as Preferred Concept</span>
                         </>
                       )}
@@ -205,8 +205,8 @@ export const DemoCards: React.FC<DemoCardsProps> = ({
       </div>
 
       {/* About Demo Content Note */}
-      <div className="rounded-xl bg-[#14263D]/80 border border-[#223753] p-4 text-xs text-[#B7C6D8] flex items-start gap-3">
-        <span className="rounded-md bg-[#35D6FF]/15 text-[#35D6FF] border border-[#35D6FF]/30 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider shrink-0 mt-0.5">
+      <div className="rounded-xl bg-[#14263D]/80 border border-[#223753] p-4 text-sm text-[#B7C6D8] flex items-start gap-3">
+        <span className="rounded-md bg-[#35D6FF]/15 text-[#35D6FF] border border-[#35D6FF]/30 px-2 py-0.5 font-mono-clean text-xs font-bold uppercase tracking-wider shrink-0 mt-0.5">
           About Demo Content
         </span>
         <p className="leading-relaxed">

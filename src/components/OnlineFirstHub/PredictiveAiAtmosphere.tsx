@@ -18,38 +18,38 @@ export const PredictiveAiAtmosphere: React.FC = () => {
       <div className="absolute bottom-[-100px] left-1/3 w-[800px] h-[600px] bg-[#14263D]/60 rounded-full blur-[150px]" />
 
       {/* 5. Minimal Floating Predictive UI Wireframes & Blueprint Nodes */}
-      {/* Top Right Floating Card Outline */}
-      <div className="hidden lg:block absolute top-28 right-12 w-64 p-3 rounded-2xl border border-[#35D6FF]/15 bg-[#14263D]/30 backdrop-blur-sm animate-float-slow opacity-40">
+      {/* Top Right Floating Architecture Blueprint Card */}
+      <div className="hidden lg:block absolute top-28 right-12 w-64 p-3.5 rounded-2xl border border-[#35D6FF]/20 bg-[#14263D]/40 backdrop-blur-md animate-float-slow opacity-60">
         <div className="flex items-center justify-between border-b border-[#35D6FF]/15 pb-1.5 mb-2">
           <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#35D6FF] animate-ping" />
-            <span className="font-mono text-[9px] text-[#7BE7FF] uppercase tracking-wider">
-              AI Schema Synthesizer
+            <span className="w-1.5 h-1.5 rounded-full bg-[#35D6FF] animate-pulse" />
+            <span className="font-mono-clean text-[10px] font-bold text-[#7BE7FF] uppercase tracking-wider">
+              Architecture Blueprint
             </span>
           </div>
-          <span className="font-mono text-[8px] text-[#B7C6D8]">v2.4</span>
+          <span className="font-mono-clean text-[9px] text-[#B7C6D8]">JORMASS</span>
         </div>
-        <div className="space-y-1 font-mono text-[8px] text-[#B7C6D8]">
+        <div className="space-y-1.5 font-mono-clean text-[10px] text-[#B7C6D8]">
           <div className="flex justify-between">
-            <span>INDEXING READY</span>
-            <span className="text-[#35D6FF]">99.8%</span>
+            <span className="text-[#D8F3FF]">SYSTEM SCHEMA</span>
+            <span className="text-[#35D6FF]">ONLINEFIRST</span>
           </div>
           <div className="w-full bg-[#223753] h-1 rounded-full overflow-hidden">
-            <div className="bg-gradient-to-r from-[#35D6FF] to-[#7BE7FF] h-full w-4/5" />
+            <div className="bg-gradient-to-r from-[#35D6FF] to-[#7BE7FF] h-full w-full" />
           </div>
         </div>
       </div>
 
-      {/* Bottom Left Floating Holographic Node */}
-      <div className="hidden xl:block absolute bottom-32 left-10 w-56 p-3 rounded-2xl border border-[#56E0FF]/15 bg-[#14263D]/30 backdrop-blur-sm animate-float-slow-reverse opacity-35">
+      {/* Bottom Left Floating OJS Continuity Node */}
+      <div className="hidden xl:block absolute bottom-32 left-10 w-60 p-3.5 rounded-2xl border border-[#56E0FF]/20 bg-[#14263D]/40 backdrop-blur-md animate-float-slow-reverse opacity-55">
         <div className="flex items-center gap-2 mb-1.5">
-          <div className="w-2 h-2 rounded-sm bg-[#35D6FF]/40 border border-[#35D6FF]" />
-          <span className="font-mono text-[9px] text-[#7BE7FF] tracking-wider">
+          <div className="w-2 h-2 rounded-sm bg-[#35D6FF]/50 border border-[#35D6FF]" />
+          <span className="font-mono-clean text-[10px] font-bold text-[#7BE7FF] tracking-wider">
             OJS CONTINUITY BRIDGE
           </span>
         </div>
-        <p className="font-mono text-[8px] text-[#B7C6D8] leading-tight">
-          LATENCY: 12ms • ZERO DOWNTIME • SYNC ACTIVE
+        <p className="font-mono-clean text-[9px] text-[#B7C6D8] leading-tight">
+          SEAMLESS SUBMISSION & PEER REVIEW PRESERVATION
         </p>
       </div>
 

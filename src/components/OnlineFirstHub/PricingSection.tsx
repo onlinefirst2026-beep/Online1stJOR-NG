@@ -195,11 +195,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                   )}
                 </div>
 
-                <h3 className="font-serif text-lg font-bold text-[#F5FAFF]">
+                <h3 className="font-heading text-lg font-bold text-[#F5FAFF]">
                   {pkg.positioning}
                 </h3>
 
-                <p className="text-xs text-[#B7C6D8] leading-relaxed line-clamp-3">
+                <p className="text-xs sm:text-sm text-[#B7C6D8] leading-relaxed line-clamp-3">
                   {pkg.shortDesc}
                 </p>
               </div>
@@ -209,7 +209,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                 {isExpanded ? (
                   <div className="flex items-baseline justify-between">
                     <div>
-                      <span className="text-lg font-extrabold text-[#35D6FF] font-serif">
+                      <span className="text-xl font-extrabold text-[#35D6FF] font-heading">
                         {pkg.price}
                       </span>
                       <p className="text-[10px] text-[#B7C6D8]">Active Below ↓</p>
@@ -220,7 +220,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                   </div>
                 ) : (
                   <div className="flex items-center justify-between text-xs text-[#B7C6D8] group-hover:text-[#35D6FF] transition">
-                    <span className="font-semibold text-[11px] text-[#35D6FF]">Click to reveal pricing</span>
+                    <span className="font-bold text-xs text-[#35D6FF]">Click to reveal pricing</span>
                     <ChevronDown className="h-3.5 w-3.5 text-[#35D6FF]" />
                   </div>
                 )}
@@ -237,7 +237,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-[#223753] pb-6">
             <div className="space-y-1.5">
               <div className="flex flex-wrap items-center gap-2.5">
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#35D6FF] bg-[#0E1A2B] border border-[#35D6FF]/30 px-2.5 py-0.5 rounded-md">
+                <span className="text-xs font-mono-clean font-bold uppercase tracking-widest text-[#35D6FF] bg-[#0E1A2B] border border-[#35D6FF]/30 px-2.5 py-0.5 rounded-md">
                   {activePkgData.name} PACKAGE
                 </span>
                 {activePkgData.badge && (
@@ -246,26 +246,26 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                   </span>
                 )}
               </div>
-              <h3 className="font-serif text-2xl font-extrabold text-[#F5FAFF]">
+              <h3 className="font-heading text-2xl font-extrabold text-[#F5FAFF]">
                 {activePkgData.positioning}
               </h3>
-              <p className="text-xs sm:text-sm text-[#B7C6D8] max-w-2xl">
+              <p className="text-sm text-[#B7C6D8] max-w-2xl leading-relaxed">
                 {activePkgData.shortDesc}
               </p>
             </div>
 
             {/* Price Callout */}
             <div className="bg-[#0E1A2B]/90 border border-[#35D6FF]/40 rounded-2xl p-4 sm:p-5 text-center md:text-right shrink-0">
-              <span className="text-2xl sm:text-3xl font-extrabold font-serif text-[#F5FAFF] tracking-tight">
+              <span className="text-2xl sm:text-3xl font-extrabold font-heading text-[#F5FAFF] tracking-tight">
                 {activePkgData.price}
               </span>
-              <p className="text-xs text-[#7BE7FF] font-medium mt-0.5">
+              <p className="text-xs text-[#7BE7FF] font-medium mt-0.5 font-mono-clean">
                 {activePkgData.priceSubtitle}
               </p>
               <div className="mt-3">
                 <button
                   onClick={() => handleSelectPackageAndConfirm(activePkgData.id)}
-                  className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-xs font-black shadow-lg transition-all cursor-pointer ${activePkgData.btnColor}`}
+                  className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-xs sm:text-sm font-bold shadow-lg transition-all cursor-pointer min-h-[44px] ${activePkgData.btnColor}`}
                 >
                   {selectedPackage === activePkgData.id ? (
                     <>
@@ -287,11 +287,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Deliverables Checklist */}
             <div className="space-y-3">
-              <h4 className="font-serif font-bold text-sm text-[#F5FAFF] flex items-center gap-2">
+              <h4 className="font-heading font-bold text-sm sm:text-base text-[#F5FAFF] flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-[#35D6FF]" />
                 <span>Key Deliverables & Inclusions</span>
               </h4>
-              <ul className="space-y-2 text-xs text-[#D8F3FF]">
+              <ul className="space-y-2 text-xs sm:text-sm text-[#D8F3FF]">
                 {activePkgData.includes.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2.5">
                     <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#35D6FF]/20 text-[#35D6FF] text-[10px] font-bold mt-0.5">
@@ -305,12 +305,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
 
             {/* Exclusions & Scope Boundaries */}
             <div className="space-y-3">
-              <h4 className="font-serif font-bold text-sm text-[#B7C6D8] flex items-center gap-2">
+              <h4 className="font-heading font-bold text-sm sm:text-base text-[#B7C6D8] flex items-center gap-2">
                 <Info className="h-4 w-4 text-[#7BE7FF]" />
                 <span>Scope Boundaries & Exclusions</span>
               </h4>
               {activePkgData.excludes.length > 0 ? (
-                <ul className="space-y-2 text-xs text-[#B7C6D8]">
+                <ul className="space-y-2 text-xs sm:text-sm text-[#B7C6D8]">
                   {activePkgData.excludes.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2.5">
                       <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#223753] text-[#7BE7FF] text-[10px] font-bold mt-0.5">
@@ -321,7 +321,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                   ))}
                 </ul>
               ) : (
-                <p className="text-xs text-[#B7C6D8] bg-[#0E1A2B]/60 p-4 rounded-xl border border-[#223753]">
+                <p className="text-xs sm:text-sm text-[#B7C6D8] bg-[#0E1A2B]/60 p-4 rounded-xl border border-[#223753]">
                   Enterprise package includes comprehensive end-to-end custom architecture and multi-year coverage.
                 </p>
               )}

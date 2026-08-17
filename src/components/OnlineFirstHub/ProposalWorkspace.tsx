@@ -33,6 +33,12 @@ import {
   AlertCircle,
   RefreshCw,
   Cpu,
+  Bookmark,
+  FileCheck,
+  Sliders,
+  DollarSign,
+  BarChart2,
+  Terminal,
 } from 'lucide-react';
 
 export type ProposalSectionId =
@@ -71,7 +77,7 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
   // State for expanded capability tile in Section 04
   const [selectedCapabilityId, setSelectedCapabilityId] = useState<string | null>(null);
 
-  // Menu items definition
+  // Exact 8 Vertical Menu Labels
   const menuItems: { id: ProposalSectionId; number: string; title: string; subtitle: string }[] = [
     {
       id: 'why-redesign',
@@ -82,8 +88,8 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
     {
       id: 'what-changes',
       number: '02',
-      title: 'What Changes',
-      subtitle: 'Current JORMASS → Future JORMASS',
+      title: 'From → To',
+      subtitle: 'Current JORMASS → Future Platform',
     },
     {
       id: 'design-concepts',
@@ -94,32 +100,32 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
     {
       id: 'website-capabilities',
       number: '04',
-      title: 'Website Capabilities',
+      title: 'Capabilities',
       subtitle: 'Archive, CMS, search, events',
     },
     {
       id: 'implementation-options',
       number: '05',
-      title: 'Implementation Options',
+      title: 'Implementation Tiers',
       subtitle: 'Basic, Launch, Professional, Advanced',
     },
     {
       id: 'delivery-process',
       number: '06',
-      title: 'Delivery Process',
-      subtitle: 'Select → Refine → Configure → Test → Launch',
+      title: 'Delivery Roadmap',
+      subtitle: '5-Stage Delivery Timeline',
     },
     {
       id: 'your-selection',
       number: '07',
       title: 'Your Selection',
-      subtitle: 'Chosen demo + package + investment',
+      subtitle: 'Chosen Design + Package Summary',
     },
     {
       id: 'decision-next-step',
       number: '08',
       title: 'Decision & Next Step',
-      subtitle: 'Deadline + confirmation actions',
+      subtitle: `Target Deadline: ${DECISION_DEADLINE}`,
     },
   ];
 
@@ -146,127 +152,143 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
       id: 'current-issue',
       title: 'Current Issue Display',
       category: 'Publications',
+      icon: BookOpen,
       shortDesc: 'Prominent showcase of the active issue with volume/number, date, cover metadata, and direct PDF downloads.',
     },
     {
       id: 'publication-archive',
       title: 'Publication Archive',
       category: 'Publications',
+      icon: Layers,
       shortDesc: 'Permanent Volume → Issue → Article hierarchy enabling seamless browsing of past volumes and future releases.',
     },
     {
       id: 'article-search',
       title: 'Article Search Engine',
       category: 'Discovery',
+      icon: Search,
       shortDesc: 'Instant multi-parameter search across author names, article titles, keywords, abstract terms, and publication years.',
     },
     {
       id: 'article-details',
       title: 'Article Details & Citations',
       category: 'Reading',
+      icon: FileText,
       shortDesc: 'Dedicated reading page with DOI badges, CC BY licensing, abstract boxes, and instant APA/Harvard/Chicago citation generation.',
     },
     {
       id: 'events-management',
       title: 'Events Management',
       category: 'Faculty',
+      icon: Calendar,
       shortDesc: 'Dedicated module for announcing COLMAS faculty public lectures, international management conferences, and symposiums.',
     },
     {
       id: 'announcements',
       title: 'Announcements Hub',
       category: 'Editorial',
+      icon: Zap,
       shortDesc: 'Broadcast Call for Papers (CFP), special issue deadlines, editorial notices, and publisher updates directly to readers.',
     },
     {
       id: 'editorial-calendar',
       title: 'Editorial Calendar',
       category: 'Schedules',
+      icon: Clock,
       shortDesc: 'Structured schedule tracking submission deadlines, review windows, editorial decisions, and target publication dates.',
     },
     {
       id: 'editorial-board',
       title: 'Editorial Board Roster',
       category: 'Governance',
+      icon: Users,
       shortDesc: 'Complete directory of Editors-in-Chief, section editors, institutional affiliations, and verified ORCID profile links.',
     },
     {
       id: 'author-guidelines',
       title: 'Author Guidelines',
       category: 'Submissions',
+      icon: FileCheck,
       shortDesc: 'Clear formatting instructions, APA 7th referencing guides, Word document template downloads, and submission instructions.',
     },
     {
       id: 'peer-review',
       title: 'Peer Review Workflow',
       category: 'Standards',
+      icon: ShieldCheck,
       shortDesc: '7-step double-blind peer review transparency policy explaining initial triage, blind review, revision, and acceptance.',
     },
     {
       id: 'publication-ethics',
       title: 'Publication Ethics',
       category: 'Standards',
+      icon: Award,
       shortDesc: 'COPE-aligned publication ethics covering authorship, conflict of interest, plagiarism screening, and retraction protocols.',
     },
     {
       id: 'open-access',
       title: 'Open Access & Licensing',
       category: 'Licensing',
+      icon: Globe,
       shortDesc: 'Clear CC BY 4.0 open-access declarations ensuring unrestricted scholarly reuse with appropriate citation attribution.',
     },
     {
       id: 'publication-fees',
       title: 'Publication Fees & Charges',
       category: 'Policies',
+      icon: DollarSign,
       shortDesc: 'Transparent breakdown of the ₦5,000 Manuscript Processing Fee and ₦25,000 APC with formal waiver policies.',
     },
     {
       id: 'indexing-metrics',
       title: 'Indexing & Discovery',
       category: 'Visibility',
+      icon: BarChart2,
       shortDesc: 'Structured presentation of indexing services, Google Scholar metadata tags, and prospective indexing targets.',
     },
     {
       id: 'admin-dashboard',
       title: 'Staff Admin Dashboard',
       category: 'CMS',
+      icon: Sliders,
       shortDesc: 'Intuitive, code-free administrative management console giving editorial staff full autonomy over articles, events, and dates.',
     },
     {
       id: 'ojs-continuity',
       title: 'OJS Continuity Bridge',
       category: 'Integration',
+      icon: Database,
       shortDesc: 'Seamless integration preserving JORMASS’s existing OJS submission portal and reviewer accounts without disruption.',
     },
   ];
 
   return (
-    <section id="proposal-workspace" className="py-12 sm:py-16 bg-[#050811] text-slate-100 relative">
+    <section id="proposal-workspace" className="py-12 sm:py-16 bg-transparent text-[#F5FAFF] relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Workspace Title & Section Subhead */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-800 pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#223753] pb-6">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">
-              <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-[#35D6FF] uppercase">
+              <Sparkles className="h-3.5 w-3.5 text-[#35D6FF]" />
               <span>OnlineFirst Interactive Workspace</span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#F5FAFF]">
               Explore the Proposal
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-xl">
+            <p className="text-xs sm:text-sm text-[#B7C6D8] max-w-xl">
               Navigate through the proposal sections using the vertical menu below. Each section opens instantly in the interactive workspace.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 self-start sm:self-auto bg-slate-900/80 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-400 font-mono">
-            <Clock className="h-3.5 w-3.5 text-cyan-400" />
-            <span>Target: <strong className="text-cyan-300">{DECISION_DEADLINE}</strong></span>
+          <div className="flex items-center gap-2 self-start sm:self-auto bg-[#14263D]/80 border border-[#223753] rounded-xl px-3 py-1.5 text-xs text-[#B7C6D8] font-mono">
+            <Clock className="h-3.5 w-3.5 text-[#35D6FF]" />
+            <span>Target: <strong className="text-[#7BE7FF]">{DECISION_DEADLINE}</strong></span>
           </div>
         </div>
 
         {/* Mobile Section Selector (Horizontally scrollable tab row on mobile screens) */}
         <div className="lg:hidden">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-700">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-[#314A68]">
             {menuItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -275,11 +297,11 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   onClick={() => onSelectSection(item.id)}
                   className={`shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium transition cursor-pointer border ${
                     isActive
-                      ? 'bg-gradient-to-r from-cyan-950 to-blue-950 border-cyan-400 text-cyan-300 font-bold shadow-md shadow-cyan-500/10'
-                      : 'bg-slate-900/80 border-slate-800 text-slate-400 hover:text-slate-200'
+                      ? 'bg-gradient-to-r from-[#14263D] to-[#223753] border-[#35D6FF] text-[#7BE7FF] font-bold shadow-md shadow-[#35D6FF]/10'
+                      : 'bg-[#14263D]/70 border-[#223753] text-[#B7C6D8] hover:text-[#F5FAFF]'
                   }`}
                 >
-                  <span className={`font-mono text-[10px] font-bold ${isActive ? 'text-cyan-400' : 'text-slate-500'}`}>
+                  <span className={`font-mono text-[10px] font-bold ${isActive ? 'text-[#35D6FF]' : 'text-[#314A68]'}`}>
                     {item.number}
                   </span>
                   <span>{item.title}</span>
@@ -295,12 +317,13 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
           {/* LEFT: Futuristic Vertical Navigation Menu (4 cols on lg) */}
           {/* ========================================================= */}
           <div className="hidden lg:block lg:col-span-4 sticky top-24 space-y-3">
-            <div className="rounded-3xl border border-slate-800 bg-[#070b16]/90 backdrop-blur-2xl p-4 shadow-xl space-y-2 relative overflow-hidden">
+            <div className="rounded-3xl border border-[#223753] bg-[#14263D]/80 backdrop-blur-2xl p-4 shadow-xl space-y-2 relative overflow-hidden">
               {/* Vertical connecting accent line */}
-              <div className="absolute left-7 top-8 bottom-8 w-[2px] bg-slate-800/80 pointer-events-none" />
+              <div className="absolute left-7 top-8 bottom-8 w-[2px] bg-[#223753] pointer-events-none" />
 
-              <div className="px-3 py-2 text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500 border-b border-slate-800/80 mb-1">
-                Proposal Outline (8 Sections)
+              <div className="px-3 py-2 text-[10px] font-mono font-bold uppercase tracking-widest text-[#B7C6D8] border-b border-[#223753] mb-1 flex items-center justify-between">
+                <span>Proposal Outline</span>
+                <span className="text-[#35D6FF] font-mono">8 SECTIONS</span>
               </div>
 
               <nav aria-label="Proposal sections" className="space-y-1.5 relative">
@@ -313,16 +336,16 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                       onClick={() => onSelectSection(item.id)}
                       className={`w-full text-left p-3 rounded-2xl transition-all duration-200 flex items-center gap-3.5 group cursor-pointer relative ${
                         isActive
-                          ? 'bg-gradient-to-r from-cyan-950/80 via-slate-900 to-blue-950/60 border border-cyan-400/80 ring-1 ring-cyan-400/40 shadow-lg shadow-cyan-500/10'
-                          : 'border border-transparent hover:bg-slate-900/60 hover:border-slate-800/80 text-slate-400 hover:text-slate-200'
+                          ? 'bg-gradient-to-r from-[#14263D] via-[#1A2E47] to-[#223753] border-l-4 border-[#35D6FF] border-y border-r border-[#223753] text-[#F5FAFF] ring-1 ring-[#35D6FF]/40 shadow-lg shadow-[#35D6FF]/10'
+                          : 'border border-transparent hover:bg-[#14263D]/60 hover:border-[#223753] text-[#B7C6D8] hover:text-[#F5FAFF]'
                       }`}
                     >
                       {/* Numbered Indicator Circle */}
                       <div
                         className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-black transition-all z-10 ${
                           isActive
-                            ? 'bg-gradient-to-tr from-cyan-400 to-blue-500 text-slate-950 shadow-md shadow-cyan-500/20 scale-105'
-                            : 'bg-slate-900 border border-slate-800 text-slate-400 group-hover:border-slate-700 group-hover:text-slate-200'
+                            ? 'bg-gradient-to-tr from-[#35D6FF] to-[#3182CE] text-[#0A121E] shadow-md shadow-[#35D6FF]/20 scale-105'
+                            : 'bg-[#0E1A2B] border border-[#223753] text-[#B7C6D8] group-hover:border-[#314A68] group-hover:text-[#F5FAFF]'
                         }`}
                       >
                         {item.number}
@@ -333,16 +356,16 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                         <div className="flex items-center justify-between">
                           <span
                             className={`text-xs font-bold truncate ${
-                              isActive ? 'text-white font-serif tracking-tight' : 'text-slate-300'
+                              isActive ? 'text-[#F5FAFF] font-serif tracking-tight' : 'text-[#D8F3FF]'
                             }`}
                           >
                             {item.title}
                           </span>
                           {isActive && (
-                            <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse shrink-0" />
+                            <span className="flex h-2 w-2 rounded-full bg-[#35D6FF] animate-pulse shrink-0 shadow-[0_0_8px_#35D6FF]" />
                           )}
                         </div>
-                        <p className={`text-[11px] truncate mt-0.5 ${isActive ? 'text-cyan-300/90 font-medium' : 'text-slate-500'}`}>
+                        <p className={`text-[11px] truncate mt-0.5 ${isActive ? 'text-[#7BE7FF] font-medium' : 'text-[#B7C6D8]'}`}>
                           {item.subtitle}
                         </p>
                       </div>
@@ -352,17 +375,17 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
               </nav>
 
               {/* Quick Status Box in Left Sidebar */}
-              <div className="pt-4 mt-3 border-t border-slate-800/80 px-2 space-y-2">
-                <div className="rounded-xl bg-slate-950/70 border border-slate-800 p-3 text-[11px] space-y-1">
-                  <div className="flex justify-between text-slate-400">
+              <div className="pt-4 mt-3 border-t border-[#223753] px-2 space-y-2">
+                <div className="rounded-xl bg-[#0E1A2B]/80 border border-[#223753] p-3 text-[11px] space-y-1">
+                  <div className="flex justify-between text-[#B7C6D8]">
                     <span>Active Concept:</span>
-                    <span className="font-bold text-cyan-300">
+                    <span className="font-bold text-[#7BE7FF]">
                       {selectedDemoChoice ? demoTitles[selectedDemoChoice].name.split('—')[0].trim() : 'Demo 2'}
                     </span>
                   </div>
-                  <div className="flex justify-between text-slate-400">
+                  <div className="flex justify-between text-[#B7C6D8]">
                     <span>Package Tier:</span>
-                    <span className="font-bold text-cyan-300 uppercase">
+                    <span className="font-bold text-[#35D6FF] uppercase">
                       {selectedPkg || 'Professional'}
                     </span>
                   </div>
@@ -370,7 +393,7 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
 
                 <button
                   onClick={onOpenDecisionModal}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-3 py-2 text-xs font-black text-slate-950 hover:from-cyan-300 hover:to-blue-400 transition shadow-md cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#35D6FF] via-[#56E0FF] to-[#3182CE] px-3 py-2 text-xs font-black text-[#0A121E] hover:shadow-[0_0_15px_rgba(53,214,255,0.4)] transition shadow-md cursor-pointer"
                 >
                   <Sparkles className="h-3.5 w-3.5" />
                   <span>Confirm Direction</span>
@@ -383,34 +406,34 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
           {/* RIGHT: Active Content Panel Glass Container (8 cols on lg) */}
           {/* ========================================================= */}
           <div className="lg:col-span-8">
-            <div className="rounded-3xl border border-slate-800 bg-[#070b16]/95 backdrop-blur-2xl p-6 sm:p-10 shadow-2xl space-y-8 min-h-[550px] relative overflow-hidden transition-all duration-300">
-              {/* Subtle neon glow in corner */}
-              <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="rounded-3xl border border-[#223753] bg-[#14263D]/80 backdrop-blur-2xl p-6 sm:p-10 shadow-2xl space-y-8 min-h-[550px] relative overflow-hidden transition-all duration-300">
+              {/* Subtle orbital glow in corner */}
+              <div className="absolute top-0 right-0 w-80 h-80 bg-[#35D6FF]/10 rounded-full blur-3xl pointer-events-none" />
 
               {/* ========================================================= */}
               {/* 01 — WHY REDESIGN */}
               {/* ========================================================= */}
               {activeSection === 'why-redesign' && (
                 <div className="space-y-8 animate-fadeIn">
-                  <div className="space-y-2 border-b border-slate-800 pb-5">
+                  <div className="space-y-2 border-b border-[#223753] pb-5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-md">
+                      <span className="font-mono text-xs font-bold text-[#35D6FF] bg-[#0E1A2B] border border-[#35D6FF]/30 px-2.5 py-0.5 rounded-md">
                         SECTION 01
                       </span>
-                      <span className="text-xs text-slate-500 font-mono">Executive Summary</span>
+                      <span className="text-xs text-[#B7C6D8] font-mono">Executive Summary</span>
                     </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
+                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#F5FAFF]">
                       Why Redesign JORMASS
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-300">
+                    <p className="text-xs sm:text-sm text-[#B7C6D8]">
                       Findings from OnlineFirst's review of the existing JORMASS website and the strategic case for modernization.
                     </p>
                   </div>
 
                   {/* 6 Concise Review Findings Grid */}
                   <div className="space-y-3">
-                    <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                      <AlertCircle className="h-4 w-4 text-amber-400" />
+                    <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-[#7BE7FF] flex items-center gap-2">
+                      <AlertCircle className="h-4 w-4 text-[#F2C94C]" />
                       <span>Key Review Findings (Current Limitations)</span>
                     </h4>
 
@@ -443,15 +466,15 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                       ].map((item, idx) => (
                         <div
                           key={idx}
-                          className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 space-y-1.5 hover:border-slate-700 transition"
+                          className="rounded-2xl border border-[#223753] bg-[#0E1A2B]/60 p-4 space-y-1.5 hover:border-[#314A68] transition"
                         >
-                          <div className="flex items-center gap-2 text-xs font-bold text-white">
-                            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-amber-500/10 text-amber-400 font-mono text-[10px]">
+                          <div className="flex items-center gap-2 text-xs font-bold text-[#F5FAFF]">
+                            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-[#35D6FF]/10 text-[#7BE7FF] font-mono text-[10px]">
                               {idx + 1}
                             </span>
                             <span>{item.title}</span>
                           </div>
-                          <p className="text-xs text-slate-400 leading-relaxed pl-7">
+                          <p className="text-xs text-[#B7C6D8] leading-relaxed pl-7">
                             {item.desc}
                           </p>
                         </div>
@@ -460,11 +483,11 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   </div>
 
                   {/* Result Statement Quote Box */}
-                  <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-r from-cyan-950/60 via-slate-900 to-blue-950/60 p-6 space-y-3 relative shadow-lg">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-cyan-400">
+                  <div className="rounded-2xl border border-[#35D6FF]/30 bg-gradient-to-r from-[#14263D] via-[#1A2E47] to-[#223753] p-6 space-y-3 relative shadow-lg">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#35D6FF]">
                       The OnlineFirst Result
                     </span>
-                    <blockquote className="text-sm sm:text-base font-serif italic text-slate-100 leading-relaxed">
+                    <blockquote className="text-sm sm:text-base font-serif italic text-[#F5FAFF] leading-relaxed">
                       “OnlineFirst's redesign turns the existing journal presence into a clearer, more credible, and easier-to-manage digital publishing platform.”
                     </blockquote>
                   </div>
@@ -473,31 +496,31 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   <div className="flex justify-end pt-2">
                     <button
                       onClick={() => onSelectSection('what-changes')}
-                      className="inline-flex items-center gap-2 rounded-xl bg-slate-800 hover:bg-slate-700 px-5 py-2.5 text-xs font-bold text-white transition cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#223753] hover:bg-[#314A68] px-5 py-2.5 text-xs font-bold text-[#F5FAFF] transition cursor-pointer"
                     >
-                      <span>Next: What Changes (Current → Future)</span>
-                      <ArrowRight className="h-4 w-4 text-cyan-400" />
+                      <span>Next: From → To</span>
+                      <ArrowRight className="h-4 w-4 text-[#35D6FF]" />
                     </button>
                   </div>
                 </div>
               )}
 
               {/* ========================================================= */}
-              {/* 02 — WHAT CHANGES */}
+              {/* 02 — FROM → TO */}
               {/* ========================================================= */}
               {activeSection === 'what-changes' && (
                 <div className="space-y-8 animate-fadeIn">
-                  <div className="space-y-2 border-b border-slate-800 pb-5">
+                  <div className="space-y-2 border-b border-[#223753] pb-5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-md">
+                      <span className="font-mono text-xs font-bold text-[#35D6FF] bg-[#0E1A2B] border border-[#35D6FF]/30 px-2.5 py-0.5 rounded-md">
                         SECTION 02
                       </span>
-                      <span className="text-xs text-slate-500 font-mono">Transformation Matrix</span>
+                      <span className="text-xs text-[#B7C6D8] font-mono">Transformation Matrix</span>
                     </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
-                      Current JORMASS → Future JORMASS
+                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#F5FAFF]">
+                      From Current JORMASS → Future Platform
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-300">
+                    <p className="text-xs sm:text-sm text-[#B7C6D8]">
                       Direct side-by-side comparison of current journal limitations and the proposed modern platform.
                     </p>
                   </div>
@@ -539,28 +562,28 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                       ].map((item, idx) => (
                         <div
                           key={idx}
-                          className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 space-y-3 hover:border-cyan-500/30 transition group"
+                          className="rounded-2xl border border-[#223753] bg-[#0E1A2B]/60 p-4 space-y-3 hover:border-[#35D6FF]/40 transition group"
                         >
-                          <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-400 border-b border-slate-800 pb-2">
-                            <item.icon className="h-4 w-4 text-cyan-400" />
+                          <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#B7C6D8] border-b border-[#223753] pb-2">
+                            <item.icon className="h-4 w-4 text-[#35D6FF]" />
                             <span>Transformation {idx + 1}</span>
                           </div>
 
                           <div className="space-y-2 text-xs">
                             {/* Current */}
-                            <div className="flex items-start gap-2 bg-rose-950/20 border border-rose-900/30 rounded-xl p-2.5 text-slate-300">
-                              <span className="text-[10px] font-mono font-bold uppercase text-rose-400 shrink-0 mt-0.5">
+                            <div className="flex items-start gap-2 bg-[#223753]/30 border border-[#314A68] rounded-xl p-2.5 text-[#B7C6D8]">
+                              <span className="text-[10px] font-mono font-bold uppercase text-[#B7C6D8] shrink-0 mt-0.5">
                                 Current:
                               </span>
-                              <span className="text-slate-400">{item.current}</span>
+                              <span className="text-[#B7C6D8]">{item.current}</span>
                             </div>
 
                             {/* Future */}
-                            <div className="flex items-start gap-2 bg-cyan-950/30 border border-cyan-500/30 rounded-xl p-2.5 text-slate-100">
-                              <span className="text-[10px] font-mono font-bold uppercase text-cyan-400 shrink-0 mt-0.5">
+                            <div className="flex items-start gap-2 bg-[#14263D] border border-[#35D6FF]/30 rounded-xl p-2.5 text-[#F5FAFF]">
+                              <span className="text-[10px] font-mono font-bold uppercase text-[#35D6FF] shrink-0 mt-0.5">
                                 Future:
                               </span>
-                              <span className="font-medium text-white">{item.future}</span>
+                              <span className="font-medium text-[#F5FAFF]">{item.future}</span>
                             </div>
                           </div>
                         </div>
@@ -569,11 +592,11 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   </div>
 
                   {/* OJS Preservation Callout */}
-                  <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-5 flex items-start gap-3.5 text-xs text-slate-300">
-                    <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
+                  <div className="rounded-2xl border border-[#35D6FF]/30 bg-[#14263D]/90 p-5 flex items-start gap-3.5 text-xs text-[#D8F3FF]">
+                    <CheckCircle2 className="h-5 w-5 text-[#35D6FF] shrink-0 mt-0.5" />
                     <div className="space-y-1">
-                      <p className="font-bold text-white">Full OJS Continuity Guaranteed</p>
-                      <p className="text-slate-400 leading-relaxed">
+                      <p className="font-bold text-[#F5FAFF]">Full OJS Continuity Guaranteed</p>
+                      <p className="text-[#B7C6D8] leading-relaxed">
                         The redesign enhances the public reader experience while seamlessly linking to JORMASS’s active OJS portal for manuscript submission and double-blind peer review.
                       </p>
                     </div>
@@ -583,16 +606,16 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   <div className="flex justify-between items-center pt-2">
                     <button
                       onClick={() => onSelectSection('why-redesign')}
-                      className="text-xs text-slate-400 hover:text-white transition cursor-pointer"
+                      className="text-xs text-[#B7C6D8] hover:text-[#F5FAFF] transition cursor-pointer"
                     >
                       ← Back to Why Redesign
                     </button>
                     <button
                       onClick={() => onSelectSection('design-concepts')}
-                      className="inline-flex items-center gap-2 rounded-xl bg-slate-800 hover:bg-slate-700 px-5 py-2.5 text-xs font-bold text-white transition cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#223753] hover:bg-[#314A68] px-5 py-2.5 text-xs font-bold text-[#F5FAFF] transition cursor-pointer"
                     >
                       <span>Next: Explore 3 Design Concepts</span>
-                      <ArrowRight className="h-4 w-4 text-cyan-400" />
+                      <ArrowRight className="h-4 w-4 text-[#35D6FF]" />
                     </button>
                   </div>
                 </div>
@@ -603,17 +626,17 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
               {/* ========================================================= */}
               {activeSection === 'design-concepts' && (
                 <div className="space-y-8 animate-fadeIn">
-                  <div className="space-y-2 border-b border-slate-800 pb-5">
+                  <div className="space-y-2 border-b border-[#223753] pb-5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-md">
+                      <span className="font-mono text-xs font-bold text-[#35D6FF] bg-[#0E1A2B] border border-[#35D6FF]/30 px-2.5 py-0.5 rounded-md">
                         SECTION 03
                       </span>
-                      <span className="text-xs text-slate-500 font-mono">Working Prototypes</span>
+                      <span className="text-xs text-[#B7C6D8] font-mono">Working Prototypes</span>
                     </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
+                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#F5FAFF]">
                       Three Distinct Design Concepts
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-300">
+                    <p className="text-xs sm:text-sm text-[#B7C6D8]">
                       Each direction offers a complete, interactive scholarly website with working articles, archive catalogues, and events management.
                     </p>
                   </div>
@@ -628,40 +651,40 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   </div>
 
                   {/* Section Next CTA */}
-                  <div className="flex justify-between items-center pt-2 border-t border-slate-800">
+                  <div className="flex justify-between items-center pt-2 border-t border-[#223753]">
                     <button
                       onClick={() => onSelectSection('what-changes')}
-                      className="text-xs text-slate-400 hover:text-white transition cursor-pointer"
+                      className="text-xs text-[#B7C6D8] hover:text-[#F5FAFF] transition cursor-pointer"
                     >
-                      ← Back to What Changes
+                      ← Back to From → To
                     </button>
                     <button
                       onClick={() => onSelectSection('website-capabilities')}
-                      className="inline-flex items-center gap-2 rounded-xl bg-slate-800 hover:bg-slate-700 px-5 py-2.5 text-xs font-bold text-white transition cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#223753] hover:bg-[#314A68] px-5 py-2.5 text-xs font-bold text-[#F5FAFF] transition cursor-pointer"
                     >
-                      <span>Next: Website Capabilities</span>
-                      <ArrowRight className="h-4 w-4 text-cyan-400" />
+                      <span>Next: Capabilities</span>
+                      <ArrowRight className="h-4 w-4 text-[#35D6FF]" />
                     </button>
                   </div>
                 </div>
               )}
 
               {/* ========================================================= */}
-              {/* 04 — WEBSITE CAPABILITIES */}
+              {/* 04 — CAPABILITIES */}
               {/* ========================================================= */}
               {activeSection === 'website-capabilities' && (
                 <div className="space-y-8 animate-fadeIn">
-                  <div className="space-y-2 border-b border-slate-800 pb-5">
+                  <div className="space-y-2 border-b border-[#223753] pb-5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-md">
+                      <span className="font-mono text-xs font-bold text-[#35D6FF] bg-[#0E1A2B] border border-[#35D6FF]/30 px-2.5 py-0.5 rounded-md">
                         SECTION 04
                       </span>
-                      <span className="text-xs text-slate-500 font-mono">Platform Features</span>
+                      <span className="text-xs text-[#B7C6D8] font-mono">Platform Features</span>
                     </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
-                      Full Website Capabilities
+                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#F5FAFF]">
+                      Website Capabilities
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-300">
+                    <p className="text-xs sm:text-sm text-[#B7C6D8]">
                       Interactive tiles for the 16 core features built into the redesigned JORMASS publishing platform. Click any tile to inspect its functional scope.
                     </p>
                   </div>
@@ -670,33 +693,38 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     {capabilitiesList.map((cap) => {
                       const isExpanded = selectedCapabilityId === cap.id;
+                      const IconComponent = cap.icon;
+
                       return (
                         <div
                           key={cap.id}
                           onClick={() => setSelectedCapabilityId(isExpanded ? null : cap.id)}
                           className={`rounded-2xl border p-4 cursor-pointer transition-all duration-200 flex flex-col justify-between select-none ${
                             isExpanded
-                              ? 'bg-gradient-to-br from-cyan-950/80 via-slate-900 to-blue-950/60 border-cyan-400 ring-1 ring-cyan-400/40 shadow-lg'
-                              : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90'
+                              ? 'bg-gradient-to-br from-[#14263D] via-[#1A2E47] to-[#223753] border-[#35D6FF] ring-1 ring-[#35D6FF]/40 shadow-lg'
+                              : 'bg-[#0E1A2B]/60 border-[#223753] hover:border-[#314A68] hover:bg-[#14263D]/60'
                           }`}
                         >
                           <div className="space-y-1.5">
                             <div className="flex items-center justify-between">
-                              <span className="rounded bg-slate-950 px-2 py-0.5 font-mono text-[9px] font-bold text-cyan-400 uppercase border border-slate-800">
+                              <span className="rounded bg-[#0E1A2B] px-2 py-0.5 font-mono text-[9px] font-bold text-[#7BE7FF] uppercase border border-[#223753]">
                                 {cap.category}
                               </span>
                               {isExpanded ? (
-                                <ChevronUp className="h-3.5 w-3.5 text-cyan-400" />
+                                <ChevronUp className="h-3.5 w-3.5 text-[#35D6FF]" />
                               ) : (
-                                <ChevronDown className="h-3.5 w-3.5 text-slate-500" />
+                                <ChevronDown className="h-3.5 w-3.5 text-[#B7C6D8]" />
                               )}
                             </div>
-                            <h4 className="font-serif text-sm font-bold text-white">
-                              {cap.title}
-                            </h4>
+                            <div className="flex items-center gap-1.5 pt-1">
+                              <IconComponent className="h-4 w-4 text-[#35D6FF] shrink-0" />
+                              <h4 className="font-serif text-sm font-bold text-[#F5FAFF]">
+                                {cap.title}
+                              </h4>
+                            </div>
                           </div>
 
-                          <p className={`text-[11px] text-slate-400 leading-relaxed mt-2 ${isExpanded ? 'text-slate-200' : 'line-clamp-2'}`}>
+                          <p className={`text-[11px] text-[#B7C6D8] leading-relaxed mt-2 ${isExpanded ? 'text-[#D8F3FF]' : 'line-clamp-2'}`}>
                             {cap.shortDesc}
                           </p>
                         </div>
@@ -705,40 +733,40 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   </div>
 
                   {/* Section Next CTA */}
-                  <div className="flex justify-between items-center pt-2 border-t border-slate-800">
+                  <div className="flex justify-between items-center pt-2 border-t border-[#223753]">
                     <button
                       onClick={() => onSelectSection('design-concepts')}
-                      className="text-xs text-slate-400 hover:text-white transition cursor-pointer"
+                      className="text-xs text-[#B7C6D8] hover:text-[#F5FAFF] transition cursor-pointer"
                     >
                       ← Back to Design Concepts
                     </button>
                     <button
                       onClick={() => onSelectSection('implementation-options')}
-                      className="inline-flex items-center gap-2 rounded-xl bg-slate-800 hover:bg-slate-700 px-5 py-2.5 text-xs font-bold text-white transition cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#223753] hover:bg-[#314A68] px-5 py-2.5 text-xs font-bold text-[#F5FAFF] transition cursor-pointer"
                     >
-                      <span>Next: Implementation Options</span>
-                      <ArrowRight className="h-4 w-4 text-cyan-400" />
+                      <span>Next: Implementation Tiers</span>
+                      <ArrowRight className="h-4 w-4 text-[#35D6FF]" />
                     </button>
                   </div>
                 </div>
               )}
 
               {/* ========================================================= */}
-              {/* 05 — IMPLEMENTATION OPTIONS */}
+              {/* 05 — IMPLEMENTATION TIERS */}
               {/* ========================================================= */}
               {activeSection === 'implementation-options' && (
                 <div className="space-y-8 animate-fadeIn">
-                  <div className="space-y-2 border-b border-slate-800 pb-5">
+                  <div className="space-y-2 border-b border-[#223753] pb-5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-md">
+                      <span className="font-mono text-xs font-bold text-[#35D6FF] bg-[#0E1A2B] border border-[#35D6FF]/30 px-2.5 py-0.5 rounded-md">
                         SECTION 05
                       </span>
-                      <span className="text-xs text-slate-500 font-mono">Investment Tiers</span>
+                      <span className="text-xs text-[#B7C6D8] font-mono">Investment Tiers</span>
                     </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
-                      Implementation Options
+                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#F5FAFF]">
+                      Implementation Tiers
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-300">
+                    <p className="text-xs sm:text-sm text-[#B7C6D8]">
                       Select a package below to reveal full pricing, included cloud hosting, editorial CMS features, and technical support.
                     </p>
                   </div>
@@ -750,40 +778,40 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   />
 
                   {/* Section Next CTA */}
-                  <div className="flex justify-between items-center pt-2 border-t border-slate-800">
+                  <div className="flex justify-between items-center pt-2 border-t border-[#223753]">
                     <button
                       onClick={() => onSelectSection('website-capabilities')}
-                      className="text-xs text-slate-400 hover:text-white transition cursor-pointer"
+                      className="text-xs text-[#B7C6D8] hover:text-[#F5FAFF] transition cursor-pointer"
                     >
-                      ← Back to Website Capabilities
+                      ← Back to Capabilities
                     </button>
                     <button
                       onClick={() => onSelectSection('delivery-process')}
-                      className="inline-flex items-center gap-2 rounded-xl bg-slate-800 hover:bg-slate-700 px-5 py-2.5 text-xs font-bold text-white transition cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#223753] hover:bg-[#314A68] px-5 py-2.5 text-xs font-bold text-[#F5FAFF] transition cursor-pointer"
                     >
-                      <span>Next: Delivery Process</span>
-                      <ArrowRight className="h-4 w-4 text-cyan-400" />
+                      <span>Next: Delivery Roadmap</span>
+                      <ArrowRight className="h-4 w-4 text-[#35D6FF]" />
                     </button>
                   </div>
                 </div>
               )}
 
               {/* ========================================================= */}
-              {/* 06 — DELIVERY PROCESS */}
+              {/* 06 — DELIVERY ROADMAP */}
               {/* ========================================================= */}
               {activeSection === 'delivery-process' && (
                 <div className="space-y-8 animate-fadeIn">
-                  <div className="space-y-2 border-b border-slate-800 pb-5">
+                  <div className="space-y-2 border-b border-[#223753] pb-5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-md">
+                      <span className="font-mono text-xs font-bold text-[#35D6FF] bg-[#0E1A2B] border border-[#35D6FF]/30 px-2.5 py-0.5 rounded-md">
                         SECTION 06
                       </span>
-                      <span className="text-xs text-slate-500 font-mono">Implementation Roadmap</span>
+                      <span className="text-xs text-[#B7C6D8] font-mono">Implementation Timeline</span>
                     </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
-                      Delivery Process
+                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#F5FAFF]">
+                      Delivery Roadmap
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-300">
+                    <p className="text-xs sm:text-sm text-[#B7C6D8]">
                       A straightforward 5-stage timeline from selection to live production launch.
                     </p>
                   </div>
@@ -819,16 +847,16 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                     ].map((step, sIdx) => (
                       <div
                         key={sIdx}
-                        className="flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-4 hover:border-cyan-500/30 transition"
+                        className="flex items-start gap-4 rounded-2xl border border-[#223753] bg-[#0E1A2B]/60 p-4 hover:border-[#35D6FF]/30 transition"
                       >
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-950 border border-slate-800 text-cyan-400 font-mono font-bold text-sm shadow-inner">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#14263D] border border-[#223753] text-[#35D6FF] font-mono font-bold text-sm shadow-inner">
                           {step.num}
                         </div>
                         <div className="space-y-1">
-                          <h4 className="font-serif text-base font-bold text-white">
+                          <h4 className="font-serif text-base font-bold text-[#F5FAFF]">
                             {step.title}
                           </h4>
-                          <p className="text-xs text-slate-300 leading-relaxed">
+                          <p className="text-xs text-[#B7C6D8] leading-relaxed">
                             {step.desc}
                           </p>
                         </div>
@@ -837,19 +865,19 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   </div>
 
                   {/* Section Next CTA */}
-                  <div className="flex justify-between items-center pt-2 border-t border-slate-800">
+                  <div className="flex justify-between items-center pt-2 border-t border-[#223753]">
                     <button
                       onClick={() => onSelectSection('implementation-options')}
-                      className="text-xs text-slate-400 hover:text-white transition cursor-pointer"
+                      className="text-xs text-[#B7C6D8] hover:text-[#F5FAFF] transition cursor-pointer"
                     >
-                      ← Back to Implementation Options
+                      ← Back to Implementation Tiers
                     </button>
                     <button
                       onClick={() => onSelectSection('your-selection')}
-                      className="inline-flex items-center gap-2 rounded-xl bg-slate-800 hover:bg-slate-700 px-5 py-2.5 text-xs font-bold text-white transition cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#223753] hover:bg-[#314A68] px-5 py-2.5 text-xs font-bold text-[#F5FAFF] transition cursor-pointer"
                     >
-                      <span>Next: Your Selection Summary</span>
-                      <ArrowRight className="h-4 w-4 text-cyan-400" />
+                      <span>Next: Your Selection</span>
+                      <ArrowRight className="h-4 w-4 text-[#35D6FF]" />
                     </button>
                   </div>
                 </div>
@@ -860,17 +888,17 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
               {/* ========================================================= */}
               {activeSection === 'your-selection' && (
                 <div className="space-y-8 animate-fadeIn">
-                  <div className="space-y-2 border-b border-slate-800 pb-5">
+                  <div className="space-y-2 border-b border-[#223753] pb-5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-md">
+                      <span className="font-mono text-xs font-bold text-[#35D6FF] bg-[#0E1A2B] border border-[#35D6FF]/30 px-2.5 py-0.5 rounded-md">
                         SECTION 07
                       </span>
-                      <span className="text-xs text-slate-500 font-mono">Direction Summary</span>
+                      <span className="text-xs text-[#B7C6D8] font-mono">Direction Summary</span>
                     </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
-                      Your Selection Summary
+                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#F5FAFF]">
+                      Your Selection
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-300">
+                    <p className="text-xs sm:text-sm text-[#B7C6D8]">
                       Review your chosen design prototype, implementation package, and investment terms.
                     </p>
                   </div>
@@ -878,32 +906,32 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   {/* Clean Selection Summary Cards */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Design Card */}
-                    <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 space-y-3">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 font-bold">
+                    <div className="rounded-2xl border border-[#223753] bg-[#0E1A2B]/70 p-5 space-y-3">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#B7C6D8] font-bold">
                         01. Preferred Design Concept
                       </span>
                       {selectedDemoChoice ? (
                         <div className="space-y-1">
-                          <p className="font-serif text-lg font-bold text-white flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                          <p className="font-serif text-lg font-bold text-[#F5FAFF] flex items-center gap-2">
+                            <CheckCircle2 className="h-4 w-4 text-[#35D6FF] shrink-0" />
                             <span>{demoTitles[selectedDemoChoice].name}</span>
                           </p>
-                          <p className="text-xs text-cyan-300">
+                          <p className="text-xs text-[#7BE7FF]">
                             {demoTitles[selectedDemoChoice].tag}
                           </p>
                           <button
                             onClick={() => onSelectSection('design-concepts')}
-                            className="text-xs text-slate-400 hover:text-cyan-300 underline pt-2 block cursor-pointer"
+                            className="text-xs text-[#B7C6D8] hover:text-[#35D6FF] underline pt-2 block cursor-pointer"
                           >
                             Change Design Concept →
                           </button>
                         </div>
                       ) : (
                         <div className="space-y-2">
-                          <p className="text-xs text-amber-300">No design concept selected yet</p>
+                          <p className="text-xs text-[#F2C94C]">No design concept selected yet</p>
                           <button
                             onClick={() => onSelectSection('design-concepts')}
-                            className="text-xs text-cyan-400 hover:underline font-bold"
+                            className="text-xs text-[#35D6FF] hover:underline font-bold"
                           >
                             Choose from 3 Demos →
                           </button>
@@ -912,32 +940,32 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                     </div>
 
                     {/* Package Card */}
-                    <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 space-y-3">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 font-bold">
+                    <div className="rounded-2xl border border-[#223753] bg-[#0E1A2B]/70 p-5 space-y-3">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#B7C6D8] font-bold">
                         02. Implementation Package
                       </span>
                       {selectedPkg ? (
                         <div className="space-y-1">
-                          <p className="font-serif text-lg font-bold text-white flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                          <p className="font-serif text-lg font-bold text-[#F5FAFF] flex items-center gap-2">
+                            <CheckCircle2 className="h-4 w-4 text-[#35D6FF] shrink-0" />
                             <span>{packageDetails[selectedPkg].name}</span>
                           </p>
-                          <p className="text-xs text-cyan-300">
+                          <p className="text-xs text-[#7BE7FF]">
                             {packageDetails[selectedPkg].title}
                           </p>
                           <button
                             onClick={() => onSelectSection('implementation-options')}
-                            className="text-xs text-slate-400 hover:text-cyan-300 underline pt-2 block cursor-pointer"
+                            className="text-xs text-[#B7C6D8] hover:text-[#35D6FF] underline pt-2 block cursor-pointer"
                           >
                             Change Package Tier →
                           </button>
                         </div>
                       ) : (
                         <div className="space-y-2">
-                          <p className="text-xs text-amber-300">No package selected yet</p>
+                          <p className="text-xs text-[#F2C94C]">No package selected yet</p>
                           <button
                             onClick={() => onSelectSection('implementation-options')}
-                            className="text-xs text-cyan-400 hover:underline font-bold"
+                            className="text-xs text-[#35D6FF] hover:underline font-bold"
                           >
                             Select a Package →
                           </button>
@@ -947,31 +975,31 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   </div>
 
                   {/* Investment & Hosting Info */}
-                  <div className="rounded-2xl border border-cyan-500/30 bg-slate-950/80 p-6 space-y-3">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                  <div className="rounded-2xl border border-[#35D6FF]/30 bg-[#0E1A2B]/80 p-6 space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#223753] pb-4">
                       <div>
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#B7C6D8] font-bold">
                           Total One-Time Investment
                         </span>
-                        <p className="font-serif text-3xl font-extrabold text-white mt-1">
+                        <p className="font-serif text-3xl font-extrabold text-[#F5FAFF] mt-1">
                           {selectedPkg ? packageDetails[selectedPkg].price : '—'}
                         </p>
                       </div>
                       <div className="sm:text-right">
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#B7C6D8] font-bold">
                           Cloud Hosting & Domain SLA
                         </span>
-                        <p className="text-xs text-slate-300 mt-1 max-w-sm">
+                        <p className="text-xs text-[#D8F3FF] mt-1 max-w-sm">
                           {selectedPkg ? packageDetails[selectedPkg].hosting : 'Select package to view terms'}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400 pt-1">
+                    <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-[#B7C6D8] pt-1">
                       <span>Transparent pricing • Guaranteed validity until {DECISION_DEADLINE}</span>
                       <button
                         onClick={() => onSelectSection('decision-next-step')}
-                        className="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-bold cursor-pointer"
+                        className="inline-flex items-center gap-1.5 text-[#35D6FF] hover:text-[#7BE7FF] font-bold cursor-pointer"
                       >
                         <span>Proceed to Confirmation</span>
                         <ArrowRight className="h-3.5 w-3.5" />
@@ -980,19 +1008,19 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   </div>
 
                   {/* Section Next CTA */}
-                  <div className="flex justify-between items-center pt-2 border-t border-slate-800">
+                  <div className="flex justify-between items-center pt-2 border-t border-[#223753]">
                     <button
                       onClick={() => onSelectSection('delivery-process')}
-                      className="text-xs text-slate-400 hover:text-white transition cursor-pointer"
+                      className="text-xs text-[#B7C6D8] hover:text-[#F5FAFF] transition cursor-pointer"
                     >
-                      ← Back to Delivery Process
+                      ← Back to Delivery Roadmap
                     </button>
                     <button
                       onClick={() => onSelectSection('decision-next-step')}
-                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-2.5 text-xs font-black text-slate-950 hover:from-cyan-300 hover:to-blue-400 transition cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#35D6FF] via-[#56E0FF] to-[#3182CE] px-6 py-2.5 text-xs font-black text-[#0A121E] hover:shadow-[0_0_15px_rgba(53,214,255,0.4)] transition cursor-pointer"
                     >
-                      <span>Next: Decision & Next Steps</span>
-                      <ArrowRight className="h-4 w-4 text-slate-950" />
+                      <span>Next: Decision & Next Step</span>
+                      <ArrowRight className="h-4 w-4 text-[#0A121E]" />
                     </button>
                   </div>
                 </div>
@@ -1003,38 +1031,38 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
               {/* ========================================================= */}
               {activeSection === 'decision-next-step' && (
                 <div className="space-y-8 animate-fadeIn">
-                  <div className="space-y-2 border-b border-slate-800 pb-5">
+                  <div className="space-y-2 border-b border-[#223753] pb-5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-md">
+                      <span className="font-mono text-xs font-bold text-[#35D6FF] bg-[#0E1A2B] border border-[#35D6FF]/30 px-2.5 py-0.5 rounded-md">
                         SECTION 08
                       </span>
-                      <span className="text-xs text-slate-500 font-mono">Formal Decision</span>
+                      <span className="text-xs text-[#B7C6D8] font-mono">Formal Decision</span>
                     </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
-                      Decision & Next Steps
+                    <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#F5FAFF]">
+                      Decision & Next Step
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-300">
+                    <p className="text-xs sm:text-sm text-[#B7C6D8]">
                       Submit your preferred direction to OnlineFirst to initiate refinement and schedule development.
                     </p>
                   </div>
 
                   {/* Deadline Box */}
-                  <div className="rounded-2xl border border-cyan-500/40 bg-gradient-to-r from-cyan-950/60 via-slate-900 to-blue-950/60 p-6 space-y-4 shadow-xl">
+                  <div className="rounded-2xl border border-[#35D6FF]/40 bg-gradient-to-r from-[#14263D] via-[#1A2E47] to-[#223753] p-6 space-y-4 shadow-xl">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#35D6FF]/10 border border-[#35D6FF]/30 text-[#35D6FF]">
                         <Calendar className="h-6 w-6" />
                       </div>
                       <div>
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-400 font-bold">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#35D6FF] font-bold">
                           Decision Deadline
                         </span>
-                        <h4 className="font-serif text-2xl font-extrabold text-white">
+                        <h4 className="font-serif text-2xl font-extrabold text-[#F5FAFF]">
                           {DECISION_DEADLINE}
                         </h4>
                       </div>
                     </div>
 
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#D8F3FF] leading-relaxed">
                       Please confirm the preferred design and implementation direction by this date. If additional internal consultation is required, contact OnlineFirst before the deadline.
                     </p>
                   </div>
@@ -1043,7 +1071,7 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
                     <button
                       onClick={onOpenDecisionModal}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 px-8 py-3.5 text-xs sm:text-sm font-black text-slate-950 hover:from-cyan-300 hover:to-blue-400 transition shadow-xl shadow-cyan-500/20 cursor-pointer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-[#35D6FF] via-[#56E0FF] to-[#3182CE] px-8 py-3.5 text-xs sm:text-sm font-black text-[#0A121E] hover:shadow-[0_0_20px_rgba(53,214,255,0.4)] transition shadow-xl cursor-pointer"
                     >
                       <Sparkles className="h-4 w-4" />
                       <span>Confirm Direction</span>
@@ -1051,18 +1079,18 @@ export const ProposalWorkspace: React.FC<ProposalWorkspaceProps> = ({
 
                     <button
                       onClick={onOpenDecisionModal}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-xs sm:text-sm font-bold text-slate-300 hover:bg-slate-800 hover:text-white transition cursor-pointer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-[#314A68] bg-[#0E1A2B]/80 px-6 py-3.5 text-xs sm:text-sm font-bold text-[#D8F3FF] hover:bg-[#223753] hover:text-white transition cursor-pointer"
                     >
-                      <MessageSquare className="h-4 w-4 text-slate-400" />
+                      <MessageSquare className="h-4 w-4 text-[#7BE7FF]" />
                       <span>Request Adjustments</span>
                     </button>
                   </div>
 
                   {/* Section Next CTA */}
-                  <div className="flex justify-start items-center pt-4 border-t border-slate-800">
+                  <div className="flex justify-start items-center pt-4 border-t border-[#223753]">
                     <button
                       onClick={() => onSelectSection('your-selection')}
-                      className="text-xs text-slate-400 hover:text-white transition cursor-pointer"
+                      className="text-xs text-[#B7C6D8] hover:text-[#F5FAFF] transition cursor-pointer"
                     >
                       ← Back to Your Selection
                     </button>

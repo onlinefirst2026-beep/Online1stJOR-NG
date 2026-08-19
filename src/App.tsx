@@ -323,12 +323,13 @@ export default function App() {
             {store.currentPage === 'home' ? (
               <Demo3Home
                 settings={store.settings}
-                currentIssue={currentIssue}
-                currentVolume={currentVolume}
+                volumes={store.volumes}
+                issues={store.issues}
                 articles={store.articles}
                 events={store.events}
                 announcements={store.announcements}
-                calendar={store.calendar}
+                boardMembers={store.boardMembers}
+                indexing={store.indexing}
                 onNavigate={(pg) => {
                   if (pg === 'submit') handleOpenSubmit();
                   else {
@@ -339,6 +340,7 @@ export default function App() {
                 onSelectArticle={handleArticleClick}
                 onOpenCitation={handleOpenCitation}
                 onOpenPdf={handleOpenPdf}
+                onOpenOjs={() => setIsOjsModalOpen(true)}
               />
             ) : (
               <Demo3Pages

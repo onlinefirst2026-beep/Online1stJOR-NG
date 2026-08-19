@@ -146,60 +146,71 @@ export const Demo2Thumbnail: React.FC = () => {
 
 export const Demo3Thumbnail: React.FC = () => {
   return (
-    <div className="w-full h-56 sm:h-64 bg-[#fafaf9] text-stone-900 rounded-xl overflow-hidden shadow-inner border border-stone-300 flex flex-col font-serif select-none pointer-events-none relative">
-      {/* Mock Browser Top Bar */}
-      <div className="bg-[#1c1917] text-stone-300 px-3 py-1.5 flex items-center justify-between text-[9px] font-sans border-b border-stone-700">
+    <div className="w-full h-56 sm:h-64 bg-[#F9FAFC] text-[#242A38] rounded-xl overflow-hidden shadow-inner border border-[#E2E6EE] flex flex-col font-sans select-none pointer-events-none relative">
+      {/* Mock Browser Top Bar (Deep Royal Cobalt Utility Bar) */}
+      <div className="bg-[#2a369c] text-white px-3 py-1.5 flex items-center justify-between text-[9px] font-sans border-b border-[#1f2979]">
         <div className="flex items-center gap-1.5">
           <div className="flex gap-1">
-            <span className="h-2 w-2 rounded-full bg-rose-500/80" />
-            <span className="h-2 w-2 rounded-full bg-amber-500/80" />
-            <span className="h-2 w-2 rounded-full bg-emerald-500/80" />
+            <span className="h-2 w-2 rounded-full bg-[#c04f17]" />
+            <span className="h-2 w-2 rounded-full bg-[#e86b31]" />
+            <span className="h-2 w-2 rounded-full bg-[#b3bcf2]" />
           </div>
-          <span className="font-mono text-[9px] text-amber-300 ml-1">jormass-demo3.previewnest.site</span>
+          <span className="font-mono text-[9px] text-[#b3bcf2] ml-1">jormass-demo3.previewnest.site</span>
         </div>
-        <span className="text-[8px] bg-amber-500/20 text-amber-300 px-1.5 py-0.2 rounded font-sans">Digital Library</span>
+        <span className="text-[8px] bg-[#b3bcf2] text-[#2a369c] px-1.5 py-0.2 rounded font-sans font-bold">Royal Cobalt & Periwinkle</span>
       </div>
 
       {/* Main Mockup Body */}
-      <div className="flex-1 p-3 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#fafaf9] to-[#f2efeb]">
-        {/* Centered Archival Masthead */}
-        <div className="text-center space-y-0.5 border-b border-stone-200 pb-1.5">
-          <span className="text-[6.5px] uppercase font-sans tracking-widest font-bold text-amber-900">COLMAS DIGITAL ARCHIVE</span>
-          <p className="text-[10px] font-extrabold tracking-tight text-[#1c1917] leading-tight">Journal of Research in Management & Social Sciences</p>
-          <p className="text-[6.5px] font-sans text-stone-500 font-semibold">ISSN: 2536-7412 (Print & Online)</p>
-        </div>
-
-        {/* Discovery Search Module embedded right below header */}
-        <div className="bg-white p-1.5 rounded-lg border border-stone-300 shadow-xs flex items-center justify-between font-sans text-[7px] my-1">
-          <div className="flex items-center gap-1 text-stone-400">
-            <Search className="h-3 w-3 text-amber-800" />
-            <span>Search library archive (author, title, volume)...</span>
+      <div className="flex-1 p-3 flex flex-col justify-between overflow-hidden bg-white">
+        {/* Navigation & Header */}
+        <div className="flex items-center justify-between border-b border-[#E2E6EE] pb-1.5">
+          <div className="flex items-center gap-1.5">
+            <div className="h-5 w-5 rounded bg-[#2a369c] text-[#b3bcf2] flex items-center justify-center font-black text-[9px]">J</div>
+            <div>
+              <p className="text-[9px] font-extrabold text-[#2a369c] leading-none">JORMASS Research</p>
+              <p className="text-[6.5px] text-[#675e79]">Discovery & Publishing Platform</p>
+            </div>
           </div>
-          <span className="bg-stone-900 text-white px-2 py-0.5 rounded font-bold">Catalogue Search</span>
+          <div className="flex gap-1 text-[7px] text-[#675e79] font-semibold">
+            <span className="text-[#c04f17] font-bold">Explore</span>
+            <span>Archive</span>
+            <span>Guidelines</span>
+          </div>
         </div>
 
-        {/* Archival Issue Cover Art & Article Listings */}
+        {/* Search Bar */}
+        <div className="bg-[#F4F6FB] p-1.5 rounded-md border border-[#E2E6EE] flex items-center justify-between text-[7px] my-1">
+          <div className="flex items-center gap-1 text-[#675e79]">
+            <Search className="h-2.5 w-2.5 text-[#e86b31]" />
+            <span>Search articles, authors, DOIs...</span>
+          </div>
+          <span className="bg-[#e86b31] text-white px-2 py-0.5 rounded text-[6.5px] font-bold">Search</span>
+        </div>
+
+        {/* 2-Column Split: Filter sidebar + Article Cards */}
         <div className="grid grid-cols-3 gap-2 flex-1 overflow-hidden">
-          {/* Issue Book Cover Mock */}
-          <div className="bg-[#2b1019] text-white p-1.5 rounded border border-amber-700/40 flex flex-col justify-between shadow-xs">
-            <div className="space-y-0.5">
-              <span className="text-[5.5px] font-sans text-amber-300 uppercase tracking-widest">VOLUME 11</span>
-              <p className="text-[7.5px] font-bold text-amber-100 leading-tight">Issue No. 2 (2025)</p>
-            </div>
-            <div className="pt-2 border-t border-amber-700/30 text-[6px] font-sans text-amber-300/80">
-              MOUAU Press
+          {/* Left Mini-Filter Sidebar */}
+          <div className="bg-[#F4F6FB] p-1.5 rounded border border-[#E2E6EE] space-y-1">
+            <span className="text-[6px] font-bold text-[#2a369c] uppercase">Filter Research</span>
+            <div className="space-y-0.5 text-[5.5px] text-[#675e79]">
+              <p className="text-[#c04f17] font-bold">✓ 2025 (Vol. 11)</p>
+              <p>✓ Open Access</p>
+              <p>• Finance & Econ</p>
+              <p>• Management</p>
             </div>
           </div>
 
-          {/* Typography-first catalog entries */}
-          <div className="col-span-2 space-y-1 font-serif">
-            <div className="bg-white p-1.5 rounded border border-stone-200 space-y-0.5">
-              <p className="text-[7.5px] font-bold text-stone-900 line-clamp-1">Machine Learning Algorithms for Detecting Tax Fraud</p>
-              <p className="text-[6.5px] font-sans text-stone-500">C. J. Obizuo et al. • pp. 173–182</p>
+          {/* Right Discovery Article Cards */}
+          <div className="col-span-2 space-y-1">
+            <div className="bg-white p-1.5 rounded border border-[#E2E6EE] space-y-0.5">
+              <span className="text-[5.5px] bg-[#b3bcf2] text-[#2a369c] font-bold px-1 rounded">OPEN ACCESS</span>
+              <p className="text-[7.5px] font-bold text-[#2a369c] line-clamp-1">Machine Learning Algorithms for Detecting Tax Fraud</p>
+              <p className="text-[6px] text-[#675e79]">C. J. Obizuo et al. • Vol. 11 No. 2</p>
             </div>
-            <div className="bg-white p-1.5 rounded border border-stone-200 space-y-0.5">
-              <p className="text-[7.5px] font-bold text-stone-900 line-clamp-1">Environmental Taxation & Sustainable Development in Oil Firms</p>
-              <p className="text-[6.5px] font-sans text-stone-500">O. E. Alpheaus et al. • pp. 183–192</p>
+            <div className="bg-white p-1.5 rounded border border-[#E2E6EE] space-y-0.5">
+              <span className="text-[5.5px] bg-[#b3bcf2] text-[#2a369c] font-bold px-1 rounded">OPEN ACCESS</span>
+              <p className="text-[7.5px] font-bold text-[#2a369c] line-clamp-1">Environmental Taxation & Sustainable Development</p>
+              <p className="text-[6px] text-[#675e79]">O. E. Alpheaus et al. • Vol. 11 No. 2</p>
             </div>
           </div>
         </div>

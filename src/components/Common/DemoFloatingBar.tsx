@@ -24,7 +24,7 @@ export const DemoFloatingBar: React.FC<DemoFloatingBarProps> = ({
   const demoLabels: Record<ThemeVariant, { name: string; tag: string }> = {
     demo1: { name: 'Demo 1', tag: 'Heritage Academic' },
     demo2: { name: 'Demo 2', tag: 'Contemporary Research' },
-    demo3: { name: 'Demo 3', tag: 'Editorial Digital Library' },
+    demo3: { name: 'Demo 3', tag: 'Scholarly Discovery Platform (Taylor & Francis Inspired)' },
   };
 
   return (
@@ -82,10 +82,10 @@ export const DemoFloatingBar: React.FC<DemoFloatingBarProps> = ({
             onClick={() => onSwitchDemo('demo3')}
             className={`rounded-lg px-2.5 py-1 text-xs font-bold transition ${
               currentTheme === 'demo3'
-                ? 'bg-amber-800 text-white shadow-xs'
+                ? 'bg-[#2a369c] text-[#b3bcf2] border border-[#b3bcf2]/40 shadow-xs'
                 : 'text-slate-400 hover:text-white hover:bg-slate-800'
             }`}
-            title="Demo 3: Editorial Digital Library"
+            title="Demo 3: Scholarly Discovery Platform (Taylor & Francis Inspired)"
           >
             Demo 3
           </button>

@@ -133,18 +133,18 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
       .slice(0, 3);
 
     return (
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-8 font-d3-body">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-8 font-sans">
         {/* Breadcrumb Navigation */}
-        <nav className="flex flex-wrap items-center gap-2 text-xs text-[#675e79] font-d3-meta border-b border-[#E2E6EE] pb-3">
-          <button onClick={() => onNavigate('home')} className="hover:text-[#2a369c] transition">
+        <nav className="flex flex-wrap items-center gap-2 text-xs text-[#50577A] border-b border-[#E2E5F3] pb-3 font-mono">
+          <button onClick={() => onNavigate('home')} className="hover:text-[#20255C] transition cursor-pointer">
             Home
           </button>
           <span>/</span>
-          <button onClick={() => onNavigate('archive')} className="hover:text-[#2a369c] transition">
+          <button onClick={() => onNavigate('archive')} className="hover:text-[#20255C] transition cursor-pointer">
             Vol. {volOfArt.volumeNumber} No. {issueOfArt.issueNumber} ({issueOfArt.year})
           </button>
           <span>/</span>
-          <span className="text-[#2a369c] font-semibold truncate max-w-md">
+          <span className="text-[#20255C] font-bold truncate max-w-md">
             {selectedArticle.title}
           </span>
         </nav>
@@ -154,74 +154,74 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
           {/* Main Column (8 Cols) */}
           <article className="lg:col-span-8 space-y-6">
             {/* Top Article Header Block */}
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E2E6EE] shadow-xs space-y-4">
+            <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#E2E6EE] shadow-xs space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
                 <div className="flex items-center gap-2">
-                  <span className="rounded bg-[#b3bcf2] text-[#2a369c] font-bold px-2 py-0.5 text-[11px] font-d3-meta">
+                  <span className="rounded-md bg-[#FFC84D] text-[#20255C] font-extrabold px-2.5 py-0.5 text-[11px] uppercase">
                     Open Access
                   </span>
-                  <span className="rounded bg-[#F4F6FB] border border-[#E2E6EE] text-[#c04f17] font-semibold px-2 py-0.5 text-[11px] font-d3-meta">
+                  <span className="rounded-md bg-[#E2E5F3] text-[#6B3F74] font-bold px-2.5 py-0.5 text-[11px]">
                     {selectedArticle.category}
                   </span>
                 </div>
-                <span className="text-[#675e79] text-xs font-d3-meta">
+                <span className="text-[#50577A] text-xs font-mono">
                   Pages {selectedArticle.pageStart}–{selectedArticle.pageEnd} • Published: {issueOfArt.publicationDate}
                 </span>
               </div>
 
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#2a369c] leading-snug font-d3-heading">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#20255C] leading-snug font-heading">
                 {selectedArticle.title}
               </h1>
 
               {/* Authors & Affiliations */}
               <div className="space-y-2 pt-2 border-t border-[#E2E6EE]/60">
-                <div className="flex flex-wrap gap-2 text-sm font-bold text-[#2a369c]">
+                <div className="flex flex-wrap gap-2 text-sm font-bold text-[#20255C]">
                   {selectedArticle.authors.map((auth, idx) => (
-                    <span key={idx} className="hover:text-[#c04f17] cursor-pointer">
+                    <span key={idx} className="hover:text-[#B33600] cursor-pointer">
                       {auth.name}
-                      {idx < selectedArticle.authors.length - 1 && <span className="text-[#675e79] font-normal">,</span>}
+                      {idx < selectedArticle.authors.length - 1 && <span className="text-[#50577A] font-normal">,</span>}
                     </span>
                   ))}
                 </div>
-                <div className="space-y-1 text-xs text-[#675e79] italic">
+                <div className="space-y-1 text-xs text-[#50577A] italic">
                   {selectedArticle.authors.map((auth, idx) => (
                     <p key={idx}>
-                      <span className="font-semibold text-[#242A38] not-italic">{auth.name}</span> — {auth.affiliation}
+                      <span className="font-semibold text-[#20255C] not-italic">{auth.name}</span> — {auth.affiliation}
                     </p>
                   ))}
                 </div>
               </div>
 
               {/* Verified DOI / Identifiers */}
-              <div className="flex flex-wrap items-center justify-between gap-3 text-xs bg-[#b3bcf2]/20 p-3 rounded-lg border border-[#b3bcf2] font-d3-meta">
+              <div className="flex flex-wrap items-center justify-between gap-3 text-xs bg-[#E2E5F3]/50 p-3 rounded-xl border border-[#E2E5F3] font-mono">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#675e79]">DOI:</span>
+                  <span className="text-[#50577A]">DOI:</span>
                   <a
                     href={`https://doi.org/${selectedArticle.doi || '10.5281/jormass.2025.11'}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[#c04f17] hover:underline font-bold"
+                    className="text-[#B33600] hover:underline font-bold"
                   >
                     https://doi.org/{selectedArticle.doi || '10.5281/jormass.2025.11'}
                   </a>
                 </div>
-                <span className="text-[#2a369c] font-semibold">Licensed under CC BY 4.0</span>
+                <span className="text-[#20255C] font-semibold">Licensed under CC BY 4.0</span>
               </div>
 
               {/* Action Toolbar */}
-              <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#E2E6EE]/60">
+              <div className="flex flex-wrap items-center gap-2.5 pt-2 border-t border-[#E2E6EE]/60">
                 <button
                   onClick={() => onOpenPdf(selectedArticle)}
-                  className="rounded-md bg-[#2a369c] hover:bg-[#1f2979] px-4 py-2 text-xs font-bold text-white transition inline-flex items-center gap-1.5 shadow-xs"
+                  className="rounded-xl bg-[#6B3F74] hover:bg-[#532e5b] px-4 py-2 text-xs font-bold text-white transition inline-flex items-center gap-2 shadow-xs cursor-pointer"
                 >
-                  <Download className="h-3.5 w-3.5 text-[#b3bcf2]" />
+                  <Download className="h-4 w-4 text-[#FFC84D]" />
                   <span>Download Full PDF</span>
                 </button>
                 <button
                   onClick={() => onOpenCitation(selectedArticle)}
-                  className="rounded-md border border-[#E2E6EE] bg-white hover:bg-[#F4F6FB] px-3.5 py-2 text-xs font-semibold text-[#675e79] transition inline-flex items-center gap-1.5"
+                  className="rounded-xl border border-[#E2E6EE] bg-white hover:bg-[#E2E5F3] px-3.5 py-2 text-xs font-semibold text-[#50577A] transition inline-flex items-center gap-1.5 cursor-pointer"
                 >
-                  <Quote className="h-3.5 w-3.5 text-[#e86b31]" />
+                  <Quote className="h-3.5 w-3.5 text-[#6B3F74]" />
                   <span>Cite Article</span>
                 </button>
                 <button
@@ -229,42 +229,42 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
                     navigator.clipboard?.writeText?.(window.location.href);
                     alert('Article link copied to clipboard.');
                   }}
-                  className="rounded-md border border-[#E2E6EE] bg-white hover:bg-[#F4F6FB] px-3 py-2 text-xs font-semibold text-[#675e79] transition inline-flex items-center gap-1.5"
+                  className="rounded-xl border border-[#E2E6EE] bg-white hover:bg-[#E2E5F3] px-3.5 py-2 text-xs font-semibold text-[#50577A] transition inline-flex items-center gap-1.5 cursor-pointer"
                 >
-                  <Share2 className="h-3.5 w-3.5 text-[#675e79]" />
+                  <Share2 className="h-3.5 w-3.5 text-[#50577A]" />
                   <span>Share</span>
                 </button>
                 <button
                   onClick={() => onNavigate('archive')}
-                  className="rounded-md border border-[#E2E6EE] bg-white hover:bg-[#F4F6FB] px-3 py-2 text-xs font-semibold text-[#675e79] transition inline-flex items-center gap-1.5"
+                  className="rounded-xl border border-[#E2E6EE] bg-white hover:bg-[#E2E5F3] px-3.5 py-2 text-xs font-semibold text-[#50577A] transition inline-flex items-center gap-1.5 cursor-pointer"
                 >
-                  <BookOpen className="h-3.5 w-3.5 text-[#2a369c]" />
+                  <BookOpen className="h-3.5 w-3.5 text-[#20255C]" />
                   <span>View Issue Contents</span>
                 </button>
               </div>
             </div>
 
             {/* Abstract Card */}
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E2E6EE] shadow-xs space-y-3">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-[#2a369c] font-d3-heading border-b border-[#E2E6EE]/60 pb-2">
+            <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#E2E6EE] shadow-xs space-y-3">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[#20255C] font-heading border-b border-[#E2E6EE]/60 pb-2">
                 Abstract
               </h3>
-              <p className="text-xs sm:text-sm text-[#242A38]/90 leading-relaxed text-justify">
+              <p className="text-xs sm:text-sm text-[#20255C]/90 leading-relaxed text-justify">
                 {selectedArticle.abstract}
               </p>
             </div>
 
             {/* Keywords Block */}
             {selectedArticle.keywords && (
-              <div className="bg-white p-6 rounded-xl border border-[#E2E6EE] shadow-xs space-y-2">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#675e79] font-d3-meta">
+              <div className="bg-white p-6 rounded-2xl border border-[#E2E6EE] shadow-xs space-y-2.5">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#50577A]">
                   Keywords
                 </h3>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2">
                   {selectedArticle.keywords.map((kw, i) => (
                     <span
                       key={i}
-                      className="rounded-md bg-[#F4F6FB] border border-[#E2E6EE] px-2.5 py-1 text-xs text-[#2a369c] font-medium hover:bg-[#b3bcf2]/40 transition cursor-pointer"
+                      className="rounded-lg bg-[#E2E5F3]/60 border border-[#E2E5F3] px-3 py-1 text-xs text-[#20255C] font-semibold hover:bg-[#6B3F74] hover:text-white transition cursor-pointer"
                     >
                       {kw}
                     </span>
@@ -274,18 +274,18 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
             )}
 
             {/* Article Structure Preview */}
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E2E6EE] shadow-xs space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-[#2a369c] font-d3-heading border-b border-[#E2E6EE]/60 pb-2">
+            <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#E2E6EE] shadow-xs space-y-4">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[#20255C] font-heading border-b border-[#E2E6EE]/60 pb-2">
                 Article Information & Methodology Overview
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-[#242A38]">
-                <div className="p-3 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE] space-y-1">
-                  <p className="font-bold text-[#2a369c]">Review Process</p>
-                  <p className="text-[#675e79]">Double-blind peer reviewed by 2 independent subject specialists.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-[#20255C]">
+                <div className="p-4 rounded-xl bg-[#E2E5F3]/40 border border-[#E2E5F3] space-y-1">
+                  <p className="font-bold text-[#20255C]">Review Process</p>
+                  <p className="text-[#50577A]">Double-blind peer reviewed by 2 independent subject specialists.</p>
                 </div>
-                <div className="p-3 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE] space-y-1">
-                  <p className="font-bold text-[#2a369c]">Citation Standard</p>
-                  <p className="text-[#675e79]">Formatted according to American Psychological Association (APA 7th Edition).</p>
+                <div className="p-4 rounded-xl bg-[#E2E5F3]/40 border border-[#E2E5F3] space-y-1">
+                  <p className="font-bold text-[#20255C]">Citation Standard</p>
+                  <p className="text-[#50577A]">Formatted according to American Psychological Association (APA 7th Edition).</p>
                 </div>
               </div>
             </div>
@@ -294,58 +294,58 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
           {/* Side Rail (4 Cols) */}
           <aside className="lg:col-span-4 space-y-6">
             {/* Article Metrics Widget */}
-            <div className="bg-white p-5 rounded-xl border border-[#E2E6EE] shadow-xs space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#2a369c] font-d3-heading flex items-center gap-1.5 border-b border-[#E2E6EE]/60 pb-2">
-                <BarChart2 className="h-4 w-4 text-[#e86b31]" />
+            <div className="bg-white p-5 rounded-2xl border border-[#E2E6EE] shadow-xs space-y-4">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#20255C] font-heading flex items-center gap-1.5 border-b border-[#E2E6EE]/60 pb-2">
+                <BarChart2 className="h-4 w-4 text-[#B33600]" />
                 <span>Article Metrics & Impact</span>
               </h4>
               <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="p-2.5 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE]">
-                  <p className="text-lg font-extrabold text-[#2a369c] font-d3-meta">842</p>
-                  <p className="text-[10px] text-[#675e79] font-semibold uppercase">Views</p>
+                <div className="p-3 rounded-xl bg-[#E2E5F3]/40 border border-[#E2E5F3]">
+                  <p className="text-lg font-extrabold text-[#20255C] font-mono">842</p>
+                  <p className="text-[10px] text-[#50577A] font-semibold uppercase">Views</p>
                 </div>
-                <div className="p-2.5 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE]">
-                  <p className="text-lg font-extrabold text-[#c04f17] font-d3-meta">318</p>
-                  <p className="text-[10px] text-[#675e79] font-semibold uppercase">PDF DL</p>
+                <div className="p-3 rounded-xl bg-[#E2E5F3]/40 border border-[#E2E5F3]">
+                  <p className="text-lg font-extrabold text-[#B33600] font-mono">318</p>
+                  <p className="text-[10px] text-[#50577A] font-semibold uppercase">PDF DL</p>
                 </div>
-                <div className="p-2.5 rounded-lg bg-[#b3bcf2]/30 border border-[#b3bcf2]">
-                  <p className="text-lg font-extrabold text-[#2a369c] font-d3-meta">12</p>
-                  <p className="text-[10px] text-[#2a369c] font-bold uppercase">Citations</p>
+                <div className="p-3 rounded-xl bg-[#FFC84D]/25 border border-[#FFC84D]/40">
+                  <p className="text-lg font-extrabold text-[#20255C] font-mono">12</p>
+                  <p className="text-[10px] text-[#20255C] font-bold uppercase">Citations</p>
                 </div>
               </div>
-              <p className="text-[11px] text-[#675e79] text-center font-d3-meta">
+              <p className="text-[11px] text-[#50577A] text-center font-mono">
                 Crossref & Google Scholar verified citations index
               </p>
             </div>
 
             {/* Issue Information Block */}
-            <div className="bg-white p-5 rounded-xl border border-[#E2E6EE] shadow-xs space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#2a369c] font-d3-heading border-b border-[#E2E6EE]/60 pb-2">
+            <div className="bg-white p-5 rounded-2xl border border-[#E2E6EE] shadow-xs space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#20255C] font-heading border-b border-[#E2E6EE]/60 pb-2">
                 Issue Information
               </h4>
-              <div className="space-y-1.5 text-xs text-[#242A38]">
-                <p className="font-bold text-[#2a369c]">
+              <div className="space-y-2 text-xs text-[#20255C]">
+                <p className="font-bold text-[#20255C]">
                   Volume {volOfArt.volumeNumber}, Issue {issueOfArt.issueNumber} ({issueOfArt.year})
                 </p>
-                <p className="text-[#675e79] text-[11px]">
+                <p className="text-[#50577A] text-[11px]">
                   Publication Date: {issueOfArt.publicationDate}
                 </p>
-                <p className="text-[#675e79] line-clamp-2">
+                <p className="text-[#50577A] line-clamp-2">
                   {issueOfArt.description || 'Regular scholarly research edition'}
                 </p>
                 <button
                   onClick={() => onNavigate('archive')}
-                  className="pt-1 text-[#c04f17] hover:underline font-bold inline-flex items-center gap-1 text-xs"
+                  className="pt-1 text-[#B33600] hover:underline font-bold inline-flex items-center gap-1 text-xs cursor-pointer"
                 >
                   <span>Browse other articles in this issue</span>
-                  <ChevronRight className="h-3 w-3" />
+                  <ChevronRight className="h-3.5 w-3.5" />
                 </button>
               </div>
             </div>
 
             {/* Related Research Articles */}
-            <div className="bg-white p-5 rounded-xl border border-[#E2E6EE] shadow-xs space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#2a369c] font-d3-heading border-b border-[#E2E6EE]/60 pb-2">
+            <div className="bg-white p-5 rounded-2xl border border-[#E2E6EE] shadow-xs space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#20255C] font-heading border-b border-[#E2E6EE]/60 pb-2">
                 Related Research
               </h4>
               <div className="divide-y divide-[#E2E6EE]/60">
@@ -355,13 +355,13 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
                     onClick={() => onSelectArticle(rel)}
                     className="py-3 first:pt-0 last:pb-0 cursor-pointer group space-y-1"
                   >
-                    <span className="text-[10px] font-bold text-[#c04f17] uppercase font-d3-meta">
+                    <span className="text-[10px] font-bold text-[#6B3F74] uppercase font-mono">
                       {rel.category}
                     </span>
-                    <h5 className="text-xs font-bold text-[#2a369c] group-hover:text-[#c04f17] transition line-clamp-2 leading-snug">
+                    <h5 className="text-xs font-bold text-[#20255C] group-hover:text-[#B33600] transition line-clamp-2 leading-snug font-heading">
                       {rel.title}
                     </h5>
-                    <p className="text-[11px] text-[#675e79] line-clamp-1">
+                    <p className="text-[11px] text-[#50577A] line-clamp-1">
                       {rel.authors.map((a) => a.name).join(', ')}
                     </p>
                   </div>
@@ -386,26 +386,26 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
     });
 
     return (
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-d3-body">
-        <div className="border-b border-[#E2E6EE] pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-sans">
+        <div className="border-b border-[#E2E5F3] pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#2a369c] font-d3-heading">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#20255C] font-heading">
               JORMASS Publication Archive
             </h1>
-            <p className="text-xs sm:text-sm text-[#675e79] mt-1">
+            <p className="text-xs sm:text-sm text-[#50577A] mt-1">
               Complete archival records organized by Volume and Issue across all publication years.
             </p>
           </div>
 
           {/* Filter By Year Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 text-xs font-d3-meta">
-            <span className="text-[#675e79] font-semibold mr-1">Browse Year:</span>
+          <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
+            <span className="text-[#50577A] font-semibold mr-1">Browse Year:</span>
             <button
               onClick={() => setArchiveYear('all')}
-              className={`rounded px-3 py-1 text-xs transition ${
+              className={`rounded-lg px-3 py-1.5 text-xs transition cursor-pointer ${
                 archiveYear === 'all'
-                  ? 'bg-[#2a369c] text-white font-bold shadow-xs'
-                  : 'bg-white border border-[#E2E6EE] text-[#675e79] hover:bg-[#F4F6FB]'
+                  ? 'bg-[#20255C] text-white font-bold shadow-xs'
+                  : 'bg-white border border-[#E2E6EE] text-[#50577A] hover:bg-[#E2E5F3]'
               }`}
             >
               All Years
@@ -414,10 +414,10 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
               <button
                 key={yr}
                 onClick={() => setArchiveYear(yr)}
-                className={`rounded px-3 py-1 text-xs transition ${
+                className={`rounded-lg px-3 py-1.5 text-xs transition cursor-pointer ${
                   archiveYear === yr
-                    ? 'bg-[#2a369c] text-white font-bold shadow-xs'
-                    : 'bg-white border border-[#E2E6EE] text-[#675e79] hover:bg-[#F4F6FB]'
+                    ? 'bg-[#20255C] text-white font-bold shadow-xs'
+                    : 'bg-white border border-[#E2E6EE] text-[#50577A] hover:bg-[#E2E5F3]'
                 }`}
               >
                 {yr}
@@ -431,72 +431,72 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
           {filteredVolumes.map((vol) => {
             const volIssues = (issues || []).filter((i) => i.volumeId === vol.id);
             return (
-              <div key={vol.id} className="rounded-xl border border-[#E2E6EE] bg-white p-6 shadow-xs space-y-4">
+              <div key={vol.id} className="rounded-2xl border border-[#E2E6EE] bg-white p-6 shadow-xs space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E2E6EE]/60 pb-3">
                   <div>
-                    <h2 className="text-xl font-bold text-[#2a369c] font-d3-heading">
+                    <h2 className="text-xl font-bold text-[#20255C] font-heading">
                       Volume {vol.volumeNumber} ({vol.year})
                     </h2>
-                    <p className="text-xs text-[#675e79] font-d3-meta mt-0.5">
+                    <p className="text-xs text-[#50577A] font-mono mt-0.5">
                       COLMAS Publication Records • {volIssues.length} Issues Published
                     </p>
                   </div>
-                  <span className="rounded bg-[#b3bcf2] text-[#2a369c] font-bold text-xs px-2.5 py-1">
+                  <span className="rounded-md bg-[#FFC84D] text-[#20255C] font-extrabold text-xs px-3 py-1">
                     Archived & Open Access
                   </span>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-3.5">
                   {volIssues.map((iss) => {
                     const issArts = (articles || []).filter((a) => a.issueId === iss.id);
                     const isExpanded = expandedIssues[iss.id] !== false;
 
                     return (
-                      <div key={iss.id} className="rounded-lg border border-[#E2E6EE] bg-[#F4F6FB] p-4 space-y-3">
+                      <div key={iss.id} className="rounded-xl border border-[#E2E6EE] bg-[#E2E5F3]/30 p-4 space-y-3">
                         <div className="flex items-center justify-between gap-3">
                           <div className="space-y-0.5">
                             <div className="flex items-center gap-2">
-                              <span className="font-bold text-[#2a369c] text-sm">
+                              <span className="font-bold text-[#20255C] text-sm">
                                 Issue No. {iss.issueNumber} ({vol.year})
                               </span>
-                              <span className="text-xs text-[#675e79] font-d3-meta">
+                              <span className="text-xs text-[#50577A] font-mono">
                                 • {iss.publicationDate}
                               </span>
                             </div>
-                            <p className="text-xs text-[#242A38] font-medium">
+                            <p className="text-xs text-[#20255C] font-medium">
                               {iss.title}
                             </p>
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-semibold text-[#675e79] font-d3-meta">
+                            <span className="text-xs font-semibold text-[#50577A] font-mono">
                               {issArts.length} Articles
                             </span>
                             <button
                               onClick={() => toggleIssueExpand(iss.id)}
-                              className="p-1 rounded text-[#2a369c] hover:bg-[#b3bcf2]/40"
+                              className="p-1.5 rounded-lg text-[#20255C] hover:bg-[#E2E5F3] cursor-pointer"
                             >
-                              {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4 text-[#c04f17]" />}
+                              {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4 text-[#B33600]" />}
                             </button>
                           </div>
                         </div>
 
                         {/* Expandable Article Listing */}
                         {isExpanded && (
-                          <div className="divide-y divide-[#E2E6EE] pt-2 border-t border-[#E2E6EE] bg-white rounded-md p-3">
+                          <div className="divide-y divide-[#E2E6EE] pt-2 border-t border-[#E2E6EE] bg-white rounded-xl p-3">
                             {issArts.map((art) => (
                               <div
                                 key={art.id}
-                                className="py-2.5 first:pt-1 last:pb-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs hover:bg-[#F4F6FB] px-2 rounded"
+                                className="py-3 first:pt-1 last:pb-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs hover:bg-[#E2E5F3]/30 px-2.5 rounded-lg"
                               >
                                 <div className="space-y-0.5 max-w-2xl">
                                   <h4
                                     onClick={() => onSelectArticle(art)}
-                                    className="font-bold text-[#2a369c] hover:text-[#c04f17] cursor-pointer"
+                                    className="font-bold text-[#20255C] hover:text-[#B33600] cursor-pointer font-heading"
                                   >
                                     {art.title}
                                   </h4>
-                                  <p className="text-[11px] text-[#675e79]">
+                                  <p className="text-[11px] text-[#50577A]">
                                     {(art.authors || []).map((a) => a?.name).filter(Boolean).join(', ')} • pp. {art.pageStart}–{art.pageEnd}
                                   </p>
                                 </div>
@@ -504,13 +504,13 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
                                 <div className="flex items-center gap-2 shrink-0">
                                   <button
                                     onClick={() => onSelectArticle(art)}
-                                    className="text-xs text-[#c04f17] hover:underline font-semibold"
+                                    className="text-xs text-[#B33600] hover:underline font-bold cursor-pointer"
                                   >
                                     View Article
                                   </button>
                                   <button
                                     onClick={() => onOpenPdf(art)}
-                                    className="rounded bg-[#2a369c] hover:bg-[#1f2979] text-white font-semibold px-2.5 py-1 text-[11px]"
+                                    className="rounded-lg bg-[#6B3F74] hover:bg-[#532e5b] text-white font-bold px-3 py-1 text-xs cursor-pointer"
                                   >
                                     PDF
                                   </button>
@@ -551,31 +551,31 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
     });
 
     return (
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-d3-body">
-        <div className="border-b border-[#E2E6EE] pb-4">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#2a369c] font-d3-heading">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-sans">
+        <div className="border-b border-[#E2E5F3] pb-4">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#20255C] font-heading">
             Editorial Board Directory
           </h1>
-          <p className="text-xs sm:text-sm text-[#675e79] mt-1">
+          <p className="text-xs sm:text-sm text-[#50577A] mt-1">
             Scholarly advisory and editorial leaders guiding peer-review rigor across management sciences.
           </p>
         </div>
 
         {/* Directory Controls */}
-        <div className="flex flex-col sm:flex-row gap-3 bg-white p-4 rounded-xl border border-[#E2E6EE] shadow-xs">
+        <div className="flex flex-col sm:flex-row gap-3 bg-white p-4 rounded-2xl border border-[#E2E6EE] shadow-xs">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#675e79]" />
+            <Search className="absolute left-3.5 top-3 h-4 w-4 text-[#50577A]" />
             <input
               type="text"
               value={boardSearch}
               onChange={(e) => setBoardSearch(e.target.value)}
               placeholder="Search editorial members by name, institution, or department..."
-              className="w-full rounded-md border border-[#E2E6EE] pl-9 pr-3 py-1.5 text-xs text-[#242A38] focus:border-[#2a369c] focus:outline-none"
+              className="w-full rounded-xl border border-[#E2E6EE] pl-10 pr-3 py-2 text-xs text-[#20255C] focus:border-[#6B3F74] focus:outline-none"
             />
           </div>
 
-          <div className="flex items-center gap-1.5 text-xs font-d3-meta">
-            <span className="text-[#675e79] font-semibold mr-1">Role:</span>
+          <div className="flex items-center gap-2 text-xs font-mono">
+            <span className="text-[#50577A] font-semibold mr-1">Role:</span>
             {[
               { id: 'all', label: 'All Roles' },
               { id: 'Editor-in-Chief', label: 'Editor-in-Chief' },
@@ -585,10 +585,10 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
               <button
                 key={rf.id}
                 onClick={() => setBoardFilter(rf.id as any)}
-                className={`rounded px-2.5 py-1 text-xs transition ${
+                className={`rounded-lg px-3 py-1.5 text-xs transition cursor-pointer ${
                   boardFilter === rf.id
-                    ? 'bg-[#2a369c] text-white font-bold shadow-xs'
-                    : 'bg-[#F4F6FB] border border-[#E2E6EE] text-[#675e79] hover:bg-[#b3bcf2]/30'
+                    ? 'bg-[#6B3F74] text-white font-bold shadow-xs'
+                    : 'bg-[#E2E5F3]/50 border border-[#E2E6EE] text-[#50577A] hover:bg-[#E2E5F3]'
                 }`}
               >
                 {rf.label}
@@ -602,38 +602,38 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
           {filteredBoard.map((member) => (
             <div
               key={member.id}
-              className="rounded-xl border border-[#E2E6EE] bg-white p-5 space-y-2.5 shadow-xs hover:border-[#c04f17] transition"
+              className="rounded-2xl border border-[#E2E6EE] bg-white p-5 space-y-3 shadow-xs hover:border-[#6B3F74] transition"
             >
               <div className="flex items-center justify-between">
-                <span className="rounded bg-[#b3bcf2] text-[#2a369c] font-bold text-[10px] px-2 py-0.5 uppercase tracking-wider font-d3-meta">
+                <span className="rounded-md bg-[#E2E5F3] text-[#6B3F74] font-bold text-[10px] px-2.5 py-0.5 uppercase tracking-wider">
                   {member.role}
                 </span>
-                <span className="text-[11px] text-[#675e79] font-d3-meta">{member.country}</span>
+                <span className="text-[11px] text-[#50577A] font-mono">{member.country}</span>
               </div>
 
               <div>
-                <h3 className="text-base font-bold text-[#2a369c] font-d3-heading">
+                <h3 className="text-base font-bold text-[#20255C] font-heading">
                   {member.name}
                 </h3>
-                <p className="text-xs text-[#c04f17] font-medium">
+                <p className="text-xs text-[#B33600] font-semibold">
                   {member.department}
                 </p>
-                <p className="text-xs text-[#675e79]">
+                <p className="text-xs text-[#50577A]">
                   {member.institution}
                 </p>
               </div>
 
               {member.orcid && (
-                <div className="pt-2 border-t border-[#E2E6EE]/60 flex items-center justify-between text-[11px] text-[#675e79] font-d3-meta">
+                <div className="pt-2 border-t border-[#E2E6EE]/60 flex items-center justify-between text-[11px] text-[#50577A] font-mono">
                   <span>ORCID Profile</span>
                   <a
                     href={member.orcid}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[#c04f17] hover:underline font-semibold inline-flex items-center gap-1"
+                    className="text-[#B33600] hover:underline font-bold inline-flex items-center gap-1"
                   >
                     <span>Verified Researcher</span>
-                    <ExternalLink className="h-3 w-3 text-[#e86b31]" />
+                    <ExternalLink className="h-3 w-3 text-[#FFC84D]" />
                   </a>
                 </div>
               )}
@@ -649,27 +649,27 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
   // ----------------------------------------------------
   if (page === 'author-guidelines') {
     return (
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-d3-body">
-        <div className="border-b border-[#E2E6EE] pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-sans">
+        <div className="border-b border-[#E2E5F3] pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#2a369c] font-d3-heading">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#20255C] font-heading">
               Author Submission & Manuscript Guidelines
             </h1>
-            <p className="text-xs sm:text-sm text-[#675e79] mt-1">
+            <p className="text-xs sm:text-sm text-[#50577A] mt-1">
               Instructions for manuscript formatting, submission requirements, APA 7th referencing, and review protocols.
             </p>
           </div>
 
           <button
             onClick={() => onNavigate('submit')}
-            className="rounded-md bg-[#e86b31] hover:bg-[#c04f17] px-4 py-2 text-xs font-bold text-white transition shrink-0 shadow-xs"
+            className="rounded-xl bg-[#B33600] hover:bg-[#8f2b00] px-5 py-2.5 text-xs font-bold text-white transition shrink-0 shadow-xs cursor-pointer"
           >
             Submit Manuscript Online
           </button>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex flex-wrap border-b border-[#E2E6EE] gap-1 font-semibold text-xs">
+        <div className="flex flex-wrap border-b border-[#E2E5F3] gap-1 font-bold text-xs">
           {[
             { id: 'prepare', label: 'Preparing Your Manuscript' },
             { id: 'checklist', label: 'Submission Checklist' },
@@ -681,10 +681,10 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
             <button
               key={tab.id}
               onClick={() => setGuidelinesTab(tab.id as any)}
-              className={`px-4 py-2.5 border-b-2 transition ${
+              className={`px-4 py-2.5 border-b-2 transition cursor-pointer ${
                 guidelinesTab === tab.id
-                  ? 'border-[#c04f17] text-[#c04f17] font-bold bg-[#b3bcf2]/20 rounded-t'
-                  : 'border-transparent text-[#675e79] hover:text-[#2a369c]'
+                  ? 'border-[#B33600] text-[#B33600] font-extrabold bg-[#E2E5F3]/40 rounded-t-lg'
+                  : 'border-transparent text-[#50577A] hover:text-[#20255C]'
               }`}
             >
               {tab.label}
@@ -693,27 +693,27 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
         </div>
 
         {/* Tab Content Panes */}
-        <div className="rounded-xl border border-[#E2E6EE] bg-white p-6 sm:p-8 shadow-xs space-y-6 text-xs sm:text-sm text-[#242A38] leading-relaxed">
+        <div className="rounded-2xl border border-[#E2E6EE] bg-white p-6 sm:p-8 shadow-xs space-y-6 text-xs sm:text-sm text-[#20255C] leading-relaxed">
           {guidelinesTab === 'prepare' && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-[#2a369c] font-d3-heading">
+              <h3 className="text-lg font-bold text-[#20255C] font-heading">
                 Manuscript Preparation Specifications
               </h3>
-              <p>
+              <p className="text-[#50577A]">
                 Manuscripts submitted to JORMASS must represent original research contributions that have not been published previously and are not under consideration by another journal.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                <div className="p-4 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE] space-y-1">
-                  <p className="font-bold text-[#2a369c]">File Format & Length</p>
-                  <p className="text-xs text-[#675e79]">Microsoft Word (.doc, .docx), 5,000–8,000 words including tables and references.</p>
+                <div className="p-4 rounded-xl bg-[#E2E5F3]/40 border border-[#E2E5F3] space-y-1">
+                  <p className="font-bold text-[#20255C]">File Format & Length</p>
+                  <p className="text-xs text-[#50577A]">Microsoft Word (.doc, .docx), 5,000–8,000 words including tables and references.</p>
                 </div>
-                <div className="p-4 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE] space-y-1">
-                  <p className="font-bold text-[#2a369c]">Referencing Standard</p>
-                  <p className="text-xs text-[#675e79]">APA 7th Edition style strictly required for all in-text citations and reference list.</p>
+                <div className="p-4 rounded-xl bg-[#E2E5F3]/40 border border-[#E2E5F3] space-y-1">
+                  <p className="font-bold text-[#20255C]">Referencing Standard</p>
+                  <p className="text-xs text-[#50577A]">APA 7th Edition style strictly required for all in-text citations and reference list.</p>
                 </div>
-                <div className="p-4 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE] space-y-1">
-                  <p className="font-bold text-[#2a369c]">Abstract & Keywords</p>
-                  <p className="text-xs text-[#675e79]">Structured abstract between 150–250 words accompanied by 4–6 relevant keywords.</p>
+                <div className="p-4 rounded-xl bg-[#E2E5F3]/40 border border-[#E2E5F3] space-y-1">
+                  <p className="font-bold text-[#20255C]">Abstract & Keywords</p>
+                  <p className="text-xs text-[#50577A]">Structured abstract between 150–250 words accompanied by 4–6 relevant keywords.</p>
                 </div>
               </div>
             </div>
@@ -721,24 +721,24 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
 
           {guidelinesTab === 'checklist' && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-[#2a369c] font-d3-heading">
+              <h3 className="text-lg font-bold text-[#20255C] font-heading">
                 Pre-Submission Author Checklist
               </h3>
-              <ul className="space-y-2.5 text-xs text-[#242A38]">
+              <ul className="space-y-2.5 text-xs text-[#20255C]">
                 <li className="flex items-start gap-2">
-                  <Check className="h-4 w-4 text-[#c04f17] shrink-0 mt-0.5" />
+                  <Check className="h-4 w-4 text-[#B33600] shrink-0 mt-0.5" />
                   <span>The manuscript is original, prepared in clear English, and formatted in double line spacing.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="h-4 w-4 text-[#c04f17] shrink-0 mt-0.5" />
+                  <Check className="h-4 w-4 text-[#B33600] shrink-0 mt-0.5" />
                   <span>A separate title page with all author names, affiliations, emails, and ORCID IDs is provided.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="h-4 w-4 text-[#c04f17] shrink-0 mt-0.5" />
+                  <Check className="h-4 w-4 text-[#B33600] shrink-0 mt-0.5" />
                   <span>The main manuscript text is completely anonymized for double-blind peer review.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="h-4 w-4 text-[#c04f17] shrink-0 mt-0.5" />
+                  <Check className="h-4 w-4 text-[#B33600] shrink-0 mt-0.5" />
                   <span>All tables and figures are numbered sequentially with self-contained descriptive titles.</span>
                 </li>
               </ul>
@@ -747,13 +747,13 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
 
           {guidelinesTab === 'review' && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-[#2a369c] font-d3-heading">
+              <h3 className="text-lg font-bold text-[#20255C] font-heading">
                 Double-Blind Peer Review Protocols
               </h3>
-              <p>
+              <p className="text-[#50577A]">
                 Every submission is initially assessed by the Managing Editor for scope and formatting. Manuscripts meeting minimum requirements are assigned to two independent reviewers who evaluate empirical rigor, theoretical soundness, and clarity.
               </p>
-              <div className="p-4 rounded-lg bg-[#b3bcf2]/30 border border-[#b3bcf2] text-[#2a369c] font-semibold text-xs">
+              <div className="p-4 rounded-xl bg-[#E2E5F3]/50 border border-[#E2E5F3] text-[#20255C] font-semibold text-xs">
                 Typical review turnaround duration is 4–6 weeks from initial submission to editorial decision.
               </div>
             </div>
@@ -761,20 +761,20 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
 
           {guidelinesTab === 'fees' && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-[#2a369c] font-d3-heading">
+              <h3 className="text-lg font-bold text-[#20255C] font-heading">
                 Publication Fees & Author Processing Charges (APC)
               </h3>
-              <p>
+              <p className="text-[#50577A]">
                 JORMASS maintains a transparent fee structure. Assessment fees cover double-blind peer review management, while page charges support open-access digital archiving and DOI registration.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 {(fees || []).map((f) => (
-                  <div key={f.id} className="p-4 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE] space-y-1">
+                  <div key={f.id} className="p-4 rounded-xl bg-[#E2E5F3]/40 border border-[#E2E6EE] space-y-1">
                     <div className="flex justify-between items-center font-bold">
-                      <span className="text-[#2a369c]">{f.title}</span>
-                      <span className="text-[#c04f17] font-mono">{f.amount}</span>
+                      <span className="text-[#20255C]">{f.title}</span>
+                      <span className="text-[#B33600] font-mono">{f.amount}</span>
                     </div>
-                    <p className="text-xs text-[#675e79]">{f.description}</p>
+                    <p className="text-xs text-[#50577A]">{f.description}</p>
                   </div>
                 ))}
               </div>
@@ -783,10 +783,10 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
 
           {guidelinesTab === 'ethics' && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-[#2a369c] font-d3-heading">
+              <h3 className="text-lg font-bold text-[#20255C] font-heading">
                 Ethics & Plagiarism Policy
               </h3>
-              <p>
+              <p className="text-[#50577A]">
                 JORMASS adheres strictly to the Committee on Publication Ethics (COPE) core practices. Plagiarism and duplicate publication are strictly prohibited. All submissions are screened using Turnitin with a maximum similarity index threshold of 15%.
               </p>
             </div>
@@ -794,10 +794,10 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
 
           {guidelinesTab === 'open-access' && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-[#2a369c] font-d3-heading">
+              <h3 className="text-lg font-bold text-[#20255C] font-heading">
                 Open Access & Licensing Statement
               </h3>
-              <p>
+              <p className="text-[#50577A]">
                 All articles published in JORMASS are distributed under the Creative Commons Attribution 4.0 International License (CC BY 4.0), permitting unrestricted use, distribution, and reproduction in any medium provided the original work is properly cited.
               </p>
             </div>
@@ -812,12 +812,12 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
   // ----------------------------------------------------
   if (page === 'events') {
     return (
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-d3-body">
-        <div className="border-b border-[#E2E6EE] pb-4">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#2a369c] font-d3-heading">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-sans">
+        <div className="border-b border-[#E2E5F3] pb-4">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#20255C] font-heading">
             Academic Events & Conferences
           </h1>
-          <p className="text-xs sm:text-sm text-[#675e79] mt-1">
+          <p className="text-xs sm:text-sm text-[#50577A] mt-1">
             Faculty symposia, research workshops, call-for-papers deadlines, and doctoral roundtables.
           </p>
         </div>
@@ -826,35 +826,35 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
           {(events || []).map((evt) => (
             <div
               key={evt.id}
-              className="rounded-xl border border-[#E2E6EE] bg-white p-6 shadow-xs flex flex-col md:flex-row justify-between gap-6 hover:border-[#c04f17] transition"
+              className="rounded-2xl border border-[#E2E6EE] bg-white p-6 shadow-xs flex flex-col md:flex-row justify-between gap-6 hover:border-[#6B3F74] transition"
             >
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="rounded bg-[#2a369c] text-white font-bold text-[10px] px-2 py-0.5 uppercase tracking-wider font-d3-meta">
+                  <span className="rounded-md bg-[#20255C] text-white font-bold text-[10px] px-2.5 py-0.5 uppercase tracking-wider font-mono">
                     {evt.category}
                   </span>
-                  <span className="text-[#675e79] font-d3-meta font-medium">
+                  <span className="text-[#50577A] font-mono">
                     {evt.date} • {evt.time}
                   </span>
                 </div>
-                <h3 className="text-lg font-bold text-[#2a369c] font-d3-heading">
+                <h3 className="text-lg font-bold text-[#20255C] font-heading">
                   {evt.title}
                 </h3>
-                <p className="text-xs text-[#675e79] max-w-2xl leading-relaxed">
+                <p className="text-xs text-[#50577A] max-w-2xl leading-relaxed">
                   {evt.description}
                 </p>
-                <p className="text-xs font-semibold text-[#2a369c] pt-1">
-                  Location: <span className="text-[#675e79] font-normal">{evt.location}</span>
+                <p className="text-xs font-semibold text-[#20255C] pt-1">
+                  Location: <span className="text-[#50577A] font-normal">{evt.location}</span>
                 </p>
               </div>
 
               <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-2 shrink-0">
-                <span className="rounded bg-[#b3bcf2] text-[#2a369c] font-bold text-xs px-3 py-1">
+                <span className="rounded-md bg-[#FFC84D] text-[#20255C] font-extrabold text-xs px-3 py-1">
                   Registration Open
                 </span>
                 <button
                   onClick={() => alert(`Registration details for ${evt.title} will be confirmed.`)}
-                  className="rounded-md bg-[#e86b31] hover:bg-[#c04f17] px-4 py-1.5 text-xs font-bold text-white transition shadow-xs"
+                  className="rounded-xl bg-[#6B3F74] hover:bg-[#532e5b] px-4 py-2 text-xs font-bold text-white transition shadow-xs cursor-pointer"
                 >
                   Register / Details
                 </button>
@@ -871,12 +871,12 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
   // ----------------------------------------------------
   if (page === 'indexing') {
     return (
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-d3-body">
-        <div className="border-b border-[#E2E6EE] pb-4">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#2a369c] font-d3-heading">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-sans">
+        <div className="border-b border-[#E2E5F3] pb-4">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#20255C] font-heading">
             Indexing & Abstracting Services
           </h1>
-          <p className="text-xs sm:text-sm text-[#675e79] mt-1">
+          <p className="text-xs sm:text-sm text-[#50577A] mt-1">
             Global discovery databases and bibliographic indexes ensuring maximum scholarly impact for JORMASS authors.
           </p>
         </div>
@@ -885,15 +885,15 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
           {(indexing || []).map((idxItem, idx) => (
             <div
               key={idx}
-              className="rounded-xl border border-[#E2E6EE] bg-white p-5 space-y-3 shadow-xs hover:border-[#c04f17] transition"
+              className="rounded-2xl border border-[#E2E6EE] bg-white p-5 space-y-3 shadow-xs hover:border-[#6B3F74] transition"
             >
               <div className="flex items-start justify-between">
-                <h3 className="text-base font-bold text-[#2a369c] font-d3-heading">
+                <h3 className="text-base font-bold text-[#20255C] font-heading">
                   {idxItem.name}
                 </h3>
                 <VerifiedBadge status={idxItem.status} />
               </div>
-              <p className="text-xs text-[#675e79] leading-relaxed">
+              <p className="text-xs text-[#50577A] leading-relaxed">
                 {idxItem.description}
               </p>
               {idxItem.url && (
@@ -901,10 +901,10 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
                   href={idxItem.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="pt-2 text-xs font-semibold text-[#c04f17] hover:underline inline-flex items-center gap-1 font-d3-meta"
+                  className="pt-2 text-xs font-bold text-[#B33600] hover:underline inline-flex items-center gap-1 font-mono"
                 >
                   <span>Verification Portal</span>
-                  <ExternalLink className="h-3 w-3 text-[#e86b31]" />
+                  <ExternalLink className="h-3.5 w-3.5 text-[#6B3F74]" />
                 </a>
               )}
             </div>
@@ -918,55 +918,55 @@ export const Demo3Pages: React.FC<Demo3PagesProps> = ({
   // 7. DEFAULT / ABOUT & AIMS & SCOPE
   // ----------------------------------------------------
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-d3-body">
-      <div className="border-b border-[#E2E6EE] pb-4">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#2a369c] font-d3-heading">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8 font-sans">
+      <div className="border-b border-[#E2E5F3] pb-4">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#20255C] font-heading">
           About JORMASS & Institutional Scope
         </h1>
-        <p className="text-xs sm:text-sm text-[#675e79] mt-1">
+        <p className="text-xs sm:text-sm text-[#50577A] mt-1">
           {settings.faculty}, {settings.institution}, Umudike, Nigeria
         </p>
       </div>
 
-      <div className="rounded-xl border border-[#E2E6EE] bg-white p-6 sm:p-8 shadow-xs space-y-6 text-xs sm:text-sm text-[#242A38] leading-relaxed">
+      <div className="rounded-2xl border border-[#E2E6EE] bg-white p-6 sm:p-8 shadow-xs space-y-6 text-xs sm:text-sm text-[#20255C] leading-relaxed">
         <div>
-          <h3 className="text-base sm:text-lg font-bold text-[#2a369c] font-d3-heading mb-2">
+          <h3 className="text-base sm:text-lg font-bold text-[#20255C] font-heading mb-2">
             Journal Mandate & Editorial Philosophy
           </h3>
-          <p>
+          <p className="text-[#50577A]">
             The Journal of Research in Management and Social Sciences (JORMASS) is the flagship peer-reviewed academic publication of the College of Management Sciences at Michael Okpara University of Agriculture, Umudike. JORMASS publishes rigorous empirical and theoretical contributions advancing knowledge in management sciences, public administration, financial economics, agribusiness, and social sciences.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-          <div className="p-4 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE] space-y-1">
-            <h4 className="font-bold text-[#2a369c]">Management & Business Sciences</h4>
-            <p className="text-xs text-[#675e79]">
+          <div className="p-4 rounded-xl bg-[#E2E5F3]/40 border border-[#E2E6EE] space-y-1">
+            <h4 className="font-bold text-[#20255C]">Management & Business Sciences</h4>
+            <p className="text-xs text-[#50577A]">
               Corporate Governance, Accounting & Auditing Standards, Human Capital Strategy, Marketing Analytics, and Supply Chain Management.
             </p>
           </div>
-          <div className="p-4 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE] space-y-1">
-            <h4 className="font-bold text-[#2a369c]">Economics, Finance & Social Sciences</h4>
-            <p className="text-xs text-[#675e79]">
+          <div className="p-4 rounded-xl bg-[#E2E5F3]/40 border border-[#E2E6EE] space-y-1">
+            <h4 className="font-bold text-[#20255C]">Economics, Finance & Social Sciences</h4>
+            <p className="text-xs text-[#50577A]">
               Development Economics, Agribusiness Value Chains, Monetary Policy, Public Sector Administration, and Social Policy.
             </p>
           </div>
         </div>
 
         <div className="pt-4 border-t border-[#E2E6EE]/60 flex flex-wrap items-center justify-between gap-4">
-          <div className="text-xs text-[#675e79] font-d3-meta">
+          <div className="text-xs text-[#50577A] font-mono">
             ISSN: {settings.issnPrint} (Print) • {settings.issnOnline} (Online)
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2.5">
             <button
               onClick={() => onNavigate('author-guidelines')}
-              className="rounded-md border border-[#E2E6EE] bg-white px-3.5 py-1.5 text-xs font-semibold text-[#2a369c] hover:bg-[#F4F6FB]"
+              className="rounded-xl border border-[#E2E6EE] bg-white px-4 py-2 text-xs font-bold text-[#20255C] hover:bg-[#E2E5F3] cursor-pointer"
             >
               Author Guidelines
             </button>
             <button
               onClick={() => onNavigate('submit')}
-              className="rounded-md bg-[#2a369c] hover:bg-[#1f2979] px-3.5 py-1.5 text-xs font-bold text-white shadow-xs"
+              className="rounded-xl bg-[#B33600] hover:bg-[#8f2b00] px-4 py-2 text-xs font-bold text-white shadow-xs cursor-pointer"
             >
               Submit Manuscript
             </button>

@@ -9,6 +9,7 @@ import {
   JournalSettings,
   PublicationFee,
   IndexingService,
+  ProposalSelectionState,
 } from '../types';
 import {
   INITIAL_SETTINGS,
@@ -24,14 +25,7 @@ import {
 } from '../data/journalData';
 import { config, hasSupabase } from './config';
 
-export interface ProposalSelectionState {
-  chosenDemo: 'demo1' | 'demo2' | 'demo3' | 'custom';
-  chosenPackage: 'basic' | 'launch' | 'professional' | 'advanced';
-  clientName?: string;
-  clientEmail?: string;
-  clientNotes?: string;
-  confirmedAt?: string;
-}
+export type { ProposalSelectionState };
 
 export interface IDataProvider {
   isLocalMode: boolean;
@@ -259,12 +253,16 @@ class LocalDemoDataProvider implements IDataProvider {
         : {
             chosenDemo: 'demo1',
             chosenPackage: 'professional',
+            clientName: '',
+            clientEmail: '',
             clientNotes: '',
           };
     } catch {
       return {
         chosenDemo: 'demo1',
         chosenPackage: 'professional',
+        clientName: '',
+        clientEmail: '',
         clientNotes: '',
       };
     }

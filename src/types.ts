@@ -202,3 +202,29 @@ export interface ComparisonRow {
   advanced: string | boolean;
   tooltip?: string;
 }
+
+export interface ProposalSelectionState {
+  referenceId?: string;
+  chosenDemo: 'demo1' | 'demo2' | 'demo3' | 'custom';
+  chosenPackage: 'basic' | 'launch' | 'professional' | 'advanced';
+  clientName: string;
+  clientRole?: string;
+  clientOrg?: string;
+  clientEmail: string;
+  clientNotes?: string;
+  totalFee?: number;
+  totalFeeFormatted?: string;
+  depositPercentage?: number;
+  depositAmount?: number;
+  depositAmountFormatted?: string;
+  balanceAmount?: number;
+  balanceAmountFormatted?: string;
+  authorityConfirmed?: boolean;
+  commercialTermsConfirmed?: boolean;
+  termsVersion?: string;
+  governingLaw?: string;
+  contractRecipientEmail?: string;
+  confirmedAt?: string;
+  submittedAt?: string;
+  summaryText?: string;
+}

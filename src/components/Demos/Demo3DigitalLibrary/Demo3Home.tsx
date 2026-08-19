@@ -137,7 +137,7 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
 
       return true;
     }).sort((a, b) => {
-      if (sortBy === 'newest') return (b.publishedDate || '').localeCompare(a.publishedDate || '');
+      if (sortBy === 'newest') return (b.publicationDate || '').localeCompare(a.publicationDate || '');
       if (sortBy === 'title') return (a.title || '').localeCompare(b.title || '');
       if (sortBy === 'author') return (a.authors?.[0]?.name || '').localeCompare(b.authors?.[0]?.name || '');
       return 0;
@@ -165,33 +165,38 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
   };
 
   return (
-    <div className="space-y-8 pb-16 font-d3-body">
-      {/* 1. SEARCH BANNER (Royal Cobalt #2a369c with Periwinkle #b3bcf2 and Tangerine #e86b31) */}
-      <section className="bg-gradient-to-r from-[#2a369c] via-[#1f2979] to-[#2a369c] text-white py-10 px-4 sm:px-6 lg:px-8 shadow-md">
-        <div className="mx-auto max-w-5xl space-y-5 text-center sm:text-left">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/15 pb-3">
-            <div className="space-y-0.5">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#b3bcf2] font-d3-meta">
-                MOUAU Scholarly Publishing Platform
+    <div className="space-y-8 pb-16 font-sans">
+      {/* 1. HERO / RESEARCH SEARCH (Deep Navy #20255C to Royal Purple #6B3F74 Gradient with Warm Gold #FFC84D Accent) */}
+      <section
+        style={{
+          background: 'linear-gradient(115deg, #20255C 0%, #35245D 55%, #6B3F74 100%)',
+        }}
+        className="text-white py-12 px-4 sm:px-6 lg:px-8 shadow-md"
+      >
+        <div className="mx-auto max-w-5xl space-y-6 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/15 pb-4">
+            <div className="space-y-1">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-[#FFC84D]">
+                MOUAU Scholarly Discovery Platform
               </span>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight font-d3-heading">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-heading">
                 Explore Research in Management & Social Sciences
               </h2>
             </div>
-            <span className="text-xs text-[#b3bcf2]/90 font-d3-meta">
+            <span className="text-xs text-[#E2E5F3] font-mono">
               Search across {articles.length} peer-reviewed articles & {volumes.length} published volumes
             </span>
           </div>
 
           {/* Search Box Card */}
-          <div className="bg-white p-2.5 sm:p-3.5 rounded-xl shadow-xl border border-white/20 text-[#242A38]">
-            <div className="flex flex-col md:flex-row gap-2">
+          <div className="bg-white p-3 sm:p-4 rounded-2xl shadow-2xl border border-white/20 text-[#20255C]">
+            <div className="flex flex-col md:flex-row gap-2.5">
               {/* Field Scope Selector */}
               <div className="relative md:w-48 shrink-0">
                 <select
                   value={searchField}
                   onChange={(e) => setSearchField(e.target.value as any)}
-                  className="w-full h-11 rounded-lg bg-[#F4F6FB] border border-[#E2E6EE] px-3 text-xs font-semibold text-[#2a369c] focus:outline-none focus:ring-2 focus:ring-[#2a369c] cursor-pointer"
+                  className="w-full h-12 rounded-xl bg-[#E2E5F3]/50 border border-[#E2E5F3] px-3.5 text-xs font-bold text-[#20255C] focus:outline-none focus:ring-2 focus:ring-[#6B3F74] cursor-pointer"
                 >
                   <option value="all">Everywhere</option>
                   <option value="title">Article Title</option>
@@ -203,42 +208,42 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
 
               {/* Main Input */}
               <div className="relative flex-1">
-                <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-[#e86b31]" />
+                <Search className="absolute left-3.5 top-3.5 h-5 w-5 text-[#6B3F74]" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Enter keywords, author name, title, or DOI..."
-                  className="w-full h-11 pl-10 pr-10 text-xs sm:text-sm bg-white rounded-lg border border-[#E2E6EE] text-[#242A38] placeholder:text-[#675e79]/70 focus:outline-none focus:ring-2 focus:ring-[#2a369c]"
+                  className="w-full h-12 pl-11 pr-10 text-xs sm:text-sm bg-white rounded-xl border border-[#E2E6EE] text-[#20255C] placeholder:text-[#50577A]/70 focus:outline-none focus:ring-2 focus:ring-[#6B3F74]"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-3 text-[#675e79] hover:text-[#c04f17]"
+                    className="absolute right-3.5 top-3.5 text-[#50577A] hover:text-[#B33600] cursor-pointer"
                   >
-                    <X className="h-4 w-4" />
+                    <X className="h-5 w-5" />
                   </button>
                 )}
               </div>
 
-              {/* Search Action Button (Vibrant Tangerine #e86b31 to Rust #c04f17) */}
+              {/* Search Action Button (Warm Gold #FFC84D with Deep Navy Text) */}
               <button
                 onClick={() => {}}
-                className="h-11 px-6 rounded-lg bg-[#e86b31] hover:bg-[#c04f17] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-sm shrink-0"
+                className="h-12 px-7 rounded-xl bg-[#FFC84D] hover:bg-[#e6b33d] text-[#20255C] font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-md shrink-0 cursor-pointer"
               >
-                <Search className="h-4 w-4" />
+                <Search className="h-4 w-4 text-[#20255C]" />
                 <span>Search</span>
               </button>
             </div>
 
             {/* Quick Topic Pills / Popular Filters */}
-            <div className="flex flex-wrap items-center gap-1.5 pt-3 border-t border-[#E2E6EE] mt-2.5 text-xs">
-              <span className="text-[#675e79] font-medium text-[11px] mr-1">Popular Topics:</span>
+            <div className="flex flex-wrap items-center gap-2 pt-3.5 border-t border-[#E2E6EE] mt-3 text-xs">
+              <span className="text-[#50577A] font-semibold text-xs mr-1">Popular Topics:</span>
               {['Corporate Governance', 'Public Policy', 'Taxation & Fiscal Policy', 'Agribusiness', 'Banking & Finance'].map((topic) => (
                 <button
                   key={topic}
                   onClick={() => setSearchQuery(topic)}
-                  className="rounded-md bg-[#F4F6FB] hover:bg-[#b3bcf2]/40 text-[#2a369c] border border-[#E2E6EE] px-2.5 py-1 text-[11px] font-medium transition"
+                  className="rounded-lg bg-[#E2E5F3]/60 hover:bg-[#6B3F74] hover:text-white text-[#20255C] border border-[#E2E5F3] px-3 py-1.5 text-xs font-semibold transition cursor-pointer"
                 >
                   {topic}
                 </button>
@@ -248,40 +253,40 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
         </div>
       </section>
 
-      {/* 2. CURRENT ISSUE SPOTLIGHT BAR */}
+      {/* 2. CURRENT ISSUE SPOTLIGHT (Pale Lavender #E2E5F3 Background + Purple #6B3F74 Badge + Navy #20255C Title) */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-[#b3bcf2]/25 via-[#F4F6FB] to-[#b3bcf2]/15 border border-[#b3bcf2] rounded-xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="rounded bg-[#2a369c] text-white font-bold text-[10px] px-2 py-0.5 uppercase tracking-wider font-d3-meta">
+        <div className="bg-[#E2E5F3]/60 border border-[#E2E5F3] rounded-2xl p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2.5">
+              <span className="rounded-md bg-[#6B3F74] text-white font-extrabold text-[10px] px-2.5 py-0.5 uppercase tracking-wider shadow-xs">
                 Latest Release
               </span>
-              <span className="text-xs font-bold text-[#c04f17] font-d3-meta">
+              <span className="text-xs font-bold text-[#B33600]">
                 Volume {currentVolume.volumeNumber}, Issue {currentIssue.issueNumber} ({currentVolume.year})
               </span>
             </div>
-            <h3 className="text-sm sm:text-base font-extrabold text-[#2a369c] font-d3-heading">
+            <h3 className="text-base sm:text-lg font-extrabold text-[#20255C] font-heading">
               {currentIssue.title}
             </h3>
-            <p className="text-xs text-[#675e79]">
+            <p className="text-xs text-[#50577A]">
               Published on {currentIssue.publicationDate} • Open Access under CC BY 4.0
             </p>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={() => onNavigate('current-issue')}
-              className="rounded-md bg-[#2a369c] hover:bg-[#1f2979] text-white font-bold px-3.5 py-2 text-xs transition inline-flex items-center gap-1.5 shadow-xs"
+              className="rounded-xl bg-[#6B3F74] hover:bg-[#532e5b] text-white font-bold px-4 py-2.5 text-xs transition inline-flex items-center gap-2 shadow-sm cursor-pointer"
             >
-              <BookOpen className="h-3.5 w-3.5 text-[#b3bcf2]" />
+              <BookOpen className="h-4 w-4 text-[#FFC84D]" />
               <span>Browse This Issue</span>
             </button>
             <button
               onClick={() => onNavigate('archive')}
-              className="rounded-md border border-[#E2E6EE] bg-white hover:bg-[#F4F6FB] text-[#2a369c] font-semibold px-3 py-2 text-xs transition inline-flex items-center gap-1"
+              className="rounded-xl border border-[#20255C]/20 bg-white hover:bg-[#E2E5F3] text-[#20255C] font-bold px-4 py-2.5 text-xs transition inline-flex items-center gap-1.5 cursor-pointer"
             >
               <span>All Volumes</span>
-              <ChevronRight className="h-3 w-3" />
+              <ChevronRight className="h-3.5 w-3.5 text-[#6B3F74]" />
             </button>
           </div>
         </div>
@@ -294,11 +299,11 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
           {/* LEFT COLUMN (4 Cols): STRUCTURED FACET FILTER PANEL       */}
           {/* ========================================================= */}
           <aside className="lg:col-span-4 space-y-6">
-            <div className="rounded-xl border border-[#E2E6EE] bg-white p-5 shadow-xs space-y-5">
+            <div className="rounded-2xl border border-[#E2E6EE] bg-white p-5 sm:p-6 shadow-xs space-y-5">
               <div className="flex items-center justify-between border-b border-[#E2E6EE] pb-3">
                 <div className="flex items-center gap-2">
-                  <SlidersHorizontal className="h-4 w-4 text-[#2a369c]" />
-                  <h3 className="text-sm font-bold text-[#2a369c] uppercase tracking-wider font-d3-heading">
+                  <SlidersHorizontal className="h-4 w-4 text-[#6B3F74]" />
+                  <h3 className="text-sm font-extrabold text-[#20255C] uppercase tracking-wider font-heading">
                     Filter Research
                   </h3>
                 </div>
@@ -310,7 +315,7 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
                       setOpenAccessOnly(false);
                       setSearchQuery('');
                     }}
-                    className="text-xs text-[#c04f17] hover:underline font-semibold"
+                    className="text-xs text-[#B33600] hover:underline font-bold cursor-pointer"
                   >
                     Clear All
                   </button>
@@ -319,20 +324,22 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
 
               {/* Subject Discipline Filter */}
               <div className="space-y-2">
-                <label className="text-xs font-bold text-[#2a369c] uppercase tracking-wider font-d3-meta block">
+                <label className="text-xs font-bold text-[#20255C] uppercase tracking-wider block">
                   Subject Discipline
                 </label>
-                <div className="space-y-1 text-xs">
+                <div className="space-y-1.5 text-xs">
                   <button
                     onClick={() => setSelectedDiscipline('all')}
-                    className={`w-full text-left px-2.5 py-1.5 rounded-md flex items-center justify-between transition ${
+                    className={`w-full text-left px-3 py-2 rounded-xl flex items-center justify-between transition cursor-pointer ${
                       selectedDiscipline === 'all'
-                        ? 'bg-[#b3bcf2]/40 text-[#2a369c] font-bold border border-[#b3bcf2]'
-                        : 'text-[#675e79] hover:bg-[#F4F6FB]'
+                        ? 'bg-[#6B3F74] text-white font-bold shadow-xs'
+                        : 'text-[#50577A] hover:bg-[#E2E5F3]'
                     }`}
                   >
                     <span>All Disciplines</span>
-                    <span className="text-[11px] font-d3-meta opacity-70">{articles.length}</span>
+                    <span className={`text-[11px] font-mono ${selectedDiscipline === 'all' ? 'text-[#FFC84D]' : 'opacity-70'}`}>
+                      {articles.length}
+                    </span>
                   </button>
                   {disciplines.map((disc) => {
                     const count = articles.filter((a) => a.category === disc).length;
@@ -341,14 +348,16 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
                       <button
                         key={disc}
                         onClick={() => setSelectedDiscipline(disc)}
-                        className={`w-full text-left px-2.5 py-1.5 rounded-md flex items-center justify-between transition ${
+                        className={`w-full text-left px-3 py-2 rounded-xl flex items-center justify-between transition cursor-pointer ${
                           isSelected
-                            ? 'bg-[#b3bcf2]/40 text-[#2a369c] font-bold border border-[#b3bcf2]'
-                            : 'text-[#675e79] hover:bg-[#F4F6FB]'
+                            ? 'bg-[#6B3F74] text-white font-bold shadow-xs'
+                            : 'text-[#50577A] hover:bg-[#E2E5F3]'
                         }`}
                       >
                         <span className="truncate pr-2">{disc}</span>
-                        <span className="text-[11px] font-d3-meta opacity-70 shrink-0">{count}</span>
+                        <span className={`text-[11px] font-mono shrink-0 ${isSelected ? 'text-[#FFC84D]' : 'opacity-70'}`}>
+                          {count}
+                        </span>
                       </button>
                     );
                   })}
@@ -356,17 +365,17 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
               </div>
 
               {/* Publication Year Filter */}
-              <div className="space-y-2 pt-3 border-t border-[#E2E6EE]">
-                <label className="text-xs font-bold text-[#2a369c] uppercase tracking-wider font-d3-meta block">
+              <div className="space-y-2 pt-3.5 border-t border-[#E2E6EE]">
+                <label className="text-xs font-bold text-[#20255C] uppercase tracking-wider block">
                   Publication Year
                 </label>
-                <div className="flex flex-wrap gap-1.5 text-xs font-d3-meta">
+                <div className="flex flex-wrap gap-2 text-xs font-mono">
                   <button
                     onClick={() => setSelectedYear('all')}
-                    className={`px-2.5 py-1 rounded text-xs transition ${
+                    className={`px-3 py-1.5 rounded-lg text-xs transition cursor-pointer ${
                       selectedYear === 'all'
-                        ? 'bg-[#2a369c] text-white font-bold'
-                        : 'bg-[#F4F6FB] border border-[#E2E6EE] text-[#675e79] hover:bg-[#E2E6EE]'
+                        ? 'bg-[#20255C] text-white font-bold'
+                        : 'bg-[#E2E5F3]/60 border border-[#E2E6EE] text-[#50577A] hover:bg-[#E2E5F3]'
                     }`}
                   >
                     All Years
@@ -375,10 +384,10 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
                     <button
                       key={yr}
                       onClick={() => setSelectedYear(yr)}
-                      className={`px-2.5 py-1 rounded text-xs transition ${
+                      className={`px-3 py-1.5 rounded-lg text-xs transition cursor-pointer ${
                         selectedYear === yr
-                          ? 'bg-[#2a369c] text-white font-bold'
-                          : 'bg-[#F4F6FB] border border-[#E2E6EE] text-[#675e79] hover:bg-[#E2E6EE]'
+                          ? 'bg-[#20255C] text-white font-bold'
+                          : 'bg-[#E2E5F3]/60 border border-[#E2E6EE] text-[#50577A] hover:bg-[#E2E5F3]'
                       }`}
                     >
                       {yr}
@@ -388,43 +397,43 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
               </div>
 
               {/* Access Type Filter */}
-              <div className="space-y-2 pt-3 border-t border-[#E2E6EE]">
-                <label className="text-xs font-bold text-[#2a369c] uppercase tracking-wider font-d3-meta block">
+              <div className="space-y-2 pt-3.5 border-t border-[#E2E6EE]">
+                <label className="text-xs font-bold text-[#20255C] uppercase tracking-wider block">
                   Access Type
                 </label>
-                <label className="flex items-center gap-2 text-xs text-[#242A38] cursor-pointer">
+                <label className="flex items-center gap-2.5 text-xs text-[#20255C] cursor-pointer">
                   <input
                     type="checkbox"
                     checked={openAccessOnly}
                     onChange={(e) => setOpenAccessOnly(e.target.checked)}
-                    className="rounded border-[#E2E6EE] text-[#2a369c] focus:ring-[#2a369c]"
+                    className="rounded border-[#E2E6EE] text-[#6B3F74] focus:ring-[#6B3F74] h-4 w-4"
                   />
-                  <span className="font-medium">Open Access Articles Only</span>
+                  <span className="font-semibold">Open Access Articles Only (CC BY 4.0)</span>
                 </label>
               </div>
             </div>
 
             {/* Quick Journal Information Widget */}
-            <div className="rounded-xl border border-[#E2E6EE] bg-white p-5 shadow-xs space-y-3 font-d3-body">
-              <h4 className="text-xs font-bold text-[#2a369c] uppercase tracking-wider font-d3-heading border-b border-[#E2E6EE] pb-2">
-                Journal Metrics & Indexing
+            <div className="rounded-2xl border border-[#E2E6EE] bg-white p-5 sm:p-6 shadow-xs space-y-3">
+              <h4 className="text-xs font-bold text-[#20255C] uppercase tracking-wider font-heading border-b border-[#E2E6EE] pb-2">
+                Journal Metrics & Standards
               </h4>
-              <div className="space-y-2 text-xs text-[#242A38]">
+              <div className="space-y-2.5 text-xs text-[#20255C]">
                 <div className="flex justify-between py-1 border-b border-[#E2E6EE]/50">
-                  <span className="text-[#675e79]">Review Duration</span>
-                  <span className="font-bold text-[#2a369c] font-d3-meta">4–6 Weeks</span>
+                  <span className="text-[#50577A]">Review Duration</span>
+                  <span className="font-bold text-[#20255C]">4–6 Weeks</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-[#E2E6EE]/50">
-                  <span className="text-[#675e79]">Acceptance Rate</span>
-                  <span className="font-bold text-[#2a369c] font-d3-meta">~38%</span>
+                  <span className="text-[#50577A]">Acceptance Rate</span>
+                  <span className="font-bold text-[#20255C]">~38%</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-[#E2E6EE]/50">
-                  <span className="text-[#675e79]">Publication Frequency</span>
-                  <span className="font-bold text-[#2a369c] font-d3-meta">Bi-Annual</span>
+                  <span className="text-[#50577A]">Publication Frequency</span>
+                  <span className="font-bold text-[#20255C]">Bi-Annual</span>
                 </div>
                 <div className="flex justify-between py-1">
-                  <span className="text-[#675e79]">Plagiarism Standard</span>
-                  <span className="font-bold text-[#c04f17] font-d3-meta">&lt; 15% Similarity</span>
+                  <span className="text-[#50577A]">Plagiarism Standard</span>
+                  <span className="font-bold text-[#B33600]">&lt; 15% Similarity</span>
                 </div>
               </div>
             </div>
@@ -435,23 +444,23 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
           {/* ========================================================= */}
           <main className="lg:col-span-8 space-y-4">
             {/* Stream Header & Sorter */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E2E6EE] pb-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E2E6EE] pb-3.5">
               <div>
-                <h3 className="text-base font-extrabold text-[#2a369c] font-d3-heading">
+                <h3 className="text-lg font-extrabold text-[#20255C] font-heading">
                   Research Articles ({filteredArticles.length})
                 </h3>
-                <p className="text-xs text-[#675e79]">
+                <p className="text-xs text-[#50577A]">
                   Peer-reviewed scholarly papers published in JORMASS
                 </p>
               </div>
 
               {/* Sort Controls */}
-              <div className="flex items-center gap-2 text-xs font-d3-meta">
-                <span className="text-[#675e79]">Sort by:</span>
+              <div className="flex items-center gap-2 text-xs">
+                <span className="text-[#50577A] font-semibold">Sort by:</span>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="rounded-md bg-white border border-[#E2E6EE] px-2.5 py-1 text-xs text-[#2a369c] font-semibold focus:outline-none focus:ring-1 focus:ring-[#2a369c]"
+                  className="rounded-lg bg-white border border-[#E2E6EE] px-3 py-1.5 text-xs text-[#20255C] font-bold focus:outline-none focus:ring-1 focus:ring-[#6B3F74]"
                 >
                   <option value="newest">Newest First</option>
                   <option value="title">Title (A-Z)</option>
@@ -462,17 +471,17 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
 
             {/* Articles Stream List */}
             {filteredArticles.length === 0 ? (
-              <div className="rounded-xl border border-dashed border-[#E2E6EE] bg-white p-12 text-center space-y-3">
-                <Search className="h-8 w-8 text-[#675e79] mx-auto opacity-50" />
-                <p className="text-sm font-bold text-[#2a369c]">No articles match your search or filter criteria.</p>
-                <p className="text-xs text-[#675e79]">Try clearing some filters or searching with broader keywords.</p>
+              <div className="rounded-2xl border border-dashed border-[#E2E6EE] bg-white p-12 text-center space-y-3">
+                <Search className="h-8 w-8 text-[#50577A] mx-auto opacity-50" />
+                <p className="text-sm font-bold text-[#20255C]">No articles match your search or filter criteria.</p>
+                <p className="text-xs text-[#50577A]">Try clearing some filters or searching with broader keywords.</p>
                 <button
                   onClick={() => {
                     setSearchQuery('');
                     setSelectedDiscipline('all');
                     setSelectedYear('all');
                   }}
-                  className="rounded-md bg-[#2a369c] text-white px-4 py-2 text-xs font-bold transition mt-2"
+                  className="rounded-xl bg-[#20255C] text-white px-5 py-2.5 text-xs font-bold transition mt-2 cursor-pointer"
                 >
                   Reset Discovery Filters
                 </button>
@@ -486,19 +495,19 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
                   return (
                     <article
                       key={article.id}
-                      className="rounded-xl border border-[#E2E6EE] bg-white p-5 sm:p-6 shadow-xs hover:border-[#2a369c] transition space-y-3"
+                      className="rounded-2xl border border-[#E2E6EE] bg-white p-5 sm:p-6 shadow-xs hover:border-[#6B3F74] transition space-y-3.5"
                     >
                       {/* Top Metadata Badges */}
                       <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
                         <div className="flex items-center gap-2">
-                          <span className="rounded bg-[#b3bcf2] text-[#2a369c] font-bold px-2 py-0.5 text-[10px] uppercase font-d3-meta">
+                          <span className="rounded-md bg-[#FFC84D] text-[#20255C] font-extrabold px-2.5 py-0.5 text-[10px] uppercase">
                             Open Access
                           </span>
-                          <span className="text-[11px] font-semibold text-[#c04f17] font-d3-meta">
+                          <span className="rounded-md bg-[#E2E5F3] text-[#6B3F74] font-bold px-2.5 py-0.5 text-[11px]">
                             {article.category}
                           </span>
                         </div>
-                        <span className="text-xs text-[#675e79] font-d3-meta">
+                        <span className="text-xs text-[#50577A] font-mono">
                           Vol. {artVol?.volumeNumber || '11'}, Issue {artIss?.issueNumber || '2'} ({artVol?.year || '2025'}) • pp. {article.pageStart}–{article.pageEnd}
                         </span>
                       </div>
@@ -506,36 +515,36 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
                       {/* Article Title */}
                       <h4
                         onClick={() => onSelectArticle(article)}
-                        className="cursor-pointer text-base sm:text-lg font-bold text-[#2a369c] hover:text-[#c04f17] transition leading-snug font-d3-heading"
+                        className="cursor-pointer text-base sm:text-lg font-bold text-[#20255C] hover:text-[#B33600] transition leading-snug font-heading"
                       >
                         {article.title}
                       </h4>
 
                       {/* Authors */}
-                      <div className="text-xs text-[#675e79] flex flex-wrap gap-1 font-medium">
+                      <div className="text-xs text-[#50577A] flex flex-wrap gap-1 font-medium">
                         <span>By:</span>
                         {article.authors.map((auth, aIdx) => (
-                          <span key={aIdx} className="text-[#242A38] font-semibold">
+                          <span key={aIdx} className="text-[#20255C] font-bold">
                             {auth.name}
-                            {aIdx < article.authors.length - 1 && <span className="text-[#675e79]">,</span>}
+                            {aIdx < article.authors.length - 1 && <span className="text-[#50577A]">,</span>}
                           </span>
                         ))}
                       </div>
 
                       {/* Snippet / Abstract Preview */}
-                      <p className="text-xs sm:text-sm text-[#675e79] line-clamp-2 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-[#50577A] line-clamp-2 leading-relaxed">
                         {article.abstract}
                       </p>
 
                       {/* DOI & License Strip */}
-                      <div className="pt-2 border-t border-[#E2E6EE]/60 flex flex-wrap items-center justify-between gap-3 text-[11px] text-[#675e79] font-d3-meta">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-[#675e79]">DOI:</span>
+                      <div className="pt-3 border-t border-[#E2E6EE]/70 flex flex-wrap items-center justify-between gap-3 text-[11px] text-[#50577A]">
+                        <div className="flex items-center gap-1.5 font-mono">
+                          <span className="text-[#50577A]">DOI:</span>
                           <a
                             href={`https://doi.org/${article.doi || '10.5281/jormass.2025.11'}`}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-[#c04f17] hover:underline font-medium"
+                            className="text-[#B33600] hover:underline font-bold"
                           >
                             https://doi.org/{article.doi || '10.5281/jormass.2025.11'}
                           </a>
@@ -545,22 +554,22 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => onSelectArticle(article)}
-                            className="text-xs text-[#2a369c] hover:underline font-bold"
+                            className="text-xs text-[#20255C] hover:text-[#6B3F74] font-bold px-2 py-1 cursor-pointer"
                           >
                             View Abstract
                           </button>
                           <button
                             onClick={() => onOpenCitation(article)}
-                            className="rounded-md border border-[#E2E6EE] bg-white hover:bg-[#F4F6FB] px-2.5 py-1 text-xs font-semibold text-[#675e79] transition inline-flex items-center gap-1"
+                            className="rounded-lg border border-[#E2E6EE] bg-white hover:bg-[#E2E5F3] px-3 py-1.5 text-xs font-semibold text-[#50577A] transition inline-flex items-center gap-1 cursor-pointer"
                           >
-                            <Quote className="h-3 w-3 text-[#e86b31]" />
+                            <Quote className="h-3.5 w-3.5 text-[#6B3F74]" />
                             <span>Cite</span>
                           </button>
                           <button
                             onClick={() => onOpenPdf(article)}
-                            className="rounded-md bg-[#2a369c] hover:bg-[#1f2979] text-white px-3 py-1 text-xs font-bold transition inline-flex items-center gap-1 shadow-xs"
+                            className="rounded-lg bg-[#6B3F74] hover:bg-[#532e5b] text-white px-3.5 py-1.5 text-xs font-bold transition inline-flex items-center gap-1.5 shadow-xs cursor-pointer"
                           >
-                            <Download className="h-3 w-3 text-[#b3bcf2]" />
+                            <Download className="h-3.5 w-3.5 text-[#FFC84D]" />
                             <span>PDF</span>
                           </button>
                         </div>
@@ -579,19 +588,19 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
         <div className="border-t border-[#E2E6EE] pt-8 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h3 className="text-xl font-extrabold text-[#2a369c] font-d3-heading">
+              <h3 className="text-xl font-extrabold text-[#20255C] font-heading">
                 Explore JORMASS Subject Disciplines
               </h3>
-              <p className="text-xs text-[#675e79]">
+              <p className="text-xs text-[#50577A]">
                 Structured empirical research taxonomy across College of Management Sciences
               </p>
             </div>
             <button
               onClick={() => onNavigate('about')}
-              className="text-xs font-bold text-[#c04f17] hover:underline inline-flex items-center gap-1 font-d3-meta"
+              className="text-xs font-bold text-[#B33600] hover:underline inline-flex items-center gap-1 cursor-pointer"
             >
               <span>View Aims & Scope</span>
-              <ChevronRight className="h-3.5 w-3.5" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
 
@@ -599,25 +608,25 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
             {[
               {
                 title: 'Management & Governance',
-                icon: <Briefcase className="h-5 w-5 text-[#2a369c]" />,
+                icon: <Briefcase className="h-5 w-5 text-[#6B3F74]" />,
                 desc: 'Corporate strategy, organizational behavior, business ethics, and operations.',
                 count: '14 Articles',
               },
               {
                 title: 'Financial Economics & Banking',
-                icon: <DollarSign className="h-5 w-5 text-[#c04f17]" />,
+                icon: <DollarSign className="h-5 w-5 text-[#B33600]" />,
                 desc: 'Capital markets, monetary policy, auditing standards, and banking stability.',
                 count: '18 Articles',
               },
               {
                 title: 'Public Administration & Policy',
-                icon: <Scale className="h-5 w-5 text-[#2a369c]" />,
+                icon: <Scale className="h-5 w-5 text-[#20255C]" />,
                 desc: 'Public sector governance, civil service reforms, and social policies.',
                 count: '9 Articles',
               },
               {
                 title: 'Agribusiness & Rural Economy',
-                icon: <Building2 className="h-5 w-5 text-[#e86b31]" />,
+                icon: <Building2 className="h-5 w-5 text-[#FFC84D]" />,
                 desc: 'Agricultural value chains, commodity markets, and rural development.',
                 count: '11 Articles',
               },
@@ -628,18 +637,18 @@ export const Demo3Home: React.FC<Demo3HomeProps> = ({
                   setSelectedDiscipline(discItem.title.split(' ')[0]);
                   window.scrollTo({ top: 400, behavior: 'smooth' });
                 }}
-                className="rounded-xl border border-[#E2E6EE] bg-white p-5 space-y-2 shadow-xs hover:border-[#2a369c] hover:shadow-sm transition cursor-pointer group"
+                className="rounded-2xl border border-[#E2E6EE] bg-white p-5 space-y-2.5 shadow-xs hover:border-[#6B3F74] hover:shadow-md transition cursor-pointer group"
               >
-                <div className="p-2 rounded-lg bg-[#F4F6FB] w-fit group-hover:bg-[#b3bcf2]/40 transition">
+                <div className="p-2.5 rounded-xl bg-[#E2E5F3] w-fit group-hover:bg-[#6B3F74]/15 transition">
                   {discItem.icon}
                 </div>
-                <h4 className="text-sm font-bold text-[#2a369c] group-hover:text-[#c04f17] transition font-d3-heading">
+                <h4 className="text-sm font-bold text-[#20255C] group-hover:text-[#B33600] transition font-heading">
                   {discItem.title}
                 </h4>
-                <p className="text-xs text-[#675e79] leading-relaxed">
+                <p className="text-xs text-[#50577A] leading-relaxed">
                   {discItem.desc}
                 </p>
-                <span className="text-[11px] font-bold text-[#c04f17] font-d3-meta block pt-1">
+                <span className="text-xs font-bold text-[#6B3F74] block pt-1">
                   {discItem.count} →
                 </span>
               </div>

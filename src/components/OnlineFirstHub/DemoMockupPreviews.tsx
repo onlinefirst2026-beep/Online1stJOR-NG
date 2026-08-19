@@ -146,55 +146,55 @@ export const Demo2Thumbnail: React.FC = () => {
 
 export const Demo3Thumbnail: React.FC = () => {
   return (
-    <div className="w-full h-56 sm:h-64 bg-[#F9FAFC] text-[#242A38] rounded-xl overflow-hidden shadow-inner border border-[#E2E6EE] flex flex-col font-sans select-none pointer-events-none relative">
-      {/* Mock Browser Top Bar (Deep Royal Cobalt Utility Bar) */}
-      <div className="bg-[#2a369c] text-white px-3 py-1.5 flex items-center justify-between text-[9px] font-sans border-b border-[#1f2979]">
+    <div className="w-full h-56 sm:h-64 bg-[#F8FAFC] text-[#20255C] rounded-xl overflow-hidden shadow-inner border border-[#E2E5F3] flex flex-col font-sans select-none pointer-events-none relative">
+      {/* Mock Browser Top Bar (Deep Navy Utility Bar) */}
+      <div className="bg-[#20255C] text-white px-3 py-1.5 flex items-center justify-between text-[9px] font-sans border-b border-[#141840]">
         <div className="flex items-center gap-1.5">
           <div className="flex gap-1">
-            <span className="h-2 w-2 rounded-full bg-[#c04f17]" />
-            <span className="h-2 w-2 rounded-full bg-[#e86b31]" />
-            <span className="h-2 w-2 rounded-full bg-[#b3bcf2]" />
+            <span className="h-2 w-2 rounded-full bg-[#B33600]" />
+            <span className="h-2 w-2 rounded-full bg-[#FFC84D]" />
+            <span className="h-2 w-2 rounded-full bg-[#6B3F74]" />
           </div>
-          <span className="font-mono text-[9px] text-[#b3bcf2] ml-1">jormass-demo3.previewnest.site</span>
+          <span className="font-mono text-[9px] text-[#E2E5F3] ml-1">jormass-demo3.previewnest.site</span>
         </div>
-        <span className="text-[8px] bg-[#b3bcf2] text-[#2a369c] px-1.5 py-0.2 rounded font-sans font-bold">Royal Cobalt & Periwinkle</span>
+        <span className="text-[8px] bg-[#FFC84D] text-[#20255C] px-1.5 py-0.2 rounded font-sans font-extrabold">Deep Navy & Purple</span>
       </div>
 
       {/* Main Mockup Body */}
       <div className="flex-1 p-3 flex flex-col justify-between overflow-hidden bg-white">
         {/* Navigation & Header */}
-        <div className="flex items-center justify-between border-b border-[#E2E6EE] pb-1.5">
+        <div className="flex items-center justify-between border-b border-[#E2E5F3] pb-1.5">
           <div className="flex items-center gap-1.5">
-            <div className="h-5 w-5 rounded bg-[#2a369c] text-[#b3bcf2] flex items-center justify-center font-black text-[9px]">J</div>
+            <div className="h-5 w-5 rounded bg-[#20255C] text-[#FFC84D] flex items-center justify-center font-black text-[9px]">J</div>
             <div>
-              <p className="text-[9px] font-extrabold text-[#2a369c] leading-none">JORMASS Research</p>
-              <p className="text-[6.5px] text-[#675e79]">Discovery & Publishing Platform</p>
+              <p className="text-[9px] font-extrabold text-[#20255C] leading-none">JORMASS Research</p>
+              <p className="text-[6.5px] text-[#50577A]">Discovery & Publishing Platform</p>
             </div>
           </div>
-          <div className="flex gap-1 text-[7px] text-[#675e79] font-semibold">
-            <span className="text-[#c04f17] font-bold">Explore</span>
+          <div className="flex gap-1 text-[7px] text-[#50577A] font-semibold">
+            <span className="text-[#B33600] font-bold">Explore</span>
             <span>Archive</span>
             <span>Guidelines</span>
           </div>
         </div>
 
         {/* Search Bar */}
-        <div className="bg-[#F4F6FB] p-1.5 rounded-md border border-[#E2E6EE] flex items-center justify-between text-[7px] my-1">
-          <div className="flex items-center gap-1 text-[#675e79]">
-            <Search className="h-2.5 w-2.5 text-[#e86b31]" />
+        <div className="bg-[#E2E5F3]/50 p-1.5 rounded-md border border-[#E2E5F3] flex items-center justify-between text-[7px] my-1">
+          <div className="flex items-center gap-1 text-[#50577A]">
+            <Search className="h-2.5 w-2.5 text-[#6B3F74]" />
             <span>Search articles, authors, DOIs...</span>
           </div>
-          <span className="bg-[#e86b31] text-white px-2 py-0.5 rounded text-[6.5px] font-bold">Search</span>
+          <span className="bg-[#FFC84D] text-[#20255C] px-2 py-0.5 rounded text-[6.5px] font-extrabold">Search</span>
         </div>
 
         {/* 2-Column Split: Filter sidebar + Article Cards */}
         <div className="grid grid-cols-3 gap-2 flex-1 overflow-hidden">
           {/* Left Mini-Filter Sidebar */}
-          <div className="bg-[#F4F6FB] p-1.5 rounded border border-[#E2E6EE] space-y-1">
-            <span className="text-[6px] font-bold text-[#2a369c] uppercase">Filter Research</span>
-            <div className="space-y-0.5 text-[5.5px] text-[#675e79]">
-              <p className="text-[#c04f17] font-bold">✓ 2025 (Vol. 11)</p>
-              <p>✓ Open Access</p>
+          <div className="bg-[#E2E5F3]/40 p-1.5 rounded border border-[#E2E5F3] space-y-1">
+            <span className="text-[6px] font-bold text-[#20255C] uppercase">Filter Research</span>
+            <div className="space-y-0.5 text-[5.5px] text-[#50577A]">
+              <p className="text-[#B33600] font-bold">✓ 2025 (Vol. 11)</p>
+              <p className="text-[#6B3F74] font-bold">✓ Open Access</p>
               <p>• Finance & Econ</p>
               <p>• Management</p>
             </div>
@@ -203,14 +203,14 @@ export const Demo3Thumbnail: React.FC = () => {
           {/* Right Discovery Article Cards */}
           <div className="col-span-2 space-y-1">
             <div className="bg-white p-1.5 rounded border border-[#E2E6EE] space-y-0.5">
-              <span className="text-[5.5px] bg-[#b3bcf2] text-[#2a369c] font-bold px-1 rounded">OPEN ACCESS</span>
-              <p className="text-[7.5px] font-bold text-[#2a369c] line-clamp-1">Machine Learning Algorithms for Detecting Tax Fraud</p>
-              <p className="text-[6px] text-[#675e79]">C. J. Obizuo et al. • Vol. 11 No. 2</p>
+              <span className="text-[5.5px] bg-[#FFC84D] text-[#20255C] font-extrabold px-1 rounded">OPEN ACCESS</span>
+              <p className="text-[7.5px] font-bold text-[#20255C] line-clamp-1">Machine Learning Algorithms for Detecting Tax Fraud</p>
+              <p className="text-[6px] text-[#50577A]">C. J. Obizuo et al. • Vol. 11 No. 2</p>
             </div>
             <div className="bg-white p-1.5 rounded border border-[#E2E6EE] space-y-0.5">
-              <span className="text-[5.5px] bg-[#b3bcf2] text-[#2a369c] font-bold px-1 rounded">OPEN ACCESS</span>
-              <p className="text-[7.5px] font-bold text-[#2a369c] line-clamp-1">Environmental Taxation & Sustainable Development</p>
-              <p className="text-[6px] text-[#675e79]">O. E. Alpheaus et al. • Vol. 11 No. 2</p>
+              <span className="text-[5.5px] bg-[#FFC84D] text-[#20255C] font-extrabold px-1 rounded">OPEN ACCESS</span>
+              <p className="text-[7.5px] font-bold text-[#20255C] line-clamp-1">Environmental Taxation & Sustainable Development</p>
+              <p className="text-[6px] text-[#50577A]">O. E. Alpheaus et al. • Vol. 11 No. 2</p>
             </div>
           </div>
         </div>

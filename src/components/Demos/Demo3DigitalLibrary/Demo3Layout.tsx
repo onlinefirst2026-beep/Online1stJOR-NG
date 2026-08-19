@@ -44,7 +44,7 @@ export const Demo3Layout: React.FC<Demo3LayoutProps> = ({
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#fafaf9] text-stone-900 font-serif selection:bg-amber-100 flex flex-col">
+    <div className="min-h-screen bg-[#fcfaf7] text-stone-900 font-d3-body selection:bg-amber-100 flex flex-col">
       {/* Floating Demo Control Bar */}
       {onBackToHub && onSwitchDemo && (
         <DemoFloatingBar
@@ -58,10 +58,10 @@ export const Demo3Layout: React.FC<Demo3LayoutProps> = ({
       )}
 
       {/* Minimal Archival Header Strip */}
-      <div className="border-b border-stone-200 bg-[#1c1917] text-stone-300 text-xs px-4 py-2 font-sans">
+      <div className="border-b border-stone-800 bg-[#171412] text-stone-300 text-xs px-4 py-2 font-d3-meta">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <div className="flex items-center gap-3 text-[11px]">
-            <span className="font-semibold text-amber-300">COLMAS Digital Library</span>
+            <span className="font-bold text-amber-400">COLMAS Digital Library</span>
             <span className="text-stone-600">•</span>
             <span className="text-stone-300">{settings.institution}</span>
           </div>
@@ -86,32 +86,32 @@ export const Demo3Layout: React.FC<Demo3LayoutProps> = ({
       </div>
 
       {/* Centered Minimal Masthead */}
-      <header className="border-b border-stone-200 bg-[#fafaf9] py-8 text-center">
+      <header className="border-b border-stone-200 bg-[#fcfaf7] py-8 text-center">
         <div className="mx-auto max-w-4xl px-4 space-y-3">
-          <div className="flex items-center justify-center gap-2">
-            <span className="text-[10px] uppercase font-sans tracking-widest font-bold text-amber-800">
+          <div className="flex items-center justify-center gap-2 font-d3-meta">
+            <span className="text-[10px] uppercase tracking-widest font-bold text-amber-900 bg-amber-100/80 px-2.5 py-0.5 rounded-full border border-amber-300/50">
               Scholarly Digital Archive
             </span>
           </div>
 
           <h1
             onClick={() => onNavigate('home')}
-            className="cursor-pointer text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#1c1917] hover:text-amber-900 transition"
+            className="cursor-pointer font-d3-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#171412] hover:text-amber-900 transition"
           >
             Journal of Research in Management & Social Sciences
           </h1>
 
-          <p className="font-sans text-xs text-stone-600 max-w-xl mx-auto">
+          <p className="text-xs text-stone-600 max-w-xl mx-auto font-d3-body">
             {settings.faculty} • {settings.institution}, Umudike, Nigeria
           </p>
 
-          <div className="font-sans text-[11px] text-stone-500 font-mono pt-1">
+          <div className="font-d3-meta text-[11px] text-stone-500 pt-1">
             ISSN: {settings.issnPrint} (Print) | {settings.issnOnline} (Online) • Open Access (CC BY 4.0)
           </div>
         </div>
 
         {/* Minimal Typography Navigation */}
-        <nav className="mt-6 border-t border-b border-stone-200 font-sans text-xs font-semibold text-stone-700 py-2.5">
+        <nav className="mt-6 border-t border-b border-stone-200 font-d3-body text-xs font-semibold text-stone-700 py-2.5">
           <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-6 px-4">
             <button
               onClick={() => onNavigate('home')}
@@ -177,21 +177,21 @@ export const Demo3Layout: React.FC<Demo3LayoutProps> = ({
       </main>
 
       {/* Minimal Archival Footer */}
-      <footer className="border-t border-stone-200 bg-[#1c1917] text-stone-400 font-sans text-xs py-10">
+      <footer className="border-t border-stone-800 bg-[#171412] text-stone-400 font-d3-body text-xs py-10">
         <div className="mx-auto max-w-5xl px-4 text-center space-y-4">
-          <p className="font-serif text-lg font-bold text-white">
+          <p className="font-d3-heading text-lg font-bold text-white">
             Journal of Research in Management & Social Sciences
           </p>
           <p className="text-stone-400 text-xs max-w-lg mx-auto leading-relaxed">
             Published bi-annually by the College of Management Sciences, Michael Okpara University of Agriculture, Umudike, Abia State, Nigeria.
           </p>
-          <div className="flex flex-wrap justify-center gap-6 pt-2 text-[11px] text-stone-300">
+          <div className="flex flex-wrap justify-center gap-6 pt-2 text-[11px] text-stone-300 font-d3-meta">
             <button onClick={() => onNavigate('ethics')} className="hover:text-white">Publication Ethics</button>
             <button onClick={() => onNavigate('fees')} className="hover:text-white">Publication Fees</button>
             <button onClick={() => onNavigate('open-access')} className="hover:text-white">Open Access Policy</button>
             <button onClick={() => onNavigate('contact')} className="hover:text-white">Editorial Office</button>
           </div>
-          <p className="text-stone-500 text-[10px] pt-4">
+          <p className="text-stone-500 text-[10px] pt-4 font-d3-meta">
             © {new Date().getFullYear()} JORMASS • Redesign Concept 3 (Editorial Digital Library) by OnlineFirst
           </p>
         </div>

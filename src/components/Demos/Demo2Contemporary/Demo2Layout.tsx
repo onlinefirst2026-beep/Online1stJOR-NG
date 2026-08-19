@@ -46,7 +46,7 @@ export const Demo2Layout: React.FC<Demo2LayoutProps> = ({
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-teal-100 flex flex-col">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-d2-body antialiased selection:bg-teal-100 flex flex-col">
       {/* Floating Demo Control Bar */}
       {onBackToHub && onSwitchDemo && (
         <DemoFloatingBar
@@ -60,10 +60,10 @@ export const Demo2Layout: React.FC<Demo2LayoutProps> = ({
       )}
 
       {/* Top Banner Bar */}
-      <div className="bg-slate-900 text-slate-300 text-xs px-4 py-2 border-b border-slate-800">
+      <div className="bg-slate-950 text-slate-300 text-xs px-4 py-2 border-b border-slate-800 font-d2-meta">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <div className="flex items-center gap-3 text-[11px]">
-            <span className="font-semibold text-teal-400">COLMAS</span>
+            <span className="font-bold text-teal-400">COLMAS</span>
             <span className="text-slate-600">•</span>
             <span className="text-slate-300">{settings.institution}</span>
             <span className="hidden md:inline text-slate-600">•</span>
@@ -99,26 +99,26 @@ export const Demo2Layout: React.FC<Demo2LayoutProps> = ({
             onClick={() => onNavigate('home')}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-900 to-teal-800 text-white shadow-md shadow-teal-900/10">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-slate-900 to-teal-800 text-white shadow-md shadow-teal-900/10">
               <BookOpen className="h-6 w-6 text-teal-300" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-serif font-black text-lg tracking-tight text-slate-900 group-hover:text-teal-700 transition">
+                <span className="font-d2-heading font-black text-lg tracking-tight text-slate-900 group-hover:text-teal-700 transition">
                   JORMASS
                 </span>
-                <span className="rounded bg-teal-50 px-2 py-0.5 text-[10px] font-bold text-teal-800 border border-teal-200">
+                <span className="rounded bg-teal-50 px-2 py-0.5 text-[10px] font-bold text-teal-800 border border-teal-200 font-d2-meta">
                   Open Access
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 font-medium truncate max-w-xs sm:max-w-md">
+              <p className="text-[11px] text-slate-500 font-medium truncate max-w-xs sm:max-w-md font-d2-body">
                 Journal of Research in Management and Social Sciences
               </p>
             </div>
           </div>
 
           {/* Center Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-700">
+          <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-700 font-d2-body">
             <button
               onClick={() => onNavigate('home')}
               className={`hover:text-teal-700 transition ${currentPage === 'home' ? 'text-teal-700 font-bold' : ''}`}
@@ -164,7 +164,7 @@ export const Demo2Layout: React.FC<Demo2LayoutProps> = ({
           </nav>
 
           {/* Right Action: Instant Search & Submit */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5 font-d2-body">
             <button
               onClick={onOpenSearch}
               className="hidden sm:inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs text-slate-500 hover:bg-slate-100 hover:text-slate-800 transition"
@@ -236,19 +236,19 @@ export const Demo2Layout: React.FC<Demo2LayoutProps> = ({
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-white">
                 <BookOpen className="h-5 w-5 text-teal-400" />
-                <span className="font-serif font-bold text-sm">JORMASS Research Platform</span>
+                <span className="font-d2-heading font-bold text-sm">JORMASS Research Platform</span>
               </div>
               <p className="text-[11px] leading-relaxed text-slate-400">
                 Contemporary, open-access journal for management, agribusiness, banking, finance, accounting, and social science research.
               </p>
-              <div className="text-[11px] font-mono text-slate-500">
+              <div className="text-[11px] font-d2-meta text-slate-500">
                 <p>ISSN: {settings.issnPrint} (Print)</p>
                 <p>ISSN: {settings.issnOnline} (Online)</p>
               </div>
             </div>
 
             <div className="space-y-2">
-              <h5 className="font-bold text-white text-xs uppercase tracking-wider text-teal-400">
+              <h5 className="font-bold text-white text-xs uppercase tracking-wider text-teal-400 font-d2-heading">
                 Discover Research
               </h5>
               <ul className="space-y-1.5 text-slate-300">

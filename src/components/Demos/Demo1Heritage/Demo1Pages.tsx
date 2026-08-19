@@ -95,9 +95,9 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
       .slice(0, 3);
 
     return (
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8 space-y-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8 space-y-8 font-d1-body">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs text-neutral-500">
+        <div className="flex items-center gap-2 text-xs text-neutral-500 font-d1-meta">
           <button onClick={() => onNavigate('home')} className="hover:text-neutral-900">Home</button>
           <span>/</span>
           <button onClick={() => onNavigate('archive')} className="hover:text-neutral-900">Archive</button>
@@ -112,19 +112,19 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Main Article Left Column */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
+            <div className="rounded-xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs space-y-6">
               {/* Metadata Badges */}
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-100 pb-4 text-xs">
                 <span className="rounded bg-amber-100 px-3 py-1 font-semibold text-amber-900">
                   {selectedArticle.category}
                 </span>
-                <span className="font-mono text-neutral-500">
+                <span className="font-d1-meta text-neutral-500">
                   Vol. {volOfArt.volumeNumber}, No. {issueOfArt.issueNumber} ({issueOfArt.year}) • pp. {selectedArticle.pageStart}–{selectedArticle.pageEnd}
                 </span>
               </div>
 
               {/* Title */}
-              <h1 className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-[#0d1b2a]">
+              <h1 className="font-d1-heading text-2xl sm:text-3xl font-bold leading-tight text-[#0d1b2a]">
                 {selectedArticle.title}
               </h1>
 
@@ -145,7 +145,7 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
                     <p key={idx}>
                       {auth.name} — {auth.affiliation}
                       {auth.orcid && (
-                        <span className="font-mono not-italic text-neutral-500 ml-1">
+                        <span className="font-d1-meta not-italic text-neutral-500 ml-1">
                           (ORCID: {auth.orcid})
                         </span>
                       )}
@@ -155,8 +155,8 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
               </div>
 
               {/* Abstract Section */}
-              <div className="rounded-xl border border-neutral-200 bg-[#fdfbf7] p-6 space-y-3">
-                <h3 className="font-serif text-sm font-bold uppercase tracking-wider text-[#0d1b2a]">
+              <div className="rounded-lg border border-neutral-200 bg-[#fdfbf7] p-6 space-y-3">
+                <h3 className="font-d1-heading text-sm font-bold uppercase tracking-wider text-[#0d1b2a]">
                   Abstract
                 </h3>
                 <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed text-justify">
@@ -166,14 +166,14 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
 
               {/* Keywords */}
               <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-500">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-500 font-d1-heading">
                   Keywords
                 </h4>
                 <div className="flex flex-wrap gap-1.5">
                   {selectedArticle.keywords.map((kw, i) => (
                     <span
                       key={i}
-                      className="rounded bg-neutral-100 px-3 py-1 text-xs text-neutral-700 border border-neutral-200"
+                      className="rounded bg-neutral-100 px-3 py-1 text-xs text-neutral-700 border border-neutral-200 font-d1-meta"
                     >
                       {kw}
                     </span>
@@ -182,10 +182,10 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
               </div>
 
               {/* Citation & DOI Box */}
-              <div className="rounded-xl bg-neutral-50 p-4 border border-neutral-200 text-xs space-y-2">
+              <div className="rounded-lg bg-neutral-50 p-4 border border-neutral-200 text-xs space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-neutral-700">Digital Object Identifier (DOI):</span>
-                  <span className="font-mono text-amber-900 font-semibold">{selectedArticle.doi || '10.5281/zenodo.jormass.2026.07201'}</span>
+                  <span className="font-d1-meta text-amber-900 font-semibold">{selectedArticle.doi || '10.5281/zenodo.jormass.2026.07201'}</span>
                 </div>
                 <div className="flex justify-between items-center pt-1 border-t border-neutral-200">
                   <span className="font-bold text-neutral-700">Publication License:</span>
@@ -197,7 +197,7 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
             {/* Related Articles */}
             {relatedArticles.length > 0 && (
               <div className="space-y-4 pt-4">
-                <h3 className="font-serif text-lg font-bold text-[#0d1b2a]">
+                <h3 className="font-d1-heading text-lg font-bold text-[#0d1b2a]">
                   Related Articles in {selectedArticle.category}
                 </h3>
                 <div className="space-y-3">
@@ -205,9 +205,9 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
                     <div
                       key={rel.id}
                       onClick={() => onSelectArticle(rel)}
-                      className="cursor-pointer rounded-xl border border-neutral-200 bg-white p-4 hover:border-amber-600 transition space-y-1"
+                      className="cursor-pointer rounded-lg border border-neutral-200 bg-white p-4 hover:border-amber-600 transition space-y-1 shadow-xs"
                     >
-                      <h4 className="font-serif text-sm font-bold text-[#0d1b2a] hover:text-amber-800">
+                      <h4 className="font-d1-heading text-sm font-bold text-[#0d1b2a] hover:text-amber-800">
                         {rel.title}
                       </h4>
                       <p className="text-xs text-neutral-500">
@@ -222,20 +222,20 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
 
           {/* Right Action Rail */}
           <aside className="space-y-6">
-            <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm space-y-4">
-              <h4 className="font-serif text-sm font-bold text-[#0d1b2a] border-b pb-2">
+            <div className="rounded-xl border border-neutral-200 bg-white p-6 shadow-xs space-y-4">
+              <h4 className="font-d1-heading text-sm font-bold text-[#0d1b2a] border-b pb-2">
                 Download & Access
               </h4>
               <button
                 onClick={() => onOpenPdf(selectedArticle)}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#1b4332] py-3 text-xs font-bold text-white shadow hover:bg-[#2d6a4f] transition"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-[#1b4332] py-3 text-xs font-bold text-white shadow-xs hover:bg-[#2d6a4f] transition"
               >
                 <Download className="h-4 w-4" />
                 <span>Download Full Article PDF</span>
               </button>
               <button
                 onClick={() => onOpenCitation(selectedArticle)}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-300 bg-white py-2.5 text-xs font-semibold text-neutral-800 hover:bg-neutral-50 transition"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-neutral-300 bg-white py-2.5 text-xs font-semibold text-neutral-800 hover:bg-neutral-50 transition"
               >
                 <Quote className="h-4 w-4 text-amber-700" />
                 <span>Cite this Article (APA, BibTeX, RIS)</span>
@@ -243,11 +243,11 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
             </div>
 
             {/* Issue Information */}
-            <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm space-y-3 text-xs">
-              <h4 className="font-serif text-sm font-bold text-[#0d1b2a] border-b pb-2">
+            <div className="rounded-xl border border-neutral-200 bg-white p-6 shadow-xs space-y-3 text-xs">
+              <h4 className="font-d1-heading text-sm font-bold text-[#0d1b2a] border-b pb-2">
                 Issue Information
               </h4>
-              <p className="font-semibold text-neutral-800">
+              <p className="font-semibold text-neutral-800 font-d1-heading">
                 Vol. {volOfArt.volumeNumber}, No. {issueOfArt.issueNumber} ({issueOfArt.year})
               </p>
               <p className="text-neutral-600 leading-relaxed">
@@ -273,51 +273,51 @@ export const Demo1Pages: React.FC<Demo1PagesProps> = ({
     const currentArticles = articles.filter((a) => a.issueId === currentIssue.id);
 
     return (
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8 space-y-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8 space-y-8 font-d1-body">
         <div className="border-b-2 border-[#0d1b2a] pb-4">
-          <div className="flex items-center gap-2 text-xs font-bold text-amber-800 uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-xs font-bold text-amber-800 uppercase tracking-wider font-d1-heading">
             <span>Current Publication</span>
           </div>
-          <h1 className="font-serif text-3xl font-bold text-[#0d1b2a] mt-1">
+          <h1 className="font-d1-heading text-3xl font-bold text-[#0d1b2a] mt-1">
             Vol. {currentIssue.volumeNumber} · No. {currentIssue.issueNumber} · {currentIssue.year}
           </h1>
-          <p className="text-xs text-neutral-600 mt-1">
+          <p className="text-xs text-neutral-600 mt-1 font-d1-meta">
             Published on {currentIssue.publicationDate} • College of Management Sciences, MOUAU
           </p>
         </div>
 
         {currentIssue.description && (
-          <div className="rounded-xl border border-amber-200 bg-amber-50/60 p-5 text-xs text-neutral-700 leading-relaxed">
+          <div className="rounded-lg border border-amber-200 bg-amber-50/60 p-5 text-xs text-neutral-700 leading-relaxed">
             <span className="font-bold text-amber-900">Issue Editorial Note:</span> {currentIssue.description}
           </div>
         )}
 
         <div className="space-y-4">
-          <h3 className="font-serif text-lg font-bold text-[#0d1b2a]">
+          <h3 className="font-d1-heading text-lg font-bold text-[#0d1b2a]">
             Table of Contents ({currentArticles.length} Articles)
           </h3>
           <div className="space-y-4">
             {currentArticles.map((art) => (
               <div
                 key={art.id}
-                className="rounded-xl border border-neutral-200 bg-white p-6 shadow-xs hover:shadow-sm transition space-y-3"
+                className="rounded-lg border border-neutral-200 bg-white p-6 shadow-xs hover:border-amber-600/60 transition space-y-3"
               >
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-semibold text-amber-900 bg-amber-50 px-2 py-0.5 rounded">
+                  <span className="font-semibold text-amber-900 bg-amber-50 px-2 py-0.5 rounded border border-amber-200/50">
                     {art.category}
                   </span>
-                  <span className="font-mono text-neutral-500">pp. {art.pageStart}–{art.pageEnd}</span>
+                  <span className="font-d1-meta text-neutral-500">pp. {art.pageStart}–{art.pageEnd}</span>
                 </div>
                 <h4
                   onClick={() => onSelectArticle(art)}
-                  className="cursor-pointer font-serif text-lg font-bold text-[#0d1b2a] hover:text-amber-800 transition"
+                  className="cursor-pointer font-d1-heading text-lg font-bold text-[#0d1b2a] hover:text-amber-800 transition"
                 >
                   {art.title}
                 </h4>
                 <p className="text-xs text-neutral-600">
                   {art.authors.map((a) => a.name).join(', ')}
                 </p>
-                <p className="text-xs text-neutral-600 line-clamp-2">
+                <p className="text-xs text-neutral-600 line-clamp-2 text-justify">
                   {art.abstract}
                 </p>
                 <div className="pt-2 flex justify-between items-center text-xs border-t border-neutral-100">

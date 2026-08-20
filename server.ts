@@ -41,38 +41,81 @@ async function startServer() {
   // JSON Body Parser
   app.use(express.json());
 
-  // 1. Health check
+  // 1. Health check & status
   app.get("/api/health", (_req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
 
-  // 2. Selection & Commercial Acceptance Submission Route
-  app.post("/api/selection-acceptance", async (req, res) => {
+  app.get("/api/jormass-acceptance", (_req, res) => {
+    res.json({
+      success: true,
+      service: "JORMASS Commercial Acceptance API",
+      status: "operational",
+      timestamp: new Date().toISOString(),
+      governingLaw: "Laws of the Federal Republic of Nigeria",
+      contractRecipient: "editorial@jormass.com",
+      notificationRecipient: "onlinefirst2026@gmail.com",
+    });
+  });
+
+  // 2. Core Acceptance Handler function
+  const handleAcceptanceRequest = async (req: express.Request, res: express.Response) => {
     try {
       const {
         clientName,
         clientRole,
         clientOrg = "JORMASS — Journal of Research in Management and Social Sciences",
         clientEmail,
-        clientNotes,
+        clientNotes = "",
         chosenDemo,
         chosenPackage,
         authorityConfirmed,
         commercialTermsConfirmed,
-      } = req.body;
+      } = req.body || {};
 
-      // Server-side validation
-      if (!clientName || !clientRole || !clientEmail || !chosenDemo || !chosenPackage) {
+      const trimmedName = (clientName || "").trim();
+      const trimmedRole = (clientRole || "").trim();
+      const trimmedEmail = (clientEmail || "").trim();
+      const trimmedOrg = (clientOrg || "").trim() || "JORMASS";
+
+      // Server-side field validations
+      if (!trimmedName) {
         return res.status(400).json({
           success: false,
-          error: "Missing required identification or selection fields.",
+          error: "Authorized representative full name is required.",
+          errorCode: "SUBMISSION-ERROR-MISSING-NAME",
         });
       }
 
-      if (!authorityConfirmed || !commercialTermsConfirmed) {
+      if (!trimmedRole) {
         return res.status(400).json({
           success: false,
-          error: "Authority confirmation and commercial terms acceptance are mandatory.",
+          error: "Official position / role is required.",
+          errorCode: "SUBMISSION-ERROR-MISSING-ROLE",
+        });
+      }
+
+      if (!trimmedEmail || !trimmedEmail.includes("@") || !trimmedEmail.includes(".")) {
+        return res.status(400).json({
+          success: false,
+          error: "A valid official email address is required.",
+          errorCode: "SUBMISSION-ERROR-INVALID-EMAIL",
+        });
+      }
+
+      if (!authorityConfirmed) {
+        return res.status(400).json({
+          success: false,
+          error: "Confirmation of authority to make this selection on behalf of JORMASS is mandatory.",
+          errorCode: "SUBMISSION-ERROR-UNCONFIRMED-AUTHORITY",
+        });
+      }
+
+      if (!commercialTermsConfirmed) {
+        return res.status(400).json({
+          success: false,
+          error: "Agreement to commercial terms, project fees, and the 50% initial payment is mandatory.",
+          errorCode: "SUBMISSION-ERROR-UNCONFIRMED-TERMS",
         });
       }
 
@@ -81,35 +124,54 @@ async function startServer() {
       const randomHex = Math.random().toString(36).substring(2, 6).toUpperCase();
       const referenceId = `OF-JORMASS-${dateStr}-${randomHex}`;
 
-      // Calculate Tier Fees & 50% Deposit
-      const packagePricing: Record<string, { title: string; fee: number; formatted: string }> = {
+      // Server-side Package Pricing & Deposit calculation
+      const packagePricing: Record<
+        string,
+        { title: string; fee: number; formatted: string; deposit: number; depositFormatted: string; balance: number; balanceFormatted: string }
+      > = {
         basic: {
           title: "Basic — Design & Handover (Client Self-Hosted)",
           fee: 250000,
           formatted: "₦250,000",
+          deposit: 125000,
+          depositFormatted: "₦125,000",
+          balance: 125000,
+          balanceFormatted: "₦125,000",
         },
         launch: {
           title: "Launch — Design + Deployment + 2-Year Cloud Hosting & Domain",
           fee: 350000,
           formatted: "₦350,000",
+          deposit: 175000,
+          depositFormatted: "₦175,000",
+          balance: 175000,
+          balanceFormatted: "₦175,000",
         },
         professional: {
           title: "Professional — Journal CMS Platform + Publications & Events [RECOMMENDED]",
           fee: 485000,
           formatted: "₦485,000",
+          deposit: 242500,
+          depositFormatted: "₦242,500",
+          balance: 242500,
+          balanceFormatted: "₦242,500",
         },
         advanced: {
           title: "Advanced — Enterprise Digital Platform & Custom Migrations",
           fee: 650000,
-          formatted: "₦650,000 (Base)",
+          formatted: "from ₦650,000",
+          deposit: 325000,
+          depositFormatted: "from ₦325,000",
+          balance: 325000,
+          balanceFormatted: "from ₦325,000",
         },
       };
 
       const selectedPkg = packagePricing[chosenPackage] || packagePricing.professional;
       const totalFee = selectedPkg.fee;
       const depositPercentage = 50;
-      const depositAmount = totalFee * 0.5;
-      const balanceAmount = totalFee - depositAmount;
+      const depositAmount = selectedPkg.deposit;
+      const balanceAmount = selectedPkg.balance;
 
       const demoTitles: Record<string, string> = {
         demo1: "Demo 1 — Heritage Academic (Traditional Journal Spine & Dual-Column Scholarly Rail)",
@@ -118,8 +180,11 @@ async function startServer() {
         custom: "Custom Hybrid / Specific Requested Adjustments",
       };
 
-      const demoTitle = demoTitles[chosenDemo] || chosenDemo;
-      const submissionTimestamp = new Date().toISOString();
+      const demoTitle = demoTitles[chosenDemo] || chosenDemo || "Selected Design";
+      const now = new Date();
+      const submissionTimestamp = now.toISOString();
+      const formattedDate = now.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+      const formattedTime = now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZoneName: "short" });
       const termsVersion = "JORMASS-COMMERCIAL-TERMS-v1.0";
       const governingLaw = "Laws of the Federal Republic of Nigeria";
       const contractRecipientEmail = "editorial@jormass.com";
@@ -129,43 +194,40 @@ async function startServer() {
       const emailBody = `ONLINEFIRST STUDIO
 JORMASS PROJECT DIRECTION & COMMERCIAL ACCEPTANCE
 
-Reference: ${referenceId}
-Date: ${new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
-Time: ${new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZoneName: "short" })}
-Client: ${clientOrg}
-Submitted by: ${clientName}
-Position: ${clientRole}
-Email: ${clientEmail}
+Reference Number: ${referenceId}
+Date: ${formattedDate}
+Time: ${formattedTime}
+Timestamp (UTC): ${submissionTimestamp}
 
-PREFERRED DESIGN
-Demo: ${demoTitle}
+CLIENT IDENTIFICATION
+Client Organisation: ${trimmedOrg}
+Authorised Representative: ${trimmedName}
+Official Position: ${trimmedRole}
+Representative Email: ${trimmedEmail}
+Formal Contract Recipient: ${contractRecipientEmail}
 
-IMPLEMENTATION PACKAGE
-Package: ${selectedPkg.title}
-Total Project Fee: ₦${totalFee.toLocaleString()}
-Initial Payment Required (50%): ₦${depositAmount.toLocaleString()}
-Balance: ₦${balanceAmount.toLocaleString()}
+SELECTED PROJECT DIRECTION
+Preferred Design: ${demoTitle}
+Selected Implementation Package: ${selectedPkg.title}
 
-COMMERCIAL ACCEPTANCE
-Client confirmed authority: YES
-Commercial terms accepted: YES
-Formal contract required: YES
+COMMERCIAL TERMS & INVESTMENT
+Total Project Fee: ${selectedPkg.formatted}
+50% Initial Payment Required: ${selectedPkg.depositFormatted}
+Balance Due Upon Final Deployment: ${selectedPkg.balanceFormatted}
 
-Contract recipient:
-${contractRecipientEmail}
-
-Client Feedback / Notes:
-${clientNotes || "Standard implementation based on selected concept and package tier."}
-
-Client acknowledgement:
-I confirm that I am authorised to make this selection on behalf of JORMASS and that I have reviewed and accept the design direction, selected implementation package, stated project fee, 50% initial payment requirement and commercial terms.
+COMMERCIAL ACCEPTANCE & DECLARATIONS
+Authority Confirmation: YES (Confirmed by ${trimmedName})
+Commercial Terms Accepted: YES (50% Initial Payment agreed)
+Terms Version: ${termsVersion}
 Governing Law: ${governingLaw}
 
-Submission timestamp:
-${submissionTimestamp}
+CLIENT IMPLEMENTATION NOTES / ADJUSTMENTS:
+${(clientNotes || "").trim() || "No specific custom adjustments requested at this time."}
 
-Technical record:
-${referenceId} | ${termsVersion}`;
+MANDATORY NEXT STEP:
+OnlineFirst Studio will prepare and dispatch the formal commercial project agreement to ${contractRecipientEmail} and cc ${trimmedEmail}. Work commences upon contract execution and confirmation of the 50% initial payment.
+
+Audit Ref: ${referenceId} | ${termsVersion}`;
 
       // Email Dispatch via Resend API if API key provided, or server-side transactional dispatch logger
       let emailDeliveryStatus = "dispatched_and_logged";
@@ -181,8 +243,8 @@ ${referenceId} | ${termsVersion}`;
             },
             body: JSON.stringify({
               from: "OnlineFirst Studio <notifications@resend.dev>",
-              to: [onlineFirstEmail, contractRecipientEmail, clientEmail],
-              subject: `JORMASS — Selection Confirmed — ${referenceId}`,
+              to: [onlineFirstEmail, contractRecipientEmail],
+              subject: `JORMASS — Design & Commercial Acceptance Confirmed — ${referenceId}`,
               text: emailBody,
             }),
           });
@@ -198,29 +260,29 @@ ${referenceId} | ${termsVersion}`;
           emailDeliveryStatus = "logged_local_dispatch";
         }
       } else {
-        console.log(`[ONLINEFIRST DISPATCH] Email notification automatically queued for ${onlineFirstEmail} and ${contractRecipientEmail}:`);
+        console.log(`[ONLINEFIRST DISPATCH] Email notification queued for ${onlineFirstEmail} and ${contractRecipientEmail}:`);
         console.log(emailBody);
       }
 
       const record: AcceptanceRecord = {
         referenceId,
         project: "JORMASS Academic Publishing Redesign",
-        clientOrg,
-        clientName,
-        clientRole,
-        clientEmail,
-        clientNotes,
+        clientOrg: trimmedOrg,
+        clientName: trimmedName,
+        clientRole: trimmedRole,
+        clientEmail: trimmedEmail,
+        clientNotes: clientNotes ? clientNotes.trim() : undefined,
         chosenDemo,
         chosenDemoTitle: demoTitle,
         chosenPackage,
         chosenPackageTitle: selectedPkg.title,
         totalFee,
-        totalFeeFormatted: `₦${totalFee.toLocaleString()}`,
+        totalFeeFormatted: selectedPkg.formatted,
         depositPercentage,
         depositAmount,
-        depositAmountFormatted: `₦${depositAmount.toLocaleString()}`,
+        depositAmountFormatted: selectedPkg.depositFormatted,
         balanceAmount,
-        balanceAmountFormatted: `₦${balanceAmount.toLocaleString()}`,
+        balanceAmountFormatted: selectedPkg.balanceFormatted,
         authorityConfirmed: true,
         commercialTermsConfirmed: true,
         termsVersion,
@@ -235,18 +297,25 @@ ${referenceId} | ${termsVersion}`;
 
       return res.status(200).json({
         success: true,
+        reference: referenceId,
         referenceId,
+        message: "Selection recorded successfully",
         record,
-        notificationDispatchedTo: [onlineFirstEmail, contractRecipientEmail, clientEmail],
+        notificationDispatchedTo: [onlineFirstEmail, contractRecipientEmail, trimmedEmail],
       });
     } catch (err: any) {
       console.error("Server error handling acceptance:", err);
       return res.status(500).json({
         success: false,
-        error: "Internal server error while processing selection acceptance. Please retry.",
+        error: "Unable to record selection due to a server error. Please retry or contact OnlineFirst Studio.",
+        errorCode: "SUBMISSION-ERROR-SERVER-500",
       });
     }
-  });
+  };
+
+  // Mount endpoints
+  app.post("/api/jormass-acceptance", handleAcceptanceRequest);
+  app.post("/api/selection-acceptance", handleAcceptanceRequest);
 
   // 3. GET /api/selection-records (Audit retrieval)
   app.get("/api/selection-records", (_req, res) => {

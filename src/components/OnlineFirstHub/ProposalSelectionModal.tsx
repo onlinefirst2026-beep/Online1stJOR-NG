@@ -41,7 +41,7 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
   const [clientName, setClientName] = useState('');
   const [clientRole, setClientRole] = useState('');
   const [clientOrg, setClientOrg] = useState('JORMASS — Journal of Research in Management and Social Sciences');
-  const [clientEmail, setClientEmail] = useState('editorial@jormass.com');
+  const [clientEmail, setClientEmail] = useState('');
   const [clientNotes, setClientNotes] = useState('');
 
   // Unchecked mandatory checkboxes
@@ -51,6 +51,7 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
   // Submission state
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [errorCode, setErrorCode] = useState<string | null>(null);
   const [confirmedRecord, setConfirmedRecord] = useState<ProposalSelectionState | null>(null);
   const [copied, setCopied] = useState(false);
 
@@ -100,6 +101,7 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
     clientName.trim().length > 0 &&
     clientRole.trim().length > 0 &&
     clientEmail.trim().length > 0 &&
+    clientEmail.includes('@') &&
     authorityChecked &&
     commercialTermsChecked;
 
@@ -109,9 +111,10 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
 
     setIsSubmitting(true);
     setSubmitError(null);
+    setErrorCode(null);
 
     try {
-      const response = await fetch('/api/selection-acceptance', {
+      const response = await fetch('/api/jormass-acceptance', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -127,17 +130,28 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
         }),
       });
 
-      const data = await response.json();
+      // Safe content-type verification to prevent "Unexpected token 'T'" JSON parsing error
+      const contentType = response.headers.get('content-type');
+      let data: any = null;
 
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.error ||
-            'We could not complete your submission. Your selection has not yet been formally recorded. Please retry or contact OnlineFirst Studio.'
-        );
+      if (contentType && contentType.includes('application/json')) {
+        try {
+          data = await response.json();
+        } catch {
+          data = null;
+        }
       }
 
+      if (!response.ok || !data || !data.success) {
+        const errorMsg = data?.error || 'We couldn\'t complete your submission. Your commercial acceptance has not yet been confirmed. Please try again. If the issue continues, contact OnlineFirst Studio.';
+        const errCode = data?.errorCode || `SUBMISSION-ERROR-HTTP-${response.status || 'UNAVAILABLE'}`;
+        setErrorCode(errCode);
+        throw new Error(errorMsg);
+      }
+
+      const returnedRecord = data.record || {};
       const savedState: ProposalSelectionState = {
-        referenceId: data.referenceId,
+        referenceId: data.reference || data.referenceId || returnedRecord.referenceId,
         chosenDemo,
         chosenPackage,
         clientName: clientName.trim(),
@@ -145,21 +159,21 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
         clientOrg: clientOrg.trim(),
         clientEmail: clientEmail.trim(),
         clientNotes: clientNotes.trim(),
-        totalFee,
-        totalFeeFormatted: selectedTier.formatted,
+        totalFee: returnedRecord.totalFee || totalFee,
+        totalFeeFormatted: returnedRecord.totalFeeFormatted || selectedTier.formatted,
         depositPercentage: 50,
-        depositAmount,
-        depositAmountFormatted: `₦${depositAmount.toLocaleString()}`,
-        balanceAmount,
-        balanceAmountFormatted: `₦${balanceAmount.toLocaleString()}`,
+        depositAmount: returnedRecord.depositAmount || depositAmount,
+        depositAmountFormatted: returnedRecord.depositAmountFormatted || `₦${depositAmount.toLocaleString()}`,
+        balanceAmount: returnedRecord.balanceAmount || balanceAmount,
+        balanceAmountFormatted: returnedRecord.balanceAmountFormatted || `₦${balanceAmount.toLocaleString()}`,
         authorityConfirmed: true,
         commercialTermsConfirmed: true,
-        termsVersion: 'JORMASS-COMMERCIAL-TERMS-v1.0',
-        governingLaw: 'Laws of the Federal Republic of Nigeria',
+        termsVersion: returnedRecord.termsVersion || 'JORMASS-COMMERCIAL-TERMS-v1.0',
+        governingLaw: returnedRecord.governingLaw || 'Laws of the Federal Republic of Nigeria',
         contractRecipientEmail: 'editorial@jormass.com',
-        confirmedAt: new Date().toISOString(),
-        submittedAt: new Date().toISOString(),
-        summaryText: data.record?.summaryText,
+        confirmedAt: returnedRecord.submittedAt || new Date().toISOString(),
+        submittedAt: returnedRecord.submittedAt || new Date().toISOString(),
+        summaryText: returnedRecord.summaryText,
       };
 
       setConfirmedRecord(savedState);
@@ -168,7 +182,7 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
       console.error('Submission failed:', err);
       setSubmitError(
         err.message ||
-          'We could not complete your submission. Your selection has not yet been formally recorded. Please retry or contact OnlineFirst Studio.'
+          'We couldn\'t complete your submission. Your commercial acceptance has not yet been confirmed. Please try again. If the issue continues, contact OnlineFirst Studio.'
       );
     } finally {
       setIsSubmitting(false);
@@ -219,33 +233,31 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
         <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 font-inter">
           {confirmedRecord ? (
             /* ========================================================= */
-            /* SUCCESS CONFIRMATION SCREEN (Commercial Summary Card)     */
+            /* SUCCESS CONFIRMATION SCREEN (Project Direction Confirmed)  */
             /* ========================================================= */
             <div className="space-y-6">
-              <div className="text-center space-y-2">
+              <div className="text-center space-y-2.5">
                 <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400">
                   <CheckCircle2 className="h-9 w-9" />
                 </div>
                 <h4 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#F5FAFF]">
-                  Selection Successfully Recorded
+                  Project Direction Confirmed
                 </h4>
                 <p className="text-sm text-[#B7C6D8] max-w-xl mx-auto leading-relaxed">
-                  Thank you. Your JORMASS design direction and implementation package have been formally recorded.
-                  OnlineFirst Studio will send the detailed project agreement to{' '}
-                  <strong className="text-[#FFC84D]">editorial@jormass.com</strong>.
+                  Your JORMASS design direction and commercial selection have been successfully recorded.
                 </p>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#20255C] border border-[#6B3F74] text-[#FFC84D] font-mono text-xs font-bold mt-2">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#20255C] border border-[#6B3F74] text-[#FFC84D] font-mono text-xs font-bold mt-1">
                   <span>Reference: {confirmedRecord.referenceId}</span>
                 </div>
               </div>
 
-              {/* Professional Commercial Summary Card */}
+              {/* Commercial Confirmation Card */}
               <div className="rounded-2xl bg-[#0E1A2B] border border-[#223753] p-6 shadow-xl space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#223753] pb-3 gap-2">
                   <div className="flex items-center gap-2">
                     <Building2 className="h-5 w-5 text-[#FFC84D]" />
                     <span className="font-heading text-sm font-bold uppercase tracking-wider text-[#F5FAFF]">
-                      Your Confirmed Project Direction
+                      Institutional Selection Summary
                     </span>
                   </div>
                   <span className="text-xs text-[#B7C6D8] font-mono">
@@ -254,12 +266,12 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
-                  <div className="p-3.5 rounded-xl bg-[#14263D] border border-[#223753] space-y-1">
-                    <p className="text-xs text-[#B7C6D8] uppercase tracking-wider font-semibold">Preferred Design Direction</p>
+                  <div className="p-4 rounded-xl bg-[#14263D] border border-[#223753] space-y-1">
+                    <p className="text-xs text-[#B7C6D8] uppercase tracking-wider font-semibold">Selected Design</p>
                     <p className="font-bold text-[#F5FAFF]">{demoTitles[confirmedRecord.chosenDemo]}</p>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-[#14263D] border border-[#223753] space-y-1">
+                  <div className="p-4 rounded-xl bg-[#14263D] border border-[#223753] space-y-1">
                     <p className="text-xs text-[#B7C6D8] uppercase tracking-wider font-semibold">Implementation Package</p>
                     <p className="font-bold text-[#F5FAFF]">{selectedTier.title}</p>
                   </div>
@@ -268,22 +280,22 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
                 {/* Pricing & 50% Deposit Breakdown */}
                 <div className="rounded-xl bg-[#20255C]/70 border border-[#6B3F74]/60 p-4 space-y-3">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                    <div className="p-2.5 rounded-lg bg-[#0E1A2B]/80 border border-[#223753]">
+                    <div className="p-3 rounded-lg bg-[#0E1A2B]/80 border border-[#223753]">
                       <p className="text-xs text-[#B7C6D8] font-medium">Total Project Fee</p>
                       <p className="text-lg sm:text-xl font-extrabold text-[#F5FAFF] font-mono mt-0.5">
                         {confirmedRecord.totalFeeFormatted}
                       </p>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-[#6B3F74]/40 border border-[#FFC84D]/40">
-                      <p className="text-xs text-[#FFC84D] font-bold">Initial Payment (50%)</p>
+                    <div className="p-3 rounded-lg bg-[#6B3F74]/40 border border-[#FFC84D]/40">
+                      <p className="text-xs text-[#FFC84D] font-bold">Initial Payment — 50%</p>
                       <p className="text-lg sm:text-xl font-extrabold text-[#FFC84D] font-mono mt-0.5">
                         {confirmedRecord.depositAmountFormatted}
                       </p>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-[#0E1A2B]/80 border border-[#223753]">
-                      <p className="text-xs text-[#B7C6D8] font-medium">Balance Upon Completion</p>
+                    <div className="p-3 rounded-lg bg-[#0E1A2B]/80 border border-[#223753]">
+                      <p className="text-xs text-[#B7C6D8] font-medium">Balance</p>
                       <p className="text-lg sm:text-xl font-extrabold text-[#F5FAFF] font-mono mt-0.5">
                         {confirmedRecord.balanceAmountFormatted}
                       </p>
@@ -291,27 +303,42 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
                   </div>
 
                   <p className="text-xs text-[#B7C6D8] text-center italic">
-                    The 50% initial payment becomes due upon acceptance in accordance with the agreed project terms before implementation commences.
+                    A 50% initial payment of the total fee is required upon agreement on demo. Work commences following contract execution and initial payment.
                   </p>
                 </div>
 
-                {/* Signatory & Contract Recipient */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div className="space-y-1 text-[#B7C6D8]">
-                    <p className="font-semibold text-[#F5FAFF]">Authorized Representative:</p>
-                    <p>{confirmedRecord.clientName} ({confirmedRecord.clientRole})</p>
-                    <p className="text-xs text-[#B7C6D8]">{confirmedRecord.clientOrg}</p>
-                    <p className="text-[#FFC84D] font-mono">{confirmedRecord.clientEmail}</p>
+                {/* Next Step & Signatory Details */}
+                <div className="rounded-xl bg-[#14263D] border border-[#223753] p-4 space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FFC84D]/15 border border-[#FFC84D]/30 text-[#FFC84D] shrink-0 mt-0.5">
+                      <Mail className="h-4 w-4" />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="font-bold text-sm text-[#F5FAFF]">Next Step</p>
+                      <p className="text-xs text-[#D8E2EC] leading-relaxed">
+                        OnlineFirst Studio will send the detailed project agreement to:{' '}
+                        <strong className="text-[#FFC84D] font-mono">editorial@jormass.com</strong>
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="space-y-1 text-[#B7C6D8]">
-                    <p className="font-semibold text-[#F5FAFF]">Formal Contract Recipient:</p>
-                    <p className="text-[#FFC84D] font-mono">editorial@jormass.com</p>
-                    <p>Governing Law: Laws of the Federal Republic of Nigeria</p>
-                    <p className="text-emerald-400 font-medium flex items-center gap-1">
-                      <Check className="h-3.5 w-3.5" />
-                      <span>Automatic notification sent to onlinefirst2026@gmail.com</span>
-                    </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#223753] text-xs">
+                    <div className="space-y-0.5 text-[#B7C6D8]">
+                      <p className="font-semibold text-[#F5FAFF]">Authorized Representative:</p>
+                      <p>{confirmedRecord.clientName} ({confirmedRecord.clientRole})</p>
+                      <p className="text-xs text-[#B7C6D8]">{confirmedRecord.clientOrg}</p>
+                      <p className="text-[#FFC84D] font-mono">{confirmedRecord.clientEmail}</p>
+                    </div>
+
+                    <div className="space-y-0.5 text-[#B7C6D8]">
+                      <p className="font-semibold text-[#F5FAFF]">Contract Recipient & Governing Law:</p>
+                      <p className="text-[#FFC84D] font-mono">editorial@jormass.com</p>
+                      <p>Laws of the Federal Republic of Nigeria</p>
+                      <p className="text-emerald-400 font-medium flex items-center gap-1 mt-1">
+                        <Check className="h-3.5 w-3.5" />
+                        <span>Notification dispatched to onlinefirst2026@gmail.com</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -323,7 +350,7 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
                   className="inline-flex items-center gap-2 rounded-xl border border-[#314A68] bg-[#223753] px-5 py-3 text-xs sm:text-sm font-bold text-[#D8F3FF] hover:bg-[#314A68] transition cursor-pointer min-h-[44px]"
                 >
                   <Printer className="h-4 w-4 text-[#FFC84D]" />
-                  <span>Print / Download Confirmation</span>
+                  <span>Print / Save Confirmation</span>
                 </button>
                 <button
                   onClick={handleCopyRecord}
@@ -336,7 +363,7 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
                   onClick={onClose}
                   className="rounded-xl bg-gradient-to-r from-[#FFC84D] via-[#f7be38] to-[#e6ab1e] px-6 py-3 text-xs sm:text-sm font-bold text-[#20255C] hover:shadow-[0_0_20px_rgba(255,200,77,0.4)] transition cursor-pointer min-h-[44px]"
                 >
-                  Close & Return to Proposal
+                  Return to Proposal
                 </button>
               </div>
             </div>
@@ -346,9 +373,21 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
             /* ========================================================= */
             <form onSubmit={handleSubmit} className="space-y-6">
               {submitError && (
-                <div className="rounded-xl bg-rose-500/15 border border-rose-500/40 p-4 text-xs sm:text-sm text-rose-200 flex items-start gap-2.5">
-                  <AlertCircle className="h-5 w-5 text-rose-400 shrink-0 mt-0.5" />
-                  <span>{submitError}</span>
+                <div className="rounded-xl bg-rose-500/15 border border-rose-500/40 p-4 text-xs sm:text-sm text-rose-200 space-y-1">
+                  <div className="flex items-start gap-2.5">
+                    <AlertCircle className="h-5 w-5 text-rose-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold text-rose-100">We couldn't complete your submission.</p>
+                      <p className="text-xs text-rose-200 mt-0.5">
+                        Your commercial acceptance has not yet been confirmed. Please try again. If the issue continues, contact OnlineFirst Studio.
+                      </p>
+                      {errorCode && (
+                        <p className="text-[11px] text-rose-300 font-mono mt-1">
+                          Technical reference: {errorCode}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -539,7 +578,7 @@ export const ProposalSelectionModal: React.FC<ProposalSelectionModalProps> = ({
                       onChange={(e) => setClientEmail(e.target.value)}
                       required
                       className="w-full rounded-xl border border-[#223753] bg-[#0E1A2B] px-3.5 py-2.5 text-xs sm:text-sm text-[#F5FAFF] focus:border-[#FFC84D] focus:outline-none min-h-[42px]"
-                      placeholder="editorial@jormass.com"
+                      placeholder="e.g. representative@mouau.edu.ng"
                     />
                   </div>
                 </div>
